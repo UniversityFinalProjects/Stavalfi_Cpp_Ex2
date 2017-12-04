@@ -3,11 +3,9 @@
 
 
 #include "Point2d.h"
-#include "../Map.h"
 #include <string>
 
 class MapObject {
-    friend Map;
 
     const std::string& id;
 public:
@@ -22,7 +20,7 @@ public:
 
     const Point2d &getLocation() const;
 
-private:
+public:
     void setLocation(int x,int y);
 };
 

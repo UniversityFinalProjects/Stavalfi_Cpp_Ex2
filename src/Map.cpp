@@ -4,11 +4,11 @@ Map::Map(signed int rows, signed int columns)
         : rows(rows), columns(columns), soldiers(rows * columns, nullptr),
           collectableItems(rows * columns, nullptr), solidItems(rows * columns, nullptr) {}
 
-const Soldier *Map::getSoldierInMap(int i, int j) const {
+Soldier *Map::getSoldierInMap(int i, int j) const {
     return this->soldiers[this->rows * i + j];
 }
 
-const CollectableItem *Map::getCollectableItemInMap(int i, int j) const {
+CollectableItem *Map::getCollectableItemInMap(int i, int j) const {
     return this->collectableItems[this->rows * i + j];
 }
 
@@ -39,12 +39,12 @@ const std::vector<const Soldier *> Map::getEnemiesAround(const Soldier &soldier,
     return enemies;
 }
 
-const std::vector<Soldier *> Map::getAlliesAround(const Soldier &soldier, int distance) const {
-    std::vector<Soldier *> allies;
+const std::vector<const Soldier *> Map::getAlliesAround(const Soldier &soldier, int distance) const {
+    std::vector<const Soldier *> allies;
     for (int i = 0; i <= std::min(this->rows - 1, soldier.getLocation().getY() + distance); i++)
         for (int j = 0; j <= std::min(this->columns - 1, soldier.getLocation().getX() + distance); j++)
             if (i != soldier.getLocation().getY() || j != soldier.getLocation().getX()) {
-                Soldier *soldier1 = this->soldiers[this->rows * i + j];
+                const Soldier *soldier1 = this->soldiers[this->rows * i + j];
                 if (soldier1 != nullptr &&
                     soldier1->getPlayerId() == soldier.getPlayerId())
                     allies.push_back(soldier1);

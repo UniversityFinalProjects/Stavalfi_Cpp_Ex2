@@ -2,9 +2,9 @@
 #define STAVALFI_CPP_EX2_ARMOR_H
 
 
-#include "../Item.h"
+#include "../CollectableItem.h"
 
-class Armor : public Item {
+class Armor : public CollectableItem {
     const double ArmorStrength;
 public:
     Armor(const std::string& id, const Point2d &location,bool inUse, double ArmorStrength);

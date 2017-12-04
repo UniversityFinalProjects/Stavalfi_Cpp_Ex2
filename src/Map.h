@@ -19,14 +19,14 @@ class Map {
     std::vector<Soldier *> soldiers;
 
     // represent a map = 2d matrix.
-    std::vector<const CollectableItem *> collectableItems;
+    std::vector<CollectableItem *> collectableItems;
 
     // represent a map = 2d matrix.
     std::vector<const SolidItem *> solidItems;
 
-    const Soldier *getSoldierInMap(int i, int j) const;
+    Soldier *getSoldierInMap(int i, int j) const;
 
-    const CollectableItem *getCollectableItemInMap(int i, int j) const;
+    CollectableItem *getCollectableItemInMap(int i, int j) const;
 
     const SolidItem *getSolidItemInMap(int i, int j) const;
 
@@ -61,7 +61,7 @@ public:
      * @return all the allies of this soldier around him
      * (without this soldier).
      */
-    const std::vector<Soldier *> getAlliesAround(const Soldier &soldier, int distance) const;
+    const std::vector<const Soldier *> getAlliesAround(const Soldier &soldier, int distance) const;
 
     /**
      * @param point2d
