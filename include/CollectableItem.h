@@ -4,7 +4,7 @@
 
 #include <string>
 #include "Item.h"
-#include "../Point2d.h"
+#include "Point2d.h"
 
 class CollectableItem : public Item {
     bool inUse;

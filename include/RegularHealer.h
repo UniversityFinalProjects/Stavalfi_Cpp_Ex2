@@ -2,7 +2,7 @@
 #define STAVALFI_CPP_EX2_REGULAR_HEALER_H
 
 
-#include "../Soldier.h"
+#include "Soldier.h"
 #include "Healer.h"
 
 class RegularHealer : public Healer {

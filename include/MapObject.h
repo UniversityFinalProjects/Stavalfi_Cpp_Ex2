@@ -3,25 +3,27 @@
 
 
 #include "Point2d.h"
+#include "Map.h"
 #include <string>
 
 class MapObject {
 
-    const std::string& id;
+    //friend Map;
+    const std::string &id;
 public:
     const std::string &getId() const;
 
 private:
-    Point2d& location;
-public:
-    explicit MapObject(const std::string& id,const Point2d &location);
+    Point2d &location;
 
-    virtual ~MapObject() = 0;
+public:
+    explicit MapObject(const std::string &id, const Point2d &location);
 
     const Point2d &getLocation() const;
 
-public:
-    void setLocation(int x,int y);
+    void setLocation(int x, int y);
+
+    virtual ~MapObject() = 0;
 };
 
 

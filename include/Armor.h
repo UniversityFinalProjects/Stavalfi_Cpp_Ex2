@@ -2,7 +2,7 @@
 #define STAVALFI_CPP_EX2_ARMOR_H
 
 
-#include "../CollectableItem.h"
+#include "CollectableItem.h"
 
 class Armor : public CollectableItem {
     const double ArmorStrength;

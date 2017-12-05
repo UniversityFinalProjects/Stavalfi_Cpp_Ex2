@@ -2,7 +2,7 @@
 #define STAVALFI_CPP_EX2_REGULAR_SOLID_ITEM_H
 
 
-#include "../SolidItem.h"
+#include "SolidItem.h"
 
 class RegularSolidItem : public SolidItem {
 public:

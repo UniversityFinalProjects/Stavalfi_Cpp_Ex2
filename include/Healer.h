@@ -1,8 +1,8 @@
 #ifndef STAVALFI_CPP_EX2_HEALER_H
 #define STAVALFI_CPP_EX2_HEALER_H
 
-#include "../Soldier.h"
-#include "../../item/weapon/HealerWeapon.h"
+#include "Soldier.h"
+#include "HealerWeapon.h"
 
 class Healer: public Soldier {
 public:

@@ -2,8 +2,8 @@
 #define STAVALFI_CPP_EX2_WEAPON_H
 
 #include <string>
-#include "../CollectableItem.h"
-#include "../../Point2d.h"
+#include "CollectableItem.h"
+#include "Point2d.h"
 
 class Weapon : public CollectableItem {
     const short weaponStrength;

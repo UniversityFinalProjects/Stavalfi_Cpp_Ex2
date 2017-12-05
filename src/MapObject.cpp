@@ -1,5 +1,5 @@
-#include "MapObject.h"
 #include <cassert>
+#include <MapObject.h>
 
 MapObject::MapObject(const std::string& id, const Point2d &location)
         : id(id), location(*(new Point2d(location))) {}

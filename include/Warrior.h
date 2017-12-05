@@ -3,7 +3,7 @@
 
 
 #include <string>
-#include "../Soldier.h"
+#include "Soldier.h"
 
 class Warrior : public Soldier {
 public:

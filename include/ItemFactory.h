@@ -2,9 +2,9 @@
 #define STAVALFI_CPP_EX2_ITEM_FACTORY_H
 
 
-#include "item/armor/Armor.h"
-#include "item/weapon/Weapon.h"
-#include "item/SolidItem.h"
+#include "Armor.h"
+#include "Weapon.h"
+#include "SolidItem.h"
 
 enum ArmorTypes {
     SHIELD_ARMOR,

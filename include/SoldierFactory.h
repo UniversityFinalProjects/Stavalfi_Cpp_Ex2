@@ -2,7 +2,7 @@
 #define STAVALFI_CPP_EX2_SOLDIER_FACTORY_H
 
 
-#include "soldier/Soldier.h"
+#include "Soldier.h"
 
 enum SoldierType
 {

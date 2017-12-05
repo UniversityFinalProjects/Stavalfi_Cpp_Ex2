@@ -1,9 +1,9 @@
 #include <stdexcept>
 #include "SoldierFactory.h"
 
-#include "soldier/healer/RegularHealer.h"
-#include "soldier/warrior/RegularWarrior.h"
-#include "soldier/warrior/SniperWarrior.h"
+#include "RegularHealer.h"
+#include "RegularWarrior.h"
+#include "SniperWarrior.h"
 #include "ItemFactory.h"
 
 #define ENUM_TO_STR(ENUM) std::string(#ENUM)

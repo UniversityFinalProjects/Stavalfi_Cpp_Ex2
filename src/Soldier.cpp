@@ -1,6 +1,6 @@
-#include "Soldier.h"
 
 #include <cassert>
+#include <Soldier.h>
 
 Soldier::Soldier(const std::string& id,const Point2d &location, const std::string &playerId,
                  short lifePoints, short walkingSpeed) :

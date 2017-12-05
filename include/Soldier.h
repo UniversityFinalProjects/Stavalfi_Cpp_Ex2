@@ -3,8 +3,8 @@
 
 #include <string>
 #include <vector>
-#include "../item/weapon/Weapon.h"
-#include "../item/armor/Armor.h"
+#include "Weapon.h"
+#include "Armor.h"
 
 class Soldier : public MapObject {
     const std::string &playerId;

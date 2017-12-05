@@ -3,7 +3,7 @@
 
 
 #include <string>
-#include "../MapObject.h"
+#include "MapObject.h"
 
 class Item : public MapObject {
 public:
