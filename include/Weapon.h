@@ -16,7 +16,7 @@ public:
 
     short getBulletAmountAtOnce() const;
 
-    ~Weapon() override = 0;
+    virtual ~Weapon() = 0;
 };
 
 

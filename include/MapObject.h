@@ -3,12 +3,9 @@
 
 
 #include "Point2d.h"
-#include "Map.h"
 #include <string>
 
 class MapObject {
-
-    //friend Map;
     const std::string &id;
 public:
     const std::string &getId() const;

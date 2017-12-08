@@ -4,14 +4,13 @@
 
 #include <string>
 #include "Item.h"
-#include "Point2d.h"
 
 class CollectableItem : public Item {
     bool inUse;
 
 public:
     explicit CollectableItem(const std::string &id,
-                             const Point2d &location,bool inUse);
+                             const Point2d &location, bool inUse);
 
     bool isInUse() const;
 
@@ -20,6 +19,5 @@ public:
     ~CollectableItem() override = 0;
 
 };
-
 
 #endif //STAVALFI_CPP_EX2_COLLECTABLE_ITEM_H

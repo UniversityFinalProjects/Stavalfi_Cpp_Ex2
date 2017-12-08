@@ -1,18 +1,29 @@
-#ifndef STAVALFI_CPP_EX2_MAP_H
-#define STAVALFI_CPP_EX2_MAP_H
+#ifndef STAVALFI_CPP_EX2_MAP_CELL_H
+#define STAVALFI_CPP_EX2_MAP_CELL_H
 
-
+#include "CollectableItem.h"
+#include "SolidItem.h"
+#include "Soldier.h"
 #include "ModifyMap.h"
 #include "ReadMap.h"
-#include "MapCell.h"
 #include <vector>
 
-class Map : public ModifyMap, public ReadMap {
-    std::vector<MapCell> map;
-    const signed int w, h;
+class MapCell : public ModifyMap, public ReadMap {
+
+    const signed int y, x;
+
+    // represent a map = 2d matrix.
+    std::vector<std::shared_ptr<Soldier>> soldiers;
+
+    // represent a map = 2d matrix.
+    std::vector<std::shared_ptr<Soldier>> collectableItems;
+
+    // represent a map = 2d matrix.
+    std::vector<std::shared_ptr<const Soldier>> solidItems;
 
 public:
-    Map(int w, int h);
+
+    MapCell(signed int y, signed int x);
 
     void removeSoldier(Soldier &soldier) override;
 
@@ -64,7 +75,6 @@ public:
      */
     const std::vector<std::shared_ptr<SolidItem>>
     getSolidItemsAround(const Point2d &point2d, int distance) const override;
-
 };
 
 
