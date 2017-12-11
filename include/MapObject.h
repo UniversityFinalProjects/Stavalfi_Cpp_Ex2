@@ -7,18 +7,16 @@
 
 class MapObject {
     const std::string &id;
+    Point2d &location;
+
+protected:
+    void setLocation(int y, int x);
 public:
     const std::string &getId() const;
 
-private:
-    Point2d &location;
-
-public:
     explicit MapObject(const std::string &id, const Point2d &location);
 
     const Point2d &getLocation() const;
-
-    void setLocation(int x, int y);
 
     virtual ~MapObject() = 0;
 };

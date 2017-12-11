@@ -8,7 +8,7 @@ const Point2d &MapObject::getLocation() const {
     return this->location;
 }
 
-void MapObject::setLocation(int x,int y) {
+void MapObject::setLocation(int y,int x) {
     assert(x>=0 && y>=0);
     this->location.setX(x);
     this->location.setY(y);

@@ -7,7 +7,7 @@ class Point2d {
     double y;
 
 public:
-    Point2d(double x, double y);
+    Point2d(double y, double x);
 
     double getX() const;
 

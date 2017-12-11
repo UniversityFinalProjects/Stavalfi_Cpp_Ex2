@@ -16,9 +16,13 @@ protected:
     Weapon *weapon;
 
 public:
-    Soldier(const std::string& id,const Point2d &location, const std::string &playerId, short lifePoints, short walkingSpeed);
+    Soldier(const std::string& id,const Point2d &location,
+            const std::string &playerId, short lifePoints,
+            short walkingSpeed);
 
-    Soldier(const std::string& id,const Point2d &location, const std::string &playerId, Weapon *weapon, short lifePoints, short walkingSpeed);
+    Soldier(const std::string& id,const Point2d &location,
+            const std::string &playerId, Weapon *weapon,
+            short lifePoints, short walkingSpeed);
 
     bool isEnemy(const Soldier &soldier) const;
 

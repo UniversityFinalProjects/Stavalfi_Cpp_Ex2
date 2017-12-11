@@ -25,13 +25,13 @@ public:
 
     MapCell(signed int y, signed int x);
 
-    void removeSoldier(Soldier &soldier) override;
+    //void removeSoldier(Soldier &soldier) override;
 
     void removeCollectableItem(const CollectableItem &soldier) override;
 
     void removeSolidItem(const SolidItem &soldier) override;
 
-    void addSoldier(Soldier &soldier) override;
+    //void addSoldier(Soldier &soldier) override;
 
     void addCollectableItem(const CollectableItem &soldier) override;
 

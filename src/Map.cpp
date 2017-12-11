@@ -4,19 +4,11 @@ Map::Map(int w, int h) : h(h), w(w) {
 
 }
 
-void Map::removeSoldier(Soldier &soldier) {
-
-}
-
 void Map::removeCollectableItem(const CollectableItem &soldier) {
 
 }
 
 void Map::removeSolidItem(const SolidItem &soldier) {
-
-}
-
-void Map::addSoldier(Soldier &soldier) {
 
 }
 

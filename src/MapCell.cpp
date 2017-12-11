@@ -3,19 +3,11 @@
 MapCell::MapCell(signed int y, signed int x)
         : x(x), y(y) {}
 
-void MapCell::removeSoldier(Soldier &soldier) {
-
-}
-
 void MapCell::removeCollectableItem(const CollectableItem &soldier) {
 
 }
 
 void MapCell::removeSolidItem(const SolidItem &soldier) {
-
-}
-
-void MapCell::addSoldier(Soldier &soldier) {
 
 }
 
