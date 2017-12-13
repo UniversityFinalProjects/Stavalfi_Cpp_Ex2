@@ -2,12 +2,12 @@
 #define STAVALFI_CPP_EX2_MAP_H
 
 
-#include "ModifyMap.h"
-#include "ReadMap.h"
+#include "MapModifier.h"
+#include "MapReader.h"
 #include "MapCell.h"
 #include <vector>
 
-class Map : public ModifyMap, public ReadMap {
+class Map : public MapModifier, public MapReader {
     std::vector<MapCell> map;
     const signed int w, h;
 
@@ -22,9 +22,9 @@ public:
 
     // void addSoldier(Soldier &soldier) override;
 
-    void addCollectableItem(const CollectableItem &soldier) override;
+    void addCollectableItem(const CollectableItem &soldier);
 
-    void addSolidItem(const SolidItem &soldier) override;
+    void addSolidItem(const SolidItem &soldier);
 
     std::shared_ptr<Soldier> getSoldier(int y, int x) const;
 

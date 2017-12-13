@@ -1,6 +1,5 @@
-
 #include <cassert>
-#include <Soldier.h>
+#include "Soldier.h"
 
 Soldier::Soldier(const std::string& id,const Point2d &location, const std::string &playerId,
                  short lifePoints, short walkingSpeed) :
@@ -45,4 +44,8 @@ Soldier::~Soldier() {
     delete (this->weapon);
     for (auto &armor:this->armors)
         delete (armor);
+}
+
+void Soldier::setWeapon(Weapon *weapon) {
+    Soldier::weapon = weapon;
 }

@@ -4,11 +4,11 @@
 #include "CollectableItem.h"
 #include "SolidItem.h"
 #include "Soldier.h"
-#include "ModifyMap.h"
-#include "ReadMap.h"
+#include "MapModifier.h"
+#include "MapReader.h"
 #include <vector>
 
-class MapCell : public ModifyMap, public ReadMap {
+class MapCell : public MapModifier, public MapReader {
 
     const signed int y, x;
 
@@ -25,17 +25,17 @@ public:
 
     MapCell(signed int y, signed int x);
 
-    //void removeSoldier(Soldier &soldier) override;
+    void removeSoldier(const Soldier &soldier) override;
 
     void removeCollectableItem(const CollectableItem &soldier) override;
 
     void removeSolidItem(const SolidItem &soldier) override;
 
-    //void addSoldier(Soldier &soldier) override;
+    void addSoldier(Soldier &soldier) override;
 
-    void addCollectableItem(const CollectableItem &soldier) override;
+    void addCollectableItem(CollectableItem &soldier) override;
 
-    void addSolidItem(const SolidItem &soldier) override;
+    void addSolidItem(SolidItem &soldier) override;
 
     std::shared_ptr<Soldier> getSoldier(int y, int x) const;
 

@@ -2,14 +2,14 @@
 // Created by stavalfi on 12/8/17.
 //
 
-#ifndef STAVALFI_CPP_EX2_READ_MAPH
-#define STAVALFI_CPP_EX2_READ_MAPH
+#ifndef STAVALFI_CPP_EX2_MAP_READER_H
+#define STAVALFI_CPP_EX2_MAP_READER_H
 
 #include "Soldier.h"
 #include "SolidItem.h"
 #include <memory>
 
-struct ReadMap {
+struct MapReader {
     virtual std::shared_ptr<Soldier> getSoldier(int y, int x) const = 0;
 
     virtual std::shared_ptr<CollectableItem> getCollectableItem(int y, int x) const = 0;

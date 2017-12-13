@@ -15,26 +15,33 @@ class Soldier : public MapObject {
 protected:
     Weapon *weapon;
 
+    /**
+     * only the attack method will call this.
+     * @param distance
+     * @return if the soldier succeesfuly attacked or missed.
+     */
+    virtual bool willAttackSucceed(int distance) = 0;
+
+    void setLifePoints(short lifePoints);
+
+    void setWeapon(Weapon *weapon);
+
 public:
-    Soldier(const std::string& id,const Point2d &location,
+    Soldier(const std::string &id, const Point2d &location,
             const std::string &playerId, short lifePoints,
             short walkingSpeed);
 
-    Soldier(const std::string& id,const Point2d &location,
+    Soldier(const std::string &id, const Point2d &location,
             const std::string &playerId, Weapon *weapon,
             short lifePoints, short walkingSpeed);
 
     bool isEnemy(const Soldier &soldier) const;
-
-    virtual bool willAttackSucceed(int distance) = 0;
 
     Weapon *getWeapon() const;
 
     const std::string &getPlayerId() const;
 
     short getLifePoints() const;
-
-    void setLifePoints(short lifePoints);
 
     const short getWalkingSpeed() const;
 
