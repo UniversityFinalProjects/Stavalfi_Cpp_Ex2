@@ -30,7 +30,7 @@ public:
 
     std::shared_ptr<CollectableItem> getCollectableItem(int y, int x) const;
 
-    std::shared_ptr<SolidItem> getSolidItem(int y, int x) const;
+    std::shared_ptr<const SolidItem> getSolidItem(int y, int x) const;
 
     /**
      * @param soldier
@@ -62,7 +62,7 @@ public:
      * @return all solid items around this location
      * (without including anything from the given location).
      */
-    const std::vector<std::shared_ptr<SolidItem>>
+    const std::vector<std::shared_ptr<const SolidItem>>
     getSolidItemsAround(const Point2d &point2d, int distance) const override;
 
 };

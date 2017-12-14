@@ -1,4 +1,5 @@
 #include "Warrior.h"
+#include "SoldierActions.h"
 
 Warrior::Warrior(const std::string &id, const Point2d &location,
                  const std::string &playerId, short lifePoints,
@@ -7,4 +8,8 @@ Warrior::Warrior(const std::string &id, const Point2d &location,
 
 void Warrior::setWeapon(Weapon *weapon) {
     this->weapon = weapon;
+}
+
+void Warrior::play(SoldierActions &soldierActions) {
+    soldierActions.play(*this);
 }

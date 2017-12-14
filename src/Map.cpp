@@ -28,8 +28,8 @@ std::shared_ptr<CollectableItem> Map::getCollectableItem(int y, int x) const {
     return std::shared_ptr<CollectableItem>();
 }
 
-std::shared_ptr<SolidItem> Map::getSolidItem(int y, int x) const {
-    return std::shared_ptr<SolidItem>();
+std::shared_ptr<const SolidItem> Map::getSolidItem(int y, int x) const {
+    return std::shared_ptr<const SolidItem>();
 }
 
 const std::vector<std::shared_ptr<Soldier>> Map::getEnemiesAround(const Soldier &soldier, int distance) const {
@@ -45,6 +45,6 @@ Map::getCollectableItemsAround(const Point2d &point2d, int distance) const {
     return std::vector<std::shared_ptr<CollectableItem>>();
 }
 
-const std::vector<std::shared_ptr<SolidItem>> Map::getSolidItemsAround(const Point2d &point2d, int distance) const {
-    return std::vector<std::shared_ptr<SolidItem>>();
+const std::vector<std::shared_ptr<const SolidItem>> Map::getSolidItemsAround(const Point2d &point2d, int distance) const {
+    return std::vector<std::shared_ptr<const SolidItem>>();
 }

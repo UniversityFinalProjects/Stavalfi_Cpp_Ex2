@@ -1,10 +1,12 @@
 #ifndef STAVALFI_CPP_EX2_SOLDIER_H
 #define STAVALFI_CPP_EX2_SOLDIER_H
 
-#include <string>
+#include <string.h>
 #include <vector>
 #include "Weapon.h"
 #include "Armor.h"
+
+class SoldierActions;
 
 class Soldier : public MapObject {
     const std::string &playerId;
@@ -18,7 +20,7 @@ protected:
     /**
      * only the attack method will call this.
      * @param distance
-     * @return if the soldier succeesfuly attacked or missed.
+     * @return if the soldier successfuly attacked or missed.
      */
     virtual bool willAttackSucceed(int distance) = 0;
 
@@ -34,6 +36,8 @@ public:
     Soldier(const std::string &id, const Point2d &location,
             const std::string &playerId, Weapon *weapon,
             short lifePoints, short walkingSpeed);
+
+    virtual void play(SoldierActions &soldierActions) = 0;
 
     bool isEnemy(const Soldier &soldier) const;
 

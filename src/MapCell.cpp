@@ -24,36 +24,36 @@ void MapCell::addCollectableItem(CollectableItem &soldier) {
 
 }
 
-void MapCell::addSolidItem(SolidItem &soldier) {
+void MapCell::addSolidItem(const SolidItem &solidItem) {
 
 }
 
-std::shared_ptr <Soldier> MapCell::getSoldier(int y, int x) const {
+std::shared_ptr<Soldier> MapCell::getSoldier(int y, int x) const {
     return std::shared_ptr<Soldier>();
 }
 
-std::shared_ptr <CollectableItem> MapCell::getCollectableItem(int y, int x) const {
+std::shared_ptr<CollectableItem> MapCell::getCollectableItem(int y, int x) const {
     return std::shared_ptr<CollectableItem>();
 }
 
-std::shared_ptr <SolidItem> MapCell::getSolidItem(int y, int x) const {
-    return std::shared_ptr<SolidItem>();
+std::shared_ptr<const SolidItem> MapCell::getSolidItem(int y, int x) const {
+    return std::shared_ptr<const SolidItem>();
 }
 
-const std::vector <std::shared_ptr<Soldier>> MapCell::getEnemiesAround(const Soldier &soldier, int distance) const {
-    return std::vector < std::shared_ptr < Soldier >> ();
+const std::vector<std::shared_ptr<Soldier>> MapCell::getEnemiesAround(const Soldier &soldier, int distance) const {
+    return std::vector<std::shared_ptr<Soldier>>();
 }
 
-const std::vector <std::shared_ptr<Soldier>> MapCell::getAlliesAround(const Soldier &soldier, int distance) const {
-    return std::vector < std::shared_ptr < Soldier >> ();
+const std::vector<std::shared_ptr<Soldier>> MapCell::getAlliesAround(const Soldier &soldier, int distance) const {
+    return std::vector<std::shared_ptr<Soldier>>();
 }
 
-const std::vector <std::shared_ptr<CollectableItem>>
+const std::vector<std::shared_ptr<CollectableItem>>
 MapCell::getCollectableItemsAround(const Point2d &point2d, int distance) const {
-    return std::vector < std::shared_ptr < CollectableItem >> ();
+    return std::vector<std::shared_ptr<CollectableItem>>();
 }
 
-const std::vector <std::shared_ptr<SolidItem>>
+const std::vector<std::shared_ptr<const SolidItem>>
 MapCell::getSolidItemsAround(const Point2d &point2d, int distance) const {
-    return std::vector < std::shared_ptr < SolidItem >> ();
+    return std::vector<std::shared_ptr<const SolidItem>>();
 }

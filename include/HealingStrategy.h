@@ -1,7 +1,3 @@
-//
-// Created by stava on 12/12/2017.
-//
-
 #ifndef STAVALFI_CPP_EX2_HEALING_STRATEGY_H
 #define STAVALFI_CPP_EX2_HEALING_STRATEGY_H
 
@@ -16,8 +12,8 @@ protected:
 public:
     HealingStrategy(const MapReader &mapReader);
 
-    virtual Soldier &choose_allie_to_heal(const Soldier &soldier) = 0;
-
+    virtual Soldier &chooseAllieToHeal(const Warrior &warrior) = 0;
+    virtual Soldier &chooseAllieToHeal(const Healer &healer) = 0;
     virtual ~HealingStrategy() = default;
 };
 

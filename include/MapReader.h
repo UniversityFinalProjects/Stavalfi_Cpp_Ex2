@@ -1,9 +1,6 @@
-//
-// Created by stavalfi on 12/8/17.
-//
-
 #ifndef STAVALFI_CPP_EX2_MAP_READER_H
 #define STAVALFI_CPP_EX2_MAP_READER_H
+
 
 #include "Soldier.h"
 #include "SolidItem.h"
@@ -14,7 +11,7 @@ struct MapReader {
 
     virtual std::shared_ptr<CollectableItem> getCollectableItem(int y, int x) const = 0;
 
-    virtual std::shared_ptr<SolidItem> getSolidItem(int y, int x) const = 0;
+    virtual std::shared_ptr<const SolidItem> getSolidItem(int y, int x) const = 0;
 
     /**
      * @param soldier
@@ -48,8 +45,7 @@ struct MapReader {
      * @return all solid items around this location
      * (without including anything from the given location).
      */
-    virtual const std::vector<std::shared_ptr<SolidItem>>
-    getSolidItemsAround(const Point2d &point2d, int distance) const = 0;
+    virtual const std::vector<std::shared_ptr<const SolidItem>> getSolidItemsAround(const Point2d &point2d, int distance) const = 0;
 };
 
-#endif //STAVALFI_CPP_EX2_READMAPCELL_H
+#endif //STAVALFI_CPP_EX2_MAP_READER_H

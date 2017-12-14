@@ -19,7 +19,7 @@ class MapCell : public MapModifier, public MapReader {
     std::vector<std::shared_ptr<Soldier>> collectableItems;
 
     // represent a map = 2d matrix.
-    std::vector<std::shared_ptr<const Soldier>> solidItems;
+    std::vector<std::shared_ptr<const SolidItem>> solidItems;
 
 public:
 
@@ -35,13 +35,13 @@ public:
 
     void addCollectableItem(CollectableItem &soldier) override;
 
-    void addSolidItem(SolidItem &soldier) override;
+    void addSolidItem(const SolidItem &solidItem) override;
 
     std::shared_ptr<Soldier> getSoldier(int y, int x) const;
 
     std::shared_ptr<CollectableItem> getCollectableItem(int y, int x) const;
 
-    std::shared_ptr<SolidItem> getSolidItem(int y, int x) const;
+    std::shared_ptr<const SolidItem> getSolidItem(int y, int x) const;
 
     /**
      * @param soldier
@@ -73,7 +73,7 @@ public:
      * @return all solid items around this location
      * (without including anything from the given location).
      */
-    const std::vector<std::shared_ptr<SolidItem>>
+    const std::vector<std::shared_ptr<const SolidItem>>
     getSolidItemsAround(const Point2d &point2d, int distance) const override;
 };
 
