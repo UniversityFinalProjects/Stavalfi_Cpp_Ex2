@@ -9,15 +9,19 @@ class MapModifier {
 public:
     virtual void remove(const Soldier &soldier) = 0;
 
-    virtual void remove(const CollectableItem &soldier) = 0;
+    virtual void remove(const Weapon &weapon) = 0;
 
-    virtual void remove(const SolidItem &soldier) = 0;
+    virtual void remove(const Armor &armor) = 0;
 
-    virtual bool tryAdd(Soldier &soldier) = 0;
+    virtual void remove(const SolidItem &solidItem) = 0;
 
-    virtual bool tryAdd(CollectableItem &soldier) = 0;
+    virtual bool tryAdd(std::shared_ptr<Soldier> soldier) = 0;
 
-    virtual bool tryAdd(const SolidItem &soldier) = 0;
+    virtual bool tryAdd(std::shared_ptr<Weapon> &weapon) = 0;
+
+    virtual bool tryAdd(std::shared_ptr<Armor> &armor) = 0;
+
+    virtual bool tryAdd(std::shared_ptr<const SolidItem> &soldier) = 0;
 
     virtual ~MapModifier() = 0;
 };

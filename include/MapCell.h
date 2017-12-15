@@ -26,52 +26,40 @@ public:
 
     void remove(const Soldier &soldier) override;
 
-    void remove(const CollectableItem &soldier) override;
+    void remove(const Weapon &weapon) override;
 
-    void remove(const SolidItem &soldier) override;
+    void remove(const Armor &armor) override;
 
-    bool tryAdd(Soldier &soldier) override;
+    void remove(const SolidItem &solidItem) override;
 
-    bool tryAdd(CollectableItem &soldier) override;
+    bool tryAdd(std::shared_ptr<Soldier> soldier) override;
 
-    bool tryAdd(const SolidItem &solidItem) override;
+    bool tryAdd(std::shared_ptr<Weapon> &weapon) override;
 
-    std::shared_ptr<Soldier> getSoldier(int y, int x) const;
+    bool tryAdd(std::shared_ptr<Armor> &armor) override;
 
-    std::shared_ptr<CollectableItem> getCollectableItem(int y, int x) const;
+    bool tryAdd(std::shared_ptr<const SolidItem> &soldier) override;
 
-    std::shared_ptr<const SolidItem> getSolidItem(int y, int x) const;
+    std::shared_ptr<Soldier> get(int y, int x) const override;
 
-    /**
-     * @param soldier
-     * @param distance
-     * @return all the enemies of this soldier around him.
-     */
+    std::shared_ptr<Soldier> getSoldier(int y, int x) const override;
+
+    std::shared_ptr<Weapon> getWeapon(int y, int x) const override;
+
+    std::shared_ptr<Weapon> getArmor(int y, int x) const override;
+
+    std::shared_ptr<const SolidItem> getSolidItem(int y, int x) const override;
+
     const std::list<std::shared_ptr<Soldier>> getEnemiesAround(const Soldier &soldier, int distance) const override;
 
-    /**
-     * @param soldier
-     * @param distance
-     * @return all the allies of this soldier around him
-     * (without this soldier).
-     */
     const std::list<std::shared_ptr<Soldier>> getAlliesAround(const Soldier &soldier, int distance) const override;
 
-    /**
-     * @param point2d
-     * @param distance
-     * @return all collectable items around this location
-     * (without including anything from the given location).
-     */
     const std::list<std::shared_ptr<CollectableItem>>
-    getCollectableItemsAround(const Point2d &point2d, int distance) const override;
+    getWeaponsAround(const Point2d &point2d, int distance) const override;
 
-    /**
-     * @param point2d
-     * @param distance
-     * @return all solid items around this location
-     * (without including anything from the given location).
-     */
+    const std::list<std::shared_ptr<CollectableItem>>
+    getArmorsAround(const Point2d &point2d, int distance) const override;
+
     const std::list<std::shared_ptr<const SolidItem>>
     getSolidItemsAround(const Point2d &point2d, int distance) const override;
 };
