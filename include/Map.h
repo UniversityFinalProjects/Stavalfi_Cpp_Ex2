@@ -1,13 +1,11 @@
 #ifndef STAVALFI_CPP_EX2_MAP_H
 #define STAVALFI_CPP_EX2_MAP_H
 
-
-#include "MapModifier.h"
-#include "MapReader.h"
 #include "MapCell.h"
+#include "MapReaderModifier.h"
 #include <vector>
 
-class Map : public MapModifier, public MapReader {
+class Map : public MapReaderModifier {
     // why not <MapCell& or * or smart_ptr> - because
     // vector return MapCell& anyway.
     // Also each MapCell object is located in the heap also.
@@ -16,6 +14,8 @@ class Map : public MapModifier, public MapReader {
 
 public:
     Map(int w, int h);
+
+    ~Map() override = default;
 
     // void remove(Soldier &soldier) override;
 

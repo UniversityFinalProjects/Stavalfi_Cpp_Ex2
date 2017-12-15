@@ -6,7 +6,8 @@
 #include "SolidItem.h"
 #include <memory>
 
-struct MapReader {
+class MapReader {
+public:
     virtual std::shared_ptr<Soldier> getSoldier(int y, int x) const = 0;
 
     virtual std::shared_ptr<CollectableItem> getCollectableItem(int y, int x) const = 0;
@@ -45,7 +46,10 @@ struct MapReader {
      * @return all solid items around this location
      * (without including anything from the given location).
      */
-    virtual const std::list<std::shared_ptr<const SolidItem>> getSolidItemsAround(const Point2d &point2d, int distance) const = 0;
+    virtual const std::list<std::shared_ptr<const SolidItem>>
+    getSolidItemsAround(const Point2d &point2d, int distance) const = 0;
+
+    virtual ~MapReader() = 0;
 };
 
 #endif //STAVALFI_CPP_EX2_MAP_READER_H

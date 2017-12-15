@@ -4,12 +4,9 @@
 #include "MapReader.h"
 #include "Healer.h"
 #include "Warrior.h"
+#include "SoldierStrategy.h"
 
-class MovingSoldierStrategy {
-    const MapReader &mapReader;
-protected:
-    const MapReader &getMapReader() const;
-
+class MovingSoldierStrategy : public SoldierStrategy {
 public:
     MovingSoldierStrategy(const MapReader &mapReader);
 
@@ -17,7 +14,7 @@ public:
 
     virtual Point2d chooseNewLocation(const Healer &healer) const = 0;
 
-    virtual ~MovingSoldierStrategy() = default;
+    virtual ~MovingSoldierStrategy() = 0;
 };
 
 

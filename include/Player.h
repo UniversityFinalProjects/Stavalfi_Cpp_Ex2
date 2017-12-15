@@ -5,7 +5,7 @@
 #include <list>
 #include "Soldier.h"
 #include "AttackingStrategy.h"
-#include "CollectingItemStrategy.h"
+#include "ChoosingWeaponStrategy.h"
 #include "HealingStrategy.h"
 #include "MovingSoldierStrategy.h"
 #include "MapModifier.h"

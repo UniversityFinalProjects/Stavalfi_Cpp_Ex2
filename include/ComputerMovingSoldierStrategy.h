@@ -1,5 +1,5 @@
-#ifndef STAVALFI_CPP_EX2_COMPUTERMOVINGSOLDIERSTRATEGY_H
-#define STAVALFI_CPP_EX2_COMPUTERMOVINGSOLDIERSTRATEGY_H
+#ifndef STAVALFI_CPP_EX2_COMPUTER_MOVING_SOLDIER_STRATEGY_H
+#define STAVALFI_CPP_EX2_COMPUTER_MOVING_SOLDIER_STRATEGY_H
 
 
 #include "MapReader.h"
@@ -8,14 +8,14 @@
 class ComputerMovingSoldierStrategy : public MovingSoldierStrategy {
     ComputerMovingSoldierStrategy(const MapReader &mapReader);
 
-    Point2d chooseNewLocation(const Warrior &warrior) override {
+    Point2d chooseNewLocation(const Warrior &warrior) const override {
         return Point2d(-1, -1);
     }
 
-    Point2d chooseNewLocation(const Healer &healer) override {
+    Point2d chooseNewLocation(const Healer &healer) const override {
         return Point2d(-1, -1);
     }
 };
 
 
-#endif //STAVALFI_CPP_EX2_COMPUTERMOVINGSOLDIERSTRATEGY_H
+#endif //STAVALFI_CPP_EX2_COMPUTER_MOVING_SOLDIER_STRATEGY_H

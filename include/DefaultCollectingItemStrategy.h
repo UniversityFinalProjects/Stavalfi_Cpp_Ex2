@@ -3,22 +3,27 @@
 
 
 #include "MapReader.h"
-#include "CollectingItemStrategy.h"
+#include "ChoosingWeaponStrategy.h"
 
-class DefaultCollectingItemStrategy : public CollectingItemStrategy {
+class DefaultCollectingItemStrategy : public ChoosingWeaponStrategy {
 public:
     DefaultCollectingItemStrategy(const MapReader &mapReader);
 
-    const CollectableItem &chooseItemToCollect(const Warrior &warrior) const override {
-        return *this->get_map_reader().getCollectableItem(warrior.getLocation().getY(),
-                                                          warrior.getLocation().getX());
+    const CollectableItem &chooseArmor(const Warrior &warrior) const override {
+
     }
 
-    const CollectableItem &chooseItemToCollect(const Healer &healer) const override {
-        return *this->get_map_reader().getCollectableItem(healer.getLocation().getY(),
-                                                          healer.getLocation().getX());
+    const CollectableItem &chooseArmor(const Healer &healer) const override {
+
     }
 
+    const CollectableItem &chooseWeapon(const Warrior &warrior) const override {
+
+    }
+
+    const CollectableItem &chooseWeapon(const Healer &healer) const override {
+
+    }
 };
 
 
