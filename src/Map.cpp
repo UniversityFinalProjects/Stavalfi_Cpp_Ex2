@@ -36,10 +36,6 @@ bool Map::tryAdd(std::shared_ptr<const SolidItem> &soldier) {
     return false;
 }
 
-std::shared_ptr<Soldier> Map::operator()(int y, int x) const {
-    return nullptr;
-}
-
 std::shared_ptr<Soldier> Map::getSoldier(int y, int x) const {
     return nullptr;
 }

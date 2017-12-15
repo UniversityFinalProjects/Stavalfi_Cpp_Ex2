@@ -4,15 +4,20 @@
 #include <list>
 #include <memory>
 #include "Player.h"
-#include "MapReaderModifier.h"
+#include "Reportable.h"
 
-struct GameState {
+class GameState : public Reportable {
+public:
     std::list<std::shared_ptr<Player>> players;
     std::list<std::shared_ptr<Weapon>> weapons;
     std::list<std::shared_ptr<Armor>> armors;
     std::list<std::shared_ptr<SolidItem>> solidItems;
     std::list<std::shared_ptr<Soldier>> soldiers;
     std::string turnOfPlayerId;
+
+    void report(const Reporter &reporter) const override;
+
+    ~GameState() override;
 };
 
 

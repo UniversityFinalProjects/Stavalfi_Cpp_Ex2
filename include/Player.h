@@ -8,7 +8,6 @@
 #include "ChoosingWeaponStrategy.h"
 #include "HealingStrategy.h"
 #include "MovingSoldierStrategy.h"
-#include "MapModifier.h"
 #include "ApplySoldierStrategies.h"
 
 class Player {

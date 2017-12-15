@@ -36,14 +36,6 @@ bool MapCell::tryAdd(std::shared_ptr<const SolidItem> &soldier) {
     return false;
 }
 
-MapCell::~MapCell() {
-
-}
-
-std::shared_ptr<Soldier> MapCell::operator()(int y, int x) const {
-    return nullptr;
-}
-
 std::shared_ptr<Soldier> MapCell::getSoldier(int y, int x) const {
     return nullptr;
 }
@@ -80,4 +72,8 @@ const std::list<std::shared_ptr<CollectableItem>> MapCell::getArmorsAround(const
 const std::list<std::shared_ptr<const SolidItem>>
 MapCell::getSolidItemsAround(const Point2d &point2d, int distance) const {
     return std::list<std::shared_ptr<const SolidItem>>();
+}
+
+std::shared_ptr<Soldier> MapCell::get(int y, int x) const {
+    return std::shared_ptr<Soldier>();
 }
