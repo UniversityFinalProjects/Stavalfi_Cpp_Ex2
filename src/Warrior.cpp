@@ -1,10 +1,10 @@
 #include "Warrior.h"
 #include "ApplySoldierStrategies.h"
 
-Warrior::Warrior(const std::string &id, const Point2d &location,
-                 const std::string &playerId, short lifePoints,
-                 short walkingSpeed)
-        : Soldier(id, location, playerId, lifePoints, walkingSpeed) {}
+Warrior::Warrior(const std::string &playerId, const Point2d &location, short lifePoints,
+                 short walkingSpeed,
+                 const std::list<Point2d> &soldierDirections)
+        : Soldier(playerId, location, lifePoints, walkingSpeed, soldierDirections) {}
 
 void Warrior::play(ApplySoldierStrategies &applySoldierStrategies) {
     applySoldierStrategies.playWithSoldier(*this);

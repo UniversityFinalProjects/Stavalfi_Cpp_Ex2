@@ -13,16 +13,35 @@ class Soldier : public MapObject {
     const std::string &playerId;
     short lifePoints;
     const short walkingSpeed;
+
+    /**
+     * Specify a pre-configured directions for this soldier.
+     * It will be used only in the MoveStrategy's drived classes.
+     */
+    class SoldierDirections {
+        const std::list<Point2d> directions;
+        std::list<Point2d>::const_iterator currentDirection;
+    public:
+        SoldierDirections(const std::list<Point2d> &directions);
+
+        std::unique_ptr<Point2d> getNextDirection();
+
+        bool areDirectionsEnabled();
+    };
+
+    SoldierDirections soldierDirections;
+
     // we must keep shared_ptr to armors because if
     // at the end of the game, all the armors will
-    // be deleted befor this class then when we call
-    // this object's constructor, we will get segmentation
+    // be deleted before this class then when we call
+    // this object's constructor, we will create segmentation
     // fault when referring to those armors.
     std::list<std::shared_ptr<Armor>> armors;
 protected:
     std::shared_ptr<Weapon> weapon;
 
 public:
+
     /**
      * only the attack method will call this.
      * @param distance
@@ -32,9 +51,12 @@ public:
 
     void setLifePoints(short lifePoints);
 
-    Soldier(const std::string &id, const Point2d &location,
-            const std::string &playerId, short lifePoints,
-            short walkingSpeed, std::shared_ptr<Weapon> weapon = nullptr);
+    Soldier(const std::string &playerId,
+            const Point2d &location,
+            short lifePoints,
+            short walkingSpeed,
+            const std::list<Point2d> &soldierDirections,
+            std::shared_ptr<Weapon> weapon = nullptr);
 
     virtual void play(ApplySoldierStrategies &applySoldierStrategies) = 0;
 

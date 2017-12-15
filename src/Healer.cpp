@@ -6,12 +6,12 @@ void Healer::play(ApplySoldierStrategies &applySoldierStrategies) {
     applySoldierStrategies.playWithSoldier(*this);
 }
 
-Healer::Healer(const std::string &id, const Point2d &location, const std::string &playerId,
-               short lifePoints, short walkingSpeed, std::shared_ptr<Weapon> weapon)
-        : Soldier(id, location, playerId, lifePoints, walkingSpeed, weapon) {
-    assert(weapon != nullptr);
-}
-
 Healer::~Healer() {
 
+}
+
+Healer::Healer(const std::string &playerId, const Point2d &location, short lifePoints, short walkingSpeed,
+               const std::list<Point2d> &soldierDirections, const std::shared_ptr<Weapon> &weapon) : Soldier(
+        playerId, location, lifePoints, walkingSpeed, soldierDirections, weapon) {
+    assert(weapon != nullptr);
 }

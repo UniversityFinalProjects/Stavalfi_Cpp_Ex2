@@ -1,10 +1,5 @@
 #include "Player.h"
 
-void Player::play() {
-    for (auto soldier:this->soldiers)
-        soldier->play(*this);
-}
-
 void Player::addSoldier(std::shared_ptr<Soldier> &soldier) {
 
 }
@@ -13,32 +8,72 @@ void Player::removeSoldier(const std::shared_ptr<Soldier> &soldier) {
 
 }
 
-void Player::playWithSoldier(Soldier &soldier) {
-    soldier.play(*this);
-}
 
-void Player::playWithSoldier(Warrior &warrior) {
-    // logic
-}
-
-void Player::playWithSoldier(Healer &healer) {
-    // logic
-}
-
-Player::Player(const std::string &player_id, const FindPlayer &findPlayer, MapModifier &mapModifier,
+Player::Player(const std::string &playerId,
                const std::shared_ptr<AttackingStrategy> &attackingStrategy,
                const std::shared_ptr<ChoosingWeaponStrategy> &choosingWeaponStrategy,
                const std::shared_ptr<ChoosingArmorStrategy> &choosingArmorStrategy,
                const std::shared_ptr<HealingStrategy> &healingStrategy,
-               const std::shared_ptr<MovingSoldierStrategy> &movingSoldierStrategy) : player_id(player_id),
-                                                                                      findPlayer(findPlayer),
-                                                                                      mapModifier(mapModifier),
-                                                                                      attackingStrategy(
-                                                                                              attackingStrategy),
-                                                                                      choosingWeaponStrategy(
-                                                                                              choosingWeaponStrategy),
-                                                                                      choosingArmorStrategy(
-                                                                                              choosingArmorStrategy),
-                                                                                      healingStrategy(healingStrategy),
-                                                                                      movingSoldierStrategy(
-                                                                                              movingSoldierStrategy) {}
+               const std::shared_ptr<MovingSoldierStrategy> &movingSoldierStrategy)
+        : playerId(playerId),
+          attackingStrategy(attackingStrategy),
+          choosingWeaponStrategy(choosingWeaponStrategy),
+          choosingArmorStrategy(choosingArmorStrategy),
+          healingStrategy(healingStrategy),
+          movingSoldierStrategy(movingSoldierStrategy) {}
+
+const std::string &Player::getPlayerId() const {
+    return playerId;
+}
+
+const std::list<std::shared_ptr<Soldier>> &Player::getSoldiers() const {
+    return soldiers;
+}
+
+void Player::setSoldiers(const std::list<std::shared_ptr<Soldier>> &soldiers) {
+    Player::soldiers = soldiers;
+}
+
+const std::shared_ptr<AttackingStrategy> &Player::getAttackingStrategy() const {
+    return attackingStrategy;
+}
+
+void Player::setAttackingStrategy(const std::shared_ptr<AttackingStrategy> &attackingStrategy) {
+    Player::attackingStrategy = attackingStrategy;
+}
+
+const std::shared_ptr<ChoosingWeaponStrategy> &Player::getChoosingWeaponStrategy() const {
+    return choosingWeaponStrategy;
+}
+
+void Player::setChoosingWeaponStrategy(const std::shared_ptr<ChoosingWeaponStrategy> &choosingWeaponStrategy) {
+    Player::choosingWeaponStrategy = choosingWeaponStrategy;
+}
+
+const std::shared_ptr<ChoosingArmorStrategy> &Player::getChoosingArmorStrategy() const {
+    return choosingArmorStrategy;
+}
+
+void Player::setChoosingArmorStrategy(const std::shared_ptr<ChoosingArmorStrategy> &choosingArmorStrategy) {
+    Player::choosingArmorStrategy = choosingArmorStrategy;
+}
+
+const std::shared_ptr<HealingStrategy> &Player::getHealingStrategy() const {
+    return healingStrategy;
+}
+
+void Player::setHealingStrategy(const std::shared_ptr<HealingStrategy> &healingStrategy) {
+    Player::healingStrategy = healingStrategy;
+}
+
+const std::shared_ptr<MovingSoldierStrategy> &Player::getMovingSoldierStrategy() const {
+    return movingSoldierStrategy;
+}
+
+void Player::setMovingSoldierStrategy(const std::shared_ptr<MovingSoldierStrategy> &movingSoldierStrategy) {
+    Player::movingSoldierStrategy = movingSoldierStrategy;
+}
+
+Player::~Player() {
+
+}

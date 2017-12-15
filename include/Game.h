@@ -3,42 +3,60 @@
 
 
 #include "Player.h"
-#include "FindPlayer.h"
 #include "Reportable.h"
 #include "MapReaderModifier.h"
 #include "CurrentGameState.h"
 #include "Reporter.h"
 
-class Game : public FindPlayer, public CurrentGameState {
+class Game : public CurrentGameState, public ApplySoldierStrategies {
     std::shared_ptr<MapReaderModifier> map;
     std::list<std::shared_ptr<Player>> players;
-    std::string turnOfPlayerId;
-    std::shared_ptr<Reporter> reporter;
+    std::list<std::shared_ptr<Player>>::iterator playerTurn;
 
-public:
-    Game(signed int MapWidth, signed int mapLength,
-         std::list<std::shared_ptr<Player>> players,
-         std::list<std::shared_ptr<Armor>> armorsInMap,
-         std::list<std::shared_ptr<Weapon>> weaponsInMap,
-         std::list<std::shared_ptr<SolidItem>> solidItemsInMap,
-         const std::shared_ptr<Reporter> reporter,
-         std::string beginnerPlayerId);
+    // usually a reporter object won't be inside a reportable class.
+    // someone else should have a reporter object and call his method:
+    // report and send him a reportable object. then the report method
+    // will invoke the reportable's report method which will be invoking
+    // the report's report method.
+    // ----------------------------------------------------------------
+    // Now we can skip some steps and call from this object to the
+    // report method in report object.
+    std::shared_ptr<const Reporter> reporter;
 
     void endIteration();
 
+    void startIteration();
+
     void changeTurnToNextPlayer();
 
-    void setReporter(const std::shared_ptr<Reporter> &reporter);
+    void playCurrentWithPlayer();
 
-    Player &getPlayerBySoldier(const Soldier &soldier) const override;
+public:
+    Game(signed int mapWidth, signed int mapLength,
+         std::list<std::shared_ptr<Player>> &players,
+         std::list<std::shared_ptr<Armor>> &armorsInMap,
+         std::list<std::shared_ptr<Weapon>> &weaponsInMap,
+         std::list<std::shared_ptr<SolidItem>> &solidItemsInMap,
+         const std::shared_ptr<const Reporter> &reporter,
+         std::string &beginnerPlayerId);
+
+    const std::list<std::shared_ptr<Player>>::iterator &getPlayerTurn() const;
+
+    void setReporter(const std::shared_ptr<const Reporter> &reporter);
+
+    Player &getPlayerBySoldier(const Soldier &soldier) const;
 
     const std::list<std::shared_ptr<Player>> &getPlayers() const override;
 
-    const std::string &getTurnOfPlayerId() const;
-
-    const MapReader &getMap() const override;
+    const std::shared_ptr<MapReader> getMap() const override;
 
     void report(const Reporter &reporter) const override;
+
+    void playWithSoldier(Soldier &soldier) override;
+
+    void playWithSoldier(Warrior &warrior) override;
+
+    void playWithSoldier(Healer &healer) override;
 };
 
 

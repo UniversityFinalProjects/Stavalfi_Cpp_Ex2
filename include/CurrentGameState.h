@@ -11,7 +11,7 @@ class CurrentGameState : public Reportable {
 public:
     virtual const std::list<std::shared_ptr<Player>> &getPlayers() const = 0;
 
-    virtual const MapReader & getMap() const = 0;
+    virtual const std::shared_ptr<MapReader> getMap() const = 0;
 
     virtual ~CurrentGameState() = 0;
 };

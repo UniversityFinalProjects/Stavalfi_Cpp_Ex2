@@ -4,10 +4,15 @@
 #define REGULAR_HEALER_WALKING_SPEED 4
 #define REGULAR_HEALER_LIFE_AMOUNT 120
 
-RegularHealer::RegularHealer(const std::string &id, const Point2d &location,
-                             const std::string &playerId, std::shared_ptr<Weapon> weapon)
-        : Healer(id, location, playerId,
-                 REGULAR_HEALER_LIFE_AMOUNT, REGULAR_HEALER_WALKING_SPEED,
+RegularHealer::RegularHealer(const std::string &playerId,
+                             const Point2d &location,
+                             const std::list<Point2d> &soldierDirections,
+                             std::shared_ptr<Weapon> weapon)
+        : Healer(playerId,
+                 location,
+                 REGULAR_HEALER_LIFE_AMOUNT,
+                 REGULAR_HEALER_WALKING_SPEED,
+                 soldierDirections,
                  weapon) {
     assert(weapon != nullptr);
 }

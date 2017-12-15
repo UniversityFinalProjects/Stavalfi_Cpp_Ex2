@@ -5,8 +5,9 @@
 
 class RegularHealer : public Healer {
 public:
-    RegularHealer(const std::string &id, const Point2d &location,
-                  const std::string &playerId,std::shared_ptr<Weapon> weapon);
+    RegularHealer(const std::string &playerId, const Point2d &location,
+                  const std::list<Point2d> &soldierDirections,
+                  std::shared_ptr<Weapon> weapon);
 
     bool willAttackSucceed(int distance) override;
 
