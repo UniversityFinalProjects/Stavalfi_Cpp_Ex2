@@ -7,10 +7,16 @@
 
 class MapObject {
     const std::string &id;
-    Point2d &location;
+    // MapObject object will be located in the heap
+    // anyway so there is no need to locate him in
+    // different page in the heap because every time we will
+    // refer to any MapObject object, it is most likely
+    // that we will talk about it's location also.
+    Point2d location;
 
 protected:
     void setLocation(int y, int x);
+
 public:
     const std::string &getId() const;
 

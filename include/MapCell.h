@@ -6,36 +6,35 @@
 #include "Soldier.h"
 #include "MapModifier.h"
 #include "MapReader.h"
-#include <vector>
+#include <list>
 
 class MapCell : public MapModifier, public MapReader {
 
     const signed int y, x;
 
-    // represent a map = 2d matrix.
-    std::vector<std::shared_ptr<Soldier>> soldiers;
+    std::list<std::shared_ptr<Soldier>> soldiers;
 
     // represent a map = 2d matrix.
-    std::vector<std::shared_ptr<Soldier>> collectableItems;
+    std::list<std::shared_ptr<Soldier>> collectableItems;
 
     // represent a map = 2d matrix.
-    std::vector<std::shared_ptr<const SolidItem>> solidItems;
+    std::list<std::shared_ptr<const SolidItem>> solidItems;
 
 public:
 
     MapCell(signed int y, signed int x);
 
-    void removeSoldier(const Soldier &soldier) override;
+    void remove(const Soldier &soldier) override;
 
-    void removeCollectableItem(const CollectableItem &soldier) override;
+    void remove(const CollectableItem &soldier) override;
 
-    void removeSolidItem(const SolidItem &soldier) override;
+    void remove(const SolidItem &soldier) override;
 
-    void addSoldier(Soldier &soldier) override;
+    bool tryAdd(Soldier &soldier) override;
 
-    void addCollectableItem(CollectableItem &soldier) override;
+    bool tryAdd(CollectableItem &soldier) override;
 
-    void addSolidItem(const SolidItem &solidItem) override;
+    bool tryAdd(const SolidItem &solidItem) override;
 
     std::shared_ptr<Soldier> getSoldier(int y, int x) const;
 
@@ -48,7 +47,7 @@ public:
      * @param distance
      * @return all the enemies of this soldier around him.
      */
-    const std::vector<std::shared_ptr<Soldier>> getEnemiesAround(const Soldier &soldier, int distance) const override;
+    const std::list<std::shared_ptr<Soldier>> getEnemiesAround(const Soldier &soldier, int distance) const override;
 
     /**
      * @param soldier
@@ -56,7 +55,7 @@ public:
      * @return all the allies of this soldier around him
      * (without this soldier).
      */
-    const std::vector<std::shared_ptr<Soldier>> getAlliesAround(const Soldier &soldier, int distance) const override;
+    const std::list<std::shared_ptr<Soldier>> getAlliesAround(const Soldier &soldier, int distance) const override;
 
     /**
      * @param point2d
@@ -64,7 +63,7 @@ public:
      * @return all collectable items around this location
      * (without including anything from the given location).
      */
-    const std::vector<std::shared_ptr<CollectableItem>>
+    const std::list<std::shared_ptr<CollectableItem>>
     getCollectableItemsAround(const Point2d &point2d, int distance) const override;
 
     /**
@@ -73,7 +72,7 @@ public:
      * @return all solid items around this location
      * (without including anything from the given location).
      */
-    const std::vector<std::shared_ptr<const SolidItem>>
+    const std::list<std::shared_ptr<const SolidItem>>
     getSolidItemsAround(const Point2d &point2d, int distance) const override;
 };
 

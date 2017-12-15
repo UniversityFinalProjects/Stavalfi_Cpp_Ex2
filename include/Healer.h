@@ -7,9 +7,11 @@
 class Healer : public Soldier {
 public:
     Healer(const std::string &id, const Point2d &location, const std::string &playerId,
-           short lifePoints, short walkingSpeed, Weapon &weapon);
+           short lifePoints, short walkingSpeed,std::shared_ptr<Weapon> weapon);
 
-    void play(SoldierActions &soldierActions) override;
+    void play(ApplySoldierStrategies &applySoldierStrategies) override;
+
+    virtual ~Healer() = 0;
 };
 
 #endif //STAVALFI_CPP_EX2_HEALER_H

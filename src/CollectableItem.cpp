@@ -1,14 +1,16 @@
 #include "CollectableItem.h"
 
-CollectableItem::CollectableItem(const std::string& id,const Point2d &location,bool inUse)
-        : Item(id,location),inUse(inUse) {}
+CollectableItem::CollectableItem(const std::string &id,
+                                 const Point2d &location,
+                                 bool isCollected)
+        : Item(id, location), isCollected(isCollected) {}
 
-bool CollectableItem::isInUse() const {
-    return inUse;
+bool CollectableItem::isIsCollected() const {
+    return isCollected;
 }
 
-void CollectableItem::setInUse(bool inUse) {
-    CollectableItem::inUse = inUse;
+void CollectableItem::setIsCollected(bool isCollected) {
+    CollectableItem::isCollected = isCollected;
 }
 
 CollectableItem::~CollectableItem() = default;

@@ -4,8 +4,7 @@
 
 #include "Soldier.h"
 
-enum SoldierType
-{
+enum SoldierType {
     REGULAR_WARRIOR,
     SNIPER_WARRIOR,
     REGULAR_HEALER
@@ -13,7 +12,9 @@ enum SoldierType
 
 class SoldierFactory {
 public:
-    static Soldier* create(SoldierType soldierType,const Point2d &location, const std::string &playerId);
+    static std::shared_ptr<Soldier> create(SoldierType soldierType,
+                                           const Point2d &location,
+                                           const std::string &playerId);
 };
 
 #endif //STAVALFI_CPP_EX2_SOLDIER_FACTORY_H

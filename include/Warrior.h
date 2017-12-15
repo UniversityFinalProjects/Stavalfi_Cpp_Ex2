@@ -12,9 +12,11 @@ public:
             const std::string &playerId, short lifePoints,
             short walkingSpeed);
 
-    void setWeapon(Weapon *weapon);
+    void setWeapon(const std::shared_ptr<Weapon> &weapon);
 
-    void play(SoldierActions &soldierActions) override;
+    void play(ApplySoldierStrategies &applySoldierStrategies) override;
+
+    virtual ~Warrior() = 0;
 };
 
 

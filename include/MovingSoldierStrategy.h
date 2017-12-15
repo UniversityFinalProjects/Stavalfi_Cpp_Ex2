@@ -3,6 +3,7 @@
 
 #include "MapReader.h"
 #include "Healer.h"
+#include "Warrior.h"
 
 class MovingSoldierStrategy {
     const MapReader &mapReader;

@@ -1,7 +1,7 @@
 #include "AttackingStrategy.h"
 
 const MapReader &AttackingStrategy::getMapReader() const {
-    return <#initializer#>;
+    return this->mapReader;
 }
 
 AttackingStrategy::AttackingStrategy(const MapReader &mapReader) : mapReader(mapReader) {

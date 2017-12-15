@@ -5,6 +5,7 @@
 #include "Armor.h"
 #include "Weapon.h"
 #include "SolidItem.h"
+#include <memory>
 
 enum ArmorTypes {
     SHIELD_ARMOR,
@@ -23,11 +24,11 @@ enum SolidItemTypes {
 
 class ItemFactory {
 public:
-    static Armor *create(enum ArmorTypes armorTypes, const Point2d &location, bool inUsed);
+    static std::shared_ptr<Armor> create(enum ArmorTypes armorTypes, const Point2d &location, bool inUsed);
 
-    static Weapon *create(enum WeaponTypes weaponTypes, const Point2d &location, bool inUsed);
+    static std::shared_ptr<Weapon> create(enum WeaponTypes weaponTypes, const Point2d &location, bool inUsed);
 
-    static SolidItem *create(enum SolidItemTypes solidItemTypes, const Point2d &location);
+    static std::shared_ptr<const SolidItem> create(enum SolidItemTypes solidItemTypes, const Point2d &location);
 };
 
 

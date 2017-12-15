@@ -18,7 +18,7 @@ struct MapReader {
      * @param distance
      * @return all the enemies of this soldier around him.
      */
-    virtual const std::vector<std::shared_ptr<Soldier>>
+    virtual const std::list<std::shared_ptr<Soldier>>
     getEnemiesAround(const Soldier &soldier, int distance) const = 0;
 
     /**
@@ -27,7 +27,7 @@ struct MapReader {
      * @return all the allies of this soldier around him
      * (without this soldier).
      */
-    virtual const std::vector<std::shared_ptr<Soldier>>
+    virtual const std::list<std::shared_ptr<Soldier>>
     getAlliesAround(const Soldier &soldier, int distance) const = 0;
 
     /**
@@ -36,7 +36,7 @@ struct MapReader {
      * @return all collectable items around this location
      * (without including anything from the given location).
      */
-    virtual const std::vector<std::shared_ptr<CollectableItem>>
+    virtual const std::list<std::shared_ptr<CollectableItem>>
     getCollectableItemsAround(const Point2d &point2d, int distance) const = 0;
 
     /**
@@ -45,7 +45,7 @@ struct MapReader {
      * @return all solid items around this location
      * (without including anything from the given location).
      */
-    virtual const std::vector<std::shared_ptr<const SolidItem>> getSolidItemsAround(const Point2d &point2d, int distance) const = 0;
+    virtual const std::list<std::shared_ptr<const SolidItem>> getSolidItemsAround(const Point2d &point2d, int distance) const = 0;
 };
 
 #endif //STAVALFI_CPP_EX2_MAP_READER_H

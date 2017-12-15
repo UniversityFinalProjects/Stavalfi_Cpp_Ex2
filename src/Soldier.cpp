@@ -1,20 +1,13 @@
-#include <cassert>
 #include "Soldier.h"
+#include <cassert>
 
-Soldier::Soldier(const std::string& id,const Point2d &location, const std::string &playerId,
-                 short lifePoints, short walkingSpeed) :
-        MapObject(id,location), playerId(playerId), weapon(nullptr),
+Soldier::Soldier(const std::string &id, const Point2d &location,
+                 const std::string &playerId,
+                 short lifePoints, short walkingSpeed,
+                 std::shared_ptr<Weapon> weapon) :
+        MapObject(id, location), playerId(playerId),
         lifePoints(lifePoints), walkingSpeed(walkingSpeed),
-        armors(2, nullptr) {}
-
-
-Soldier::Soldier(const std::string& id,const Point2d &location, const std::string &playerId, Weapon *weapon, short lifePoints,
-                 short walkingSpeed)
-        : MapObject(id,location), playerId(playerId), weapon(weapon),
-          lifePoints(lifePoints), walkingSpeed(walkingSpeed),
-          armors(2, nullptr) {
-    assert(weapon != nullptr);
-}
+        armors(2, nullptr), weapon(weapon) {}
 
 bool Soldier::isEnemy(const Soldier &soldier) const {
     return this->playerId != soldier.playerId;
@@ -36,16 +29,17 @@ const short Soldier::getWalkingSpeed() const {
     return this->walkingSpeed;
 }
 
-const std::vector<const Armor *> &Soldier::getArmors() const {
-    return this->armors;
-}
-
 Soldier::~Soldier() {
-    delete (this->weapon);
-    for (auto &armor:this->armors)
-        delete (armor);
 }
 
-void Soldier::setWeapon(Weapon *weapon) {
-    Soldier::weapon = weapon;
+bool Soldier::changeArmor(std::shared_ptr<const Armor> armor) {
+    return false;
+}
+
+const std::shared_ptr<Weapon> &Soldier::getWeapon() const {
+    return weapon;
+}
+
+const std::list<std::shared_ptr<const Armor>> &Soldier::getArmors() const {
+    return armors;
 }

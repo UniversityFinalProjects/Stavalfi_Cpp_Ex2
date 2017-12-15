@@ -6,17 +6,17 @@
 #include "SolidItem.h"
 
 struct MapModifier {
-    virtual void removeSoldier(const Soldier &soldier) = 0;
+    virtual void remove(const Soldier &soldier) = 0;
 
-    virtual void removeCollectableItem(const CollectableItem &soldier) = 0;
+    virtual void remove(const CollectableItem &soldier) = 0;
 
-    virtual void removeSolidItem(const SolidItem &soldier) = 0;
+    virtual void remove(const SolidItem &soldier) = 0;
 
-    virtual void addSoldier(Soldier &soldier) = 0;
+    virtual bool tryAdd(Soldier &soldier) = 0;
 
-    virtual void addCollectableItem(CollectableItem &soldier) = 0;
+    virtual bool tryAdd(CollectableItem &soldier) = 0;
 
-    virtual void addSolidItem(const SolidItem &soldier) = 0;
+    virtual bool tryAdd(const SolidItem &soldier) = 0;
 };
 
 #endif //STAVALFI_CPP_EX2_MODIFY_MAP_CELL_H

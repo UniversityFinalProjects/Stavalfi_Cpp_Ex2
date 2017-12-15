@@ -2,21 +2,27 @@
 #define STAVALFI_CPP_EX2_SOLDIER_H
 
 #include <string.h>
-#include <vector>
+#include <list>
 #include "Weapon.h"
 #include "Armor.h"
+#include <memory>
 
-class SoldierActions;
+class ApplySoldierStrategies;
 
 class Soldier : public MapObject {
     const std::string &playerId;
     short lifePoints;
     const short walkingSpeed;
-    std::vector<const Armor *> armors;
-
+    // we must keep shared_ptr to armors because if
+    // at the end of the game, all the armors will
+    // be deleted befor this class then when we call
+    // this object's constructor, we will get segmentation
+    // fault when referring to those armors.
+    std::list<std::shared_ptr<const Armor>> armors;
 protected:
-    Weapon *weapon;
+    std::shared_ptr<Weapon> weapon;
 
+public:
     /**
      * only the attack method will call this.
      * @param distance
@@ -26,22 +32,15 @@ protected:
 
     void setLifePoints(short lifePoints);
 
-    void setWeapon(Weapon *weapon);
-
-public:
     Soldier(const std::string &id, const Point2d &location,
             const std::string &playerId, short lifePoints,
-            short walkingSpeed);
+            short walkingSpeed, std::shared_ptr<Weapon> weapon = nullptr);
 
-    Soldier(const std::string &id, const Point2d &location,
-            const std::string &playerId, Weapon *weapon,
-            short lifePoints, short walkingSpeed);
-
-    virtual void play(SoldierActions &soldierActions) = 0;
+    virtual void play(ApplySoldierStrategies &applySoldierStrategies) = 0;
 
     bool isEnemy(const Soldier &soldier) const;
 
-    Weapon *getWeapon() const;
+    const std::shared_ptr<Weapon> &getWeapon() const;
 
     const std::string &getPlayerId() const;
 
@@ -49,7 +48,15 @@ public:
 
     const short getWalkingSpeed() const;
 
-    const std::vector<const Armor *> &getArmors() const;
+    /**
+     * check if it is better to throw away an old armor and
+     * get this one. or add this armor also.
+     * @param armor
+     * @return true if the soldier added this armor, else return false.
+     */
+    bool changeArmor(std::shared_ptr<const Armor> armor);
+
+    const std::list<std::shared_ptr<const Armor>> &getArmors() const;
 
     virtual ~Soldier();
 };

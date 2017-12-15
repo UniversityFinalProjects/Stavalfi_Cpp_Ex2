@@ -1,5 +1,5 @@
 #include "Weapon.h"
-#include "SoldierActions.h"
+#include "ApplySoldierStrategies.h"
 
 Weapon::Weapon(const std::string &id, const Point2d &location, bool inUse, short weaponStrength,
                short bulletAmountAtOnce)

@@ -3,6 +3,8 @@
 
 
 #include "MapReader.h"
+#include "Warrior.h"
+#include "Healer.h"
 
 class HealingStrategy {
     const MapReader &mapReader;

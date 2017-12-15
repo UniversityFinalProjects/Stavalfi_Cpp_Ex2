@@ -2,19 +2,19 @@
 #define STAVALFI_CPP_EX2_COLLECTABLE_ITEM_H
 
 
-#include <string>
+#include <string.h>
 #include "Item.h"
 
 class CollectableItem : public Item {
-    bool inUse;
+    bool isCollected;
 
 public:
     explicit CollectableItem(const std::string &id,
-                             const Point2d &location, bool inUse);
+                             const Point2d &location, bool isCollected);
 
-    bool isInUse() const;
+    bool isIsCollected() const;
 
-    void setInUse(bool inUse);
+    void setIsCollected(bool isCollected);
 
     ~CollectableItem() override = 0;
 

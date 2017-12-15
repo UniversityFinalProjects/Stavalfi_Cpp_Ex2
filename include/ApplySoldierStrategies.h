@@ -1,13 +1,15 @@
-#ifndef STAVALFI_CPP_EX2_WARRIOR_ACTIONS_H
-#define STAVALFI_CPP_EX2_WARRIOR_ACTIONS_H
+#ifndef STAVALFI_CPP_EX2_SOLDIER_ACTIONS_H
+#define STAVALFI_CPP_EX2_SOLDIER_ACTIONS_H
 
 #include "AttackingStrategy.h"
 #include "CollectingItemStrategy.h"
 #include "HealingStrategy.h"
 #include "MovingSoldierStrategy.h"
 #include "MapModifier.h"
+#include "PlayerGame.h"
 
-class SoldierActions {
+class ApplySoldierStrategies {
+    const PlayerGame &playerGame;
     MapModifier &mapModifier;
     // the only reason to use smart pointer here
     // because a strategy can be replaced in runtime
@@ -17,11 +19,20 @@ class SoldierActions {
     std::shared_ptr<CollectingItemStrategy> collectingItemStrategy;
     std::shared_ptr<HealingStrategy> healingStrategy;
     std::shared_ptr<MovingSoldierStrategy> movingSoldierStrategy;
+
 public:
-    SoldierActions(MapModifier &mapModifier, const std::shared_ptr<AttackingStrategy> &attackingStrategy,
-                   const std::shared_ptr<CollectingItemStrategy> &collectingItemStrategy,
-                   const std::shared_ptr<HealingStrategy> &healingStrategy,
-                   const std::shared_ptr<MovingSoldierStrategy> &movingSoldierStrategy);
+
+    void playWithSoldier(Soldier &soldier);
+
+    ApplySoldierStrategies(const PlayerGame &playerGame, MapModifier &mapModifier,
+                           const std::shared_ptr<AttackingStrategy> &attackingStrategy,
+                           const std::shared_ptr<CollectingItemStrategy> &collectingItemStrategy,
+                           const std::shared_ptr<HealingStrategy> &healingStrategy,
+                           const std::shared_ptr<MovingSoldierStrategy> &movingSoldierStrategy);
+
+    void playWithSoldier(Warrior &warrior);
+
+    void playWithSoldier(Healer &healer);
 
     void setAttackingStrategy(const std::shared_ptr<AttackingStrategy> &attackingStrategy);
 
@@ -31,12 +42,8 @@ public:
 
     void setMovingSoldierStrategy(const std::shared_ptr<MovingSoldierStrategy> &movingSoldierStrategy);
 
-    void play(Soldier &soldier);
 
-    void play(Warrior &warrior);
-
-    void play(Healer &healer);
 };
 
 
-#endif //STAVALFI_CPP_EX2_WARRIOR_ACTIONS_H
+#endif //STAVALFI_CPP_EX2_SOLDIER_ACTIONS_H
