@@ -9,9 +9,9 @@
 class ChoosingWeaponStrategy : public SoldierStrategy {
 public:
 
-    ChoosingWeaponStrategy(const MapReader &mapReader);
+    explicit ChoosingWeaponStrategy(const std::shared_ptr<const MapReader> &mapReader);
 
-    virtual const CollectableItem &chooseWeapon(const Warrior &warrior) const = 0;
+    virtual std::shared_ptr<Weapon> chooseWeapon(const Warrior &warrior) const = 0;
 
     virtual ~ChoosingWeaponStrategy() = 0;
 };

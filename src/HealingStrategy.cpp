@@ -1,9 +1,4 @@
 #include "HealingStrategy.h"
 
-const MapReader &HealingStrategy::getMapReader() const {
-    return this->mapReader;
-}
-
-HealingStrategy::HealingStrategy(const MapReader &mapReader) : mapReader(mapReader) {
-
-}
+HealingStrategy::HealingStrategy(const std::shared_ptr<const MapReader> &mapReader)
+        : SoldierStrategy(mapReader) {}

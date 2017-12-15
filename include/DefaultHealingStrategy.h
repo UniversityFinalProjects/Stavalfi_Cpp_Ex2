@@ -8,15 +8,9 @@
 
 class DefaultHealingStrategy : public HealingStrategy {
 public:
-    DefaultHealingStrategy(const MapReader &mapReader);
+    explicit DefaultHealingStrategy(const std::shared_ptr<const MapReader> &mapReader);
 
-    Soldier &chooseAllieToHeal(const Warrior &warrior) override {
-        return *this->getMapReader().getAlliesAround(warrior, 1).front();
-    }
-
-    Soldier &chooseAllieToHeal(const Healer &healer) override {
-        return *this->getMapReader().getAlliesAround(healer, 1).front();
-    }
+    std::shared_ptr<Soldier> chooseAllieToHeal(const Healer &healer) override;
 };
 
 

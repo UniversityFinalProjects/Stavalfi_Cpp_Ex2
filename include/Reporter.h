@@ -3,13 +3,13 @@
 
 
 #include "Reportable.h"
-#include "GameState.h"
+#include "CurrentGameState.h"
 
 class Reporter {
 public:
     void report(const Reportable &reportable) const;
 
-    virtual void report(const GameState &gameState) const = 0;
+    virtual void report(const CurrentGameState &gameState) const = 0;
 
     virtual ~Reporter() = 0;
 };

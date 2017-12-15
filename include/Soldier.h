@@ -18,7 +18,7 @@ class Soldier : public MapObject {
     // be deleted befor this class then when we call
     // this object's constructor, we will get segmentation
     // fault when referring to those armors.
-    std::list<std::shared_ptr<const Armor>> armors;
+    std::list<std::shared_ptr<Armor>> armors;
 protected:
     std::shared_ptr<Weapon> weapon;
 
@@ -54,9 +54,9 @@ public:
      * @param armor
      * @return true if the soldier added this armor, else return false.
      */
-    bool changeArmor(std::shared_ptr<const Armor> armor);
+    bool changeArmor(std::shared_ptr<Armor> armor);
 
-    const std::list<std::shared_ptr<const Armor>> &getArmors() const;
+    const std::list<std::shared_ptr<Armor>> &getArmors() const;
 
     virtual ~Soldier();
 };

@@ -60,13 +60,13 @@ const std::list<std::shared_ptr<Soldier>> MapCell::getAlliesAround(const Soldier
     return std::list<std::shared_ptr<Soldier>>();
 }
 
-const std::list<std::shared_ptr<CollectableItem>>
+const std::list<std::shared_ptr<Weapon>>
 MapCell::getWeaponsAround(const Point2d &point2d, int distance) const {
-    return std::list<std::shared_ptr<CollectableItem>>();
+    return std::list<std::shared_ptr<Weapon>>();
 }
 
-const std::list<std::shared_ptr<CollectableItem>> MapCell::getArmorsAround(const Point2d &point2d, int distance) const {
-    return std::list<std::shared_ptr<CollectableItem>>();
+const std::list<std::shared_ptr<Armor>> MapCell::getArmorsAround(const Point2d &point2d, int distance) const {
+    return std::list<std::shared_ptr<Armor>>();
 }
 
 const std::list<std::shared_ptr<const SolidItem>>

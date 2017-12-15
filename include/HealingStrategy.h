@@ -5,19 +5,17 @@
 #include "MapReader.h"
 #include "Warrior.h"
 #include "Healer.h"
+#include "SoldierStrategy.h"
 
-class HealingStrategy {
-    const MapReader &mapReader;
-protected:
-    const MapReader &getMapReader() const;
-
+class HealingStrategy : public SoldierStrategy {
 public:
-    HealingStrategy(const MapReader &mapReader);
 
-    virtual Soldier &chooseAllieToHeal(const Warrior &warrior) = 0;
-    virtual Soldier &chooseAllieToHeal(const Healer &healer) = 0;
+    HealingStrategy(const std::shared_ptr<const MapReader> &mapReader);
+
+    virtual std::shared_ptr<Soldier> chooseAllieToHeal(const Healer &healer) = 0;
+
     virtual ~HealingStrategy() = default;
 };
 
 
-#endif //STAVALFI_CPP_EX2_HEALINGSTRATEGY_H
+#endif //STAVALFI_CPP_EX2_HEALING_STRATEGY_H

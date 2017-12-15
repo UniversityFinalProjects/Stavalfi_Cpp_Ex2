@@ -9,24 +9,41 @@
 #include "HealingStrategy.h"
 #include "MovingSoldierStrategy.h"
 #include "ApplySoldierStrategies.h"
+#include "ChoosingArmorStrategy.h"
+#include "MapModifier.h"
+#include "FindPlayer.h"
 
-class Player {
+class Player : public ApplySoldierStrategies {
     const std::string player_id;
     std::list<std::shared_ptr<Soldier>> soldiers;
-    // const issue - if this property will be const then we can't
-    // change in the map of this game (add/remove MapObjects).
-    // OR change the strategies of this player.
-    // ----
-    // reference issue - there will be limited amount of players
-    // and each player will be located in the heap so there is
-    // no need to locate this object in different place in the heap.
-    // in this way, the object will be in the same page as the player object.
-    // and this object is very small in it's size.
-    ApplySoldierStrategies applySoldierStrategies;
-public:
-    Player(const std::string &player_id, const ApplySoldierStrategies &applySoldierStrategies);
+
+    // there is reason and no easy way to
+    // use smart pointer here because the
+    // class who will send this reference
+    // is the Game Class and by default it
+    // will be destroyed almost last.
+    const FindPlayer &findPlayer;
+
+    MapModifier &mapModifier;
+
+    // one reason, for example, to use smart pointer here is
+    // because a strategy can be replaced in runtime
+    // and we must delete the old one before setting
+    // to the new one.
+    std::shared_ptr<AttackingStrategy> attackingStrategy;
+    std::shared_ptr<ChoosingWeaponStrategy> choosingWeaponStrategy;
+    std::shared_ptr<ChoosingArmorStrategy> choosingArmorStrategy;
+    std::shared_ptr<HealingStrategy> healingStrategy;
+    std::shared_ptr<MovingSoldierStrategy> movingSoldierStrategy;
 
 public:
+
+    Player(const std::string &player_id, const FindPlayer &findPlayer, MapModifier &mapModifier,
+           const std::shared_ptr<AttackingStrategy> &attackingStrategy,
+           const std::shared_ptr<ChoosingWeaponStrategy> &choosingWeaponStrategy,
+           const std::shared_ptr<ChoosingArmorStrategy> &choosingArmorStrategy,
+           const std::shared_ptr<HealingStrategy> &healingStrategy,
+           const std::shared_ptr<MovingSoldierStrategy> &movingSoldierStrategy);
 
     void addSoldier(std::shared_ptr<Soldier> &soldier);
 
@@ -34,7 +51,13 @@ public:
 
     void play();
 
-    ~Player() = default;
+    void playWithSoldier(Soldier &soldier) override;
+
+    void playWithSoldier(Warrior &warrior) override;
+
+    void playWithSoldier(Healer &healer) override;
+
+    ~Player() override = default;
 };
 
 #endif //STAVALFI_CPP_EX2_PLAYER_H

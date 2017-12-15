@@ -5,7 +5,7 @@ class Player;
 
 class Soldier;
 
-class PlayerGame {
+class FindPlayer {
     virtual Player &getPlayerBySoldier(const Soldier &soldier) const = 0;
 };
 

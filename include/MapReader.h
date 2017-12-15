@@ -42,7 +42,7 @@ public:
      * @return all collectable items around this location
      * (without including anything from the given location).
      */
-    virtual const std::list<std::shared_ptr<CollectableItem>>
+    virtual const std::list<std::shared_ptr<Weapon>>
     getWeaponsAround(const Point2d &point2d, int distance) const = 0;
 
     /**
@@ -51,7 +51,7 @@ public:
      * @return all collectable items around this location
      * (without including anything from the given location).
      */
-        virtual const std::list<std::shared_ptr<CollectableItem>>
+        virtual const std::list<std::shared_ptr<Armor>>
     getArmorsAround(const Point2d &point2d, int distance) const = 0;
 
     /**

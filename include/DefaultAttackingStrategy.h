@@ -4,18 +4,15 @@
 
 #include "MapReader.h"
 #include "AttackingStrategy.h"
+#include <memory>
 
-class DefaultAttackingStrategy : AttackingStrategy {
+class DefaultAttackingStrategy : public AttackingStrategy {
 public:
-    DefaultAttackingStrategy(const MapReader &mapReader);
+    explicit DefaultAttackingStrategy(const std::shared_ptr<const MapReader> &mapReader);
 
-    Soldier &chooseEnemyToAttack(const Warrior &warrior) override {
-        return *this->getMapReader().getAlliesAround(warrior, 1).front();
-    }
+    std::shared_ptr<Soldier> chooseEnemyToAttack(const Warrior &warrior) override;
 
-    Soldier &chooseEnemyToAttack(const Healer &healer) override {
-        return *this->getMapReader().getAlliesAround(healer, 1).front();
-    }
+    std::shared_ptr<Soldier> chooseEnemyToAttack(const Healer &healer) override;
 };
 
 

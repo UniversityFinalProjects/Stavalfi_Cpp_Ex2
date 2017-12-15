@@ -5,12 +5,12 @@
 #include "MapReader.h"
 
 class SoldierStrategy {
-    const MapReader &mapReader;
+    const std::shared_ptr<const MapReader> mapReader;
 protected:
-    const MapReader &getMapReader() const;
+    const std::shared_ptr<const MapReader> &getMapReader() const;
 
 public:
-    SoldierStrategy(const MapReader &mapReader);
+    SoldierStrategy(const std::shared_ptr<const MapReader> &mapReader);
 
     virtual ~SoldierStrategy() = 0;
 };

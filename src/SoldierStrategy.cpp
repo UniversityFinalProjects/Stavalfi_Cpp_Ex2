@@ -4,4 +4,9 @@ SoldierStrategy::~SoldierStrategy() {
 
 }
 
-SoldierStrategy::SoldierStrategy(const MapReader &mapReader) : mapReader(mapReader) {}
+const std::shared_ptr<const MapReader> &SoldierStrategy::getMapReader() const {
+    return this->mapReader;
+}
+
+SoldierStrategy::SoldierStrategy(const std::shared_ptr<const MapReader> &mapReader)
+        : mapReader(mapReader) {}

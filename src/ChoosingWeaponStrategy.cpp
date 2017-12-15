@@ -1,6 +1,6 @@
 #include "ChoosingWeaponStrategy.h"
 
-ChoosingWeaponStrategy::ChoosingWeaponStrategy(const MapReader &mapReader) : SoldierStrategy(mapReader) {}
+ChoosingWeaponStrategy::ChoosingWeaponStrategy(const std::shared_ptr<const MapReader> &mapReader) : SoldierStrategy(mapReader) {}
 
 ChoosingWeaponStrategy::~ChoosingWeaponStrategy() {
 

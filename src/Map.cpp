@@ -60,12 +60,12 @@ const std::list<std::shared_ptr<Soldier>> Map::getAlliesAround(const Soldier &so
     return std::list<std::shared_ptr<Soldier>>();
 }
 
-const std::list<std::shared_ptr<CollectableItem>> Map::getWeaponsAround(const Point2d &point2d, int distance) const {
-    return std::list<std::shared_ptr<CollectableItem>>();
+const std::list<std::shared_ptr<Weapon>> Map::getWeaponsAround(const Point2d &point2d, int distance) const {
+    return std::list<std::shared_ptr<Weapon>>();
 }
 
-const std::list<std::shared_ptr<CollectableItem>> Map::getArmorsAround(const Point2d &point2d, int distance) const {
-    return std::list<std::shared_ptr<CollectableItem>>();
+const std::list<std::shared_ptr<Armor>> Map::getArmorsAround(const Point2d &point2d, int distance) const {
+    return std::list<std::shared_ptr<Armor>>();
 }
 
 const std::list<std::shared_ptr<const SolidItem>> Map::getSolidItemsAround(const Point2d &point2d, int distance) const {

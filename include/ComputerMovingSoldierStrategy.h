@@ -6,15 +6,12 @@
 #include "MovingSoldierStrategy.h"
 
 class ComputerMovingSoldierStrategy : public MovingSoldierStrategy {
-    ComputerMovingSoldierStrategy(const MapReader &mapReader);
+public:
+    explicit ComputerMovingSoldierStrategy(const std::shared_ptr<const MapReader> &mapReader);
 
-    Point2d chooseNewLocation(const Warrior &warrior) const override {
-        return Point2d(-1, -1);
-    }
+    Point2d chooseNewLocation(const Warrior &warrior) const override;
 
-    Point2d chooseNewLocation(const Healer &healer) const override {
-        return Point2d(-1, -1);
-    }
+    Point2d chooseNewLocation(const Healer &healer) const override;
 };
 
 

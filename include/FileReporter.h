@@ -3,11 +3,11 @@
 
 
 #include "Reporter.h"
-#include "GameState.h"
+#include "CurrentGameState.h"
 
 class FileReporter : public Reporter{
 public:
-    void report(const GameState &gameState) const override;
+    void report(const CurrentGameState &gameState) const override;
 };
 
 

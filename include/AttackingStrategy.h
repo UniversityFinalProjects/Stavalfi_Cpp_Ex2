@@ -12,11 +12,11 @@ class AttackingStrategy : public SoldierStrategy {
 
 public:
 
-    AttackingStrategy(const MapReader &mapReader);
+    explicit AttackingStrategy(const std::shared_ptr<const MapReader> &mapReader);
 
-    virtual Soldier &chooseEnemyToAttack(const Warrior &warrior) = 0;
+    virtual std::shared_ptr<Soldier> chooseEnemyToAttack(const Warrior &warrior) = 0;
 
-    virtual Soldier &chooseEnemyToAttack(const Healer &healer) = 0;
+    virtual std::shared_ptr<Soldier> chooseEnemyToAttack(const Healer &healer) = 0;
 
     virtual ~AttackingStrategy() = 0;
 };

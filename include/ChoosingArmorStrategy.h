@@ -12,10 +12,10 @@
 class ChoosingArmorStrategy:public SoldierStrategy {
 public:
 
-    ChoosingArmorStrategy(const MapReader &mapReader);
+    explicit ChoosingArmorStrategy(const std::shared_ptr<const MapReader> &mapReader);
 
-    virtual const std::shared_ptr<Weapon> chooseArmor(const Warrior &warrior) const = 0;
-    virtual const CollectableItem &chooseArmor(const Healer &healer) const = 0;
+    virtual std::shared_ptr<Armor> chooseArmor(const Warrior &warrior) const = 0;
+    virtual std::shared_ptr<Armor> chooseArmor(const Healer &healer) const = 0;
 
     virtual ~ChoosingArmorStrategy() = 0;
 };

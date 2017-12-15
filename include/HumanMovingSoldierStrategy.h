@@ -7,14 +7,10 @@
 
 class HumanMovingSoldierStrategy : public MovingSoldierStrategy {
 public:
-    HumanMovingSoldierStrategy(const MapReader &mapReader);
+    HumanMovingSoldierStrategy(const std::shared_ptr<const MapReader> &mapReader);
 
-    Point2d chooseNewLocation(const Warrior &warrior) const override {
-        return Point2d(-1, -1);
-    }
+    Point2d chooseNewLocation(const Warrior &warrior) const override;
 
-    Point2d chooseNewLocation(const Healer &healer) const override {
-        return Point2d(-1, -1);
-    }
+    Point2d chooseNewLocation(const Healer &healer) const override;
 };
 #endif //STAVALFI_CPP_EX2_HUMAN_MOVING_SOLDIER_STRATEGY_H

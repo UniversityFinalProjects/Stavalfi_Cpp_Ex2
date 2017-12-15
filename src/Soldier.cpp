@@ -32,7 +32,7 @@ const short Soldier::getWalkingSpeed() const {
 Soldier::~Soldier() {
 }
 
-bool Soldier::changeArmor(std::shared_ptr<const Armor> armor) {
+bool Soldier::changeArmor(std::shared_ptr<Armor> armor) {
     return false;
 }
 
@@ -40,6 +40,6 @@ const std::shared_ptr<Weapon> &Soldier::getWeapon() const {
     return weapon;
 }
 
-const std::list<std::shared_ptr<const Armor>> &Soldier::getArmors() const {
+const std::list<std::shared_ptr<Armor>> &Soldier::getArmors() const {
     return armors;
 }

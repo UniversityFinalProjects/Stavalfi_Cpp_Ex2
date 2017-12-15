@@ -1,5 +1,5 @@
 #include "FileReporter.h"
 
-void FileReporter::report(const GameState &gameState) const {
+void FileReporter::report(const CurrentGameState &gameState) const {
 
 }

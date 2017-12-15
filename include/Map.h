@@ -46,10 +46,10 @@ public:
 
     const std::list<std::shared_ptr<Soldier>> getAlliesAround(const Soldier &soldier, int distance) const override;
 
-    const std::list<std::shared_ptr<CollectableItem>>
+    const std::list<std::shared_ptr<Weapon>>
     getWeaponsAround(const Point2d &point2d, int distance) const override;
 
-    const std::list<std::shared_ptr<CollectableItem>>
+    const std::list<std::shared_ptr<Armor>>
     getArmorsAround(const Point2d &point2d, int distance) const override;
 
     const std::list<std::shared_ptr<const SolidItem>>

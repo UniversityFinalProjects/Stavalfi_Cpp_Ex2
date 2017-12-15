@@ -8,7 +8,7 @@
 
 class MovingSoldierStrategy : public SoldierStrategy {
 public:
-    MovingSoldierStrategy(const MapReader &mapReader);
+    explicit MovingSoldierStrategy(const std::shared_ptr<const MapReader> &mapReader);
 
     virtual Point2d chooseNewLocation(const Warrior &warrior) const = 0;
 
