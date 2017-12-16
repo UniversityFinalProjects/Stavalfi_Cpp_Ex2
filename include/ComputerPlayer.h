@@ -2,7 +2,7 @@
 #define STAVALFI_CPP_EX2_COMPUTER_PLAYER_H
 
 
-#include <bits/shared_ptr.h>
+#include <memory.h>
 #include "Player.h"
 
 class ComputerPlayer : public Player {
@@ -13,17 +13,9 @@ public:
                    const std::shared_ptr<ChoosingWeaponStrategy> &choosingWeaponStrategy,
                    const std::shared_ptr<ChoosingArmorStrategy> &choosingArmorStrategy,
                    const std::shared_ptr<HealingStrategy> &healingStrategy,
-                   const std::shared_ptr<MovingSoldierStrategy> &movingSoldierStrategy)
-            : Player(player_id,
-                     attackingStrategy,
-                     choosingWeaponStrategy,
-                     choosingArmorStrategy,
-                     healingStrategy,
-                     movingSoldierStrategy) {
+                   const std::shared_ptr<MovingSoldierStrategy> &movingSoldierStrategy);
 
-    }
-
-    ~ComputerPlayer() override = default;
+    ~ComputerPlayer() override = default;;
 };
 
 

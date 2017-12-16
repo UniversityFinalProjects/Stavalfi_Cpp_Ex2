@@ -30,10 +30,6 @@ const std::list<std::shared_ptr<Soldier>> &Player::getSoldiers() const {
     return soldiers;
 }
 
-void Player::setSoldiers(const std::list<std::shared_ptr<Soldier>> &soldiers) {
-    Player::soldiers = soldiers;
-}
-
 const std::shared_ptr<AttackingStrategy> &Player::getAttackingStrategy() const {
     return attackingStrategy;
 }

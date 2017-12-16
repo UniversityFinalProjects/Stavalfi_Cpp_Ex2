@@ -37,8 +37,6 @@ public:
 
     const std::list<std::shared_ptr<Soldier>> &getSoldiers() const;
 
-    void setSoldiers(const std::list<std::shared_ptr<Soldier>> &soldiers);
-
     const std::shared_ptr<AttackingStrategy> &getAttackingStrategy() const;
 
     void setAttackingStrategy(const std::shared_ptr<AttackingStrategy> &attackingStrategy);
@@ -64,6 +62,8 @@ public:
     void addSoldier(std::shared_ptr<Soldier> &soldier);
 
     void removeSoldier(const std::shared_ptr<Soldier> &soldier);
+
+
 
     virtual ~Player() = 0;
 };
