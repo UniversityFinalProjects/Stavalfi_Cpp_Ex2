@@ -23,6 +23,8 @@ class Game : public CurrentGameState, public ApplySoldierStrategies {
     // report method in report object.
     std::shared_ptr<const Reporter> reporter;
 
+    void endGame();
+
     void endIteration();
 
     void startIteration();
@@ -48,7 +50,7 @@ public:
 
     const std::list<std::shared_ptr<Player>> &getPlayers() const override;
 
-    const std::shared_ptr<MapReader> getMap() const override;
+    const std::shared_ptr<const MapReader> getMap() const override;
 
     void report(const Reporter &reporter) const override;
 

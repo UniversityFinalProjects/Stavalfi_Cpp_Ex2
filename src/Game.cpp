@@ -9,7 +9,7 @@ const std::list<std::shared_ptr<Player>> &Game::getPlayers() const {
     return this->players;
 }
 
-const std::shared_ptr<MapReader> Game::getMap() const {
+const std::shared_ptr<const MapReader> Game::getMap() const {
     return this->map;
 }
 
@@ -53,4 +53,16 @@ void Game::playWithSoldier(Warrior &warrior) {
 
 void Game::playWithSoldier(Healer &healer) {
     // logic
+}
+
+void Game::endGame() {
+
+}
+
+void Game::startIteration() {
+
+}
+
+void Game::playCurrentWithPlayer() {
+
 }
