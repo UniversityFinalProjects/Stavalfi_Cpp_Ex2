@@ -8,7 +8,8 @@
 class Warrior : public Soldier {
 public:
 
-    Warrior(const std::string &playerId,
+    Warrior(const std::string &soldierId,
+            const std::string &playerId,
             const Point2d &location,
             short lifePoints,
             short walkingSpeed,

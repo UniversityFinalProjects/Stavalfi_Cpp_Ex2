@@ -9,15 +9,15 @@
 class MapReader {
 public:
 
-    virtual std::shared_ptr<Soldier> get(int y, int x) const = 0;
+    virtual bool isFree(double y, double x) const = 0;
 
-    virtual std::shared_ptr<Soldier> getSoldier(int y, int x) const = 0;
+    virtual std::shared_ptr<Soldier> getSoldier(double y, double x) const = 0;
 
-    virtual std::shared_ptr<Weapon> getWeapon(int y, int x) const = 0;
+    virtual std::shared_ptr<Weapon> getWeapon(double y, double x) const = 0;
 
-    virtual std::shared_ptr<Weapon> getArmor(int y, int x) const = 0;
+    virtual std::shared_ptr<Armor> getArmor(double y, double x) const = 0;
 
-    virtual std::shared_ptr<const SolidItem> getSolidItem(int y, int x) const = 0;
+    virtual std::shared_ptr<const SolidItem> getSolidItem(double y, double x) const = 0;
 
     /**
      * @param soldier
@@ -25,7 +25,7 @@ public:
      * @return all the enemies of this soldier around him.
      */
     virtual const std::list<std::shared_ptr<Soldier>>
-    getEnemiesAround(const Soldier &soldier, int distance) const = 0;
+    getEnemiesAround(const Soldier &soldier, double distance) const = 0;
 
     /**
      * @param soldier
@@ -34,7 +34,7 @@ public:
      * (without this soldier).
      */
     virtual const std::list<std::shared_ptr<Soldier>>
-    getAlliesAround(const Soldier &soldier, int distance) const = 0;
+    getAlliesAround(const Soldier &soldier, double distance) const = 0;
 
     /**
      * @param point2d
@@ -43,7 +43,7 @@ public:
      * (without including anything from the given location).
      */
     virtual const std::list<std::shared_ptr<Weapon>>
-    getWeaponsAround(const Point2d &point2d, int distance) const = 0;
+    getWeaponsAround(const Point2d &point2d, double distance) const = 0;
 
     /**
      * @param point2d
@@ -51,8 +51,8 @@ public:
      * @return all collectable items around this location
      * (without including anything from the given location).
      */
-        virtual const std::list<std::shared_ptr<Armor>>
-    getArmorsAround(const Point2d &point2d, int distance) const = 0;
+    virtual const std::list<std::shared_ptr<Armor>>
+    getArmorsAround(const Point2d &point2d, double distance) const = 0;
 
     /**
      * @param point2d
@@ -61,7 +61,7 @@ public:
      * (without including anything from the given location).
      */
     virtual const std::list<std::shared_ptr<const SolidItem>>
-    getSolidItemsAround(const Point2d &point2d, int distance) const = 0;
+    getSolidItemsAround(const Point2d &point2d, double distance) const = 0;
 
     virtual ~MapReader() = 0;
 };

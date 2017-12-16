@@ -16,6 +16,8 @@ public:
     double getY() const;
 
     void setY(double y);
+
+    double distance(const Point2d &location) const;
 };
 
 

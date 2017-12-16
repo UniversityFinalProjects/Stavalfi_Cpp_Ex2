@@ -1,8 +1,6 @@
 #include "Reporter.h"
-#include "Reportable.h"
-Reporter::~Reporter() {
 
-}
+Reporter::~Reporter() = default;
 
 void Reporter::report(const Reportable &reportable) const {
     reportable.report(*this);

@@ -8,5 +8,5 @@ include_directories(lib/googletest/googlemock/include)
 include_directories(include)
 
 file(GLOB MY_CPP_FILES src/*.cpp main.cpp)
-add_executable(stavalfi_cpp_ex2 ${MY_CPP_FILES} src/FileConfigurationReader.cpp include/FileConfigurationReader.h src/InputInterface.cpp include/InputInterface.h src/ConsoleInputInterface.cpp include/ConsoleInputInterface.h src/GameInitializer.cpp include/GameInitializer.h)
+add_executable(stavalfi_cpp_ex2 ${MY_CPP_FILES})
 target_link_libraries(stavalfi_cpp_ex2 gtest gtest_main)

@@ -13,8 +13,6 @@ public:
 
     virtual void remove(const Armor &armor) = 0;
 
-    virtual void remove(const SolidItem &solidItem) = 0;
-
     virtual bool tryAdd(std::shared_ptr<Soldier> soldier) = 0;
 
     virtual bool tryAdd(std::shared_ptr<Weapon> &weapon) = 0;

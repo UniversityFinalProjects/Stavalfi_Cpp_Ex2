@@ -16,10 +16,6 @@ void Map::remove(const Armor &armor) {
 
 }
 
-void Map::remove(const SolidItem &solidItem) {
-
-}
-
 bool Map::tryAdd(std::shared_ptr<Soldier> soldier) {
     return false;
 }
@@ -36,42 +32,43 @@ bool Map::tryAdd(std::shared_ptr<const SolidItem> &soldier) {
     return false;
 }
 
-std::shared_ptr<Soldier> Map::getSoldier(int y, int x) const {
+std::shared_ptr<Soldier> Map::getSoldier(double y, double x) const {
     return nullptr;
 }
 
-std::shared_ptr<Weapon> Map::getWeapon(int y, int x) const {
+std::shared_ptr<Weapon> Map::getWeapon(double y, double x) const {
     return nullptr;
 }
 
-std::shared_ptr<Weapon> Map::getArmor(int y, int x) const {
+std::shared_ptr<Armor> Map::getArmor(double y, double x) const {
     return nullptr;
 }
 
-std::shared_ptr<const SolidItem> Map::getSolidItem(int y, int x) const {
+std::shared_ptr<const SolidItem> Map::getSolidItem(double y, double x) const {
     return nullptr;
 }
 
-const std::list<std::shared_ptr<Soldier>> Map::getEnemiesAround(const Soldier &soldier, int distance) const {
+const std::list<std::shared_ptr<Soldier>> Map::getEnemiesAround(const Soldier &soldier, double distance) const {
     return std::list<std::shared_ptr<Soldier>>();
 }
 
-const std::list<std::shared_ptr<Soldier>> Map::getAlliesAround(const Soldier &soldier, int distance) const {
+const std::list<std::shared_ptr<Soldier>> Map::getAlliesAround(const Soldier &soldier, double distance) const {
     return std::list<std::shared_ptr<Soldier>>();
 }
 
-const std::list<std::shared_ptr<Weapon>> Map::getWeaponsAround(const Point2d &point2d, int distance) const {
+const std::list<std::shared_ptr<Weapon>> Map::getWeaponsAround(const Point2d &point2d, double distance) const {
     return std::list<std::shared_ptr<Weapon>>();
 }
 
-const std::list<std::shared_ptr<Armor>> Map::getArmorsAround(const Point2d &point2d, int distance) const {
+const std::list<std::shared_ptr<Armor>> Map::getArmorsAround(const Point2d &point2d, double distance) const {
     return std::list<std::shared_ptr<Armor>>();
 }
 
-const std::list<std::shared_ptr<const SolidItem>> Map::getSolidItemsAround(const Point2d &point2d, int distance) const {
+const std::list<std::shared_ptr<const SolidItem>>
+Map::getSolidItemsAround(const Point2d &point2d, double distance) const {
     return std::list<std::shared_ptr<const SolidItem>>();
 }
 
-std::shared_ptr<Soldier> Map::get(int y, int x) const {
-    return nullptr;
+bool Map::isFree(double y, double x) const {
+    return false;
 }

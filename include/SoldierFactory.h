@@ -14,6 +14,7 @@ class SoldierFactory {
 public:
     static std::shared_ptr<Soldier> create(SoldierType soldierType,
                                            const Point2d &location,
+                                           const std::string &playerId,
                                            const std::list<Point2d> &soldierDirections);
 };
 

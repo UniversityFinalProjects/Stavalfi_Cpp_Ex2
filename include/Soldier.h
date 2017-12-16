@@ -7,6 +7,8 @@
 #include "Armor.h"
 #include <memory>
 
+#define AMOUNT_OF_ALLOWED_ARMORS 2
+
 class ApplySoldierStrategies;
 
 class Soldier : public MapObject {
@@ -36,7 +38,7 @@ class Soldier : public MapObject {
     // be deleted before this class then when we call
     // this object's constructor, we will create segmentation
     // fault when referring to those armors.
-    std::list<std::shared_ptr<Armor>> armors;
+    std::array<std::shared_ptr<Armor>, AMOUNT_OF_ALLOWED_ARMORS> armors;
 protected:
     std::shared_ptr<Weapon> weapon;
 
@@ -44,6 +46,9 @@ public:
 
     /**
      * only the attack method will call this.
+     * rand a random number between 1 and distance
+     * and check if the random number is between 1
+     * and the change of succeeding attacking.
      * @param distance
      * @return if the soldier successfuly attacked or missed.
      */
@@ -51,7 +56,8 @@ public:
 
     void setLifePoints(short lifePoints);
 
-    Soldier(const std::string &playerId,
+    Soldier(const std::string &soldierId,
+            const std::string &playerId,
             const Point2d &location,
             short lifePoints,
             short walkingSpeed,
@@ -71,14 +77,13 @@ public:
     const short getWalkingSpeed() const;
 
     /**
-     * check if it is better to throw away an old armor and
-     * get this one. or add this armor also.
+     * throw away an old armor and get this one.
+     * or add this armor also.
      * @param armor
-     * @return true if the soldier added this armor, else return false.
      */
-    bool changeArmor(std::shared_ptr<Armor> armor);
+    void changeArmor(std::shared_ptr<Armor> armor);
 
-    const std::list<std::shared_ptr<Armor>> &getArmors() const;
+    const std::array<std::shared_ptr<Armor>, AMOUNT_OF_ALLOWED_ARMORS> &getArmors() const;
 
     virtual ~Soldier();
 };

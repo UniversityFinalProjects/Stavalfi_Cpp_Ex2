@@ -14,11 +14,47 @@ class MapCell : public MapModifier, public MapReader {
 
     std::list<std::shared_ptr<Soldier>> soldiers;
 
-    // represent a map = 2d matrix.
-    std::list<std::shared_ptr<Soldier>> collectableItems;
+    std::list<std::shared_ptr<Weapon>> weapons;
 
-    // represent a map = 2d matrix.
+    std::list<std::shared_ptr<Armor>> armors;
+
     std::list<std::shared_ptr<const SolidItem>> solidItems;
+
+    /**
+     * @param y
+     * @param x
+     * @return the address of the
+     * std::shared_ptr<Soldier>
+     * which contain a soldier in (y,x)
+     */
+    std::shared_ptr<Soldier> *getSoldier_ptr(double y, double x) const;
+
+    /**
+     * @param y
+     * @param x
+     * @return the address of the
+     * std::shared_ptr<Soldier>
+     * which contain a soldier in (y,x)
+     */
+    std::shared_ptr<Weapon> *getWeapon_ptr(double y, double x) const;
+
+    /**
+     * @param y
+     * @param x
+     * @return the address of the
+     * std::shared_ptr<Armor>
+     * which contain a soldier in (y,x)
+     */
+    std::shared_ptr<Armor> *getArmor_ptr(double y, double x) const;
+
+    /**
+     * @param y
+     * @param x
+     * @return the address of the
+     * std::shared_ptr<const SolidItem>
+     * which contain a soldier in (y,x)
+     */
+    std::shared_ptr<const SolidItem> *getSolidItem_ptr(double y, double x) const;
 
 public:
 
@@ -30,8 +66,6 @@ public:
 
     void remove(const Armor &armor) override;
 
-    void remove(const SolidItem &solidItem) override;
-
     bool tryAdd(std::shared_ptr<Soldier> soldier) override;
 
     bool tryAdd(std::shared_ptr<Weapon> &weapon) override;
@@ -40,28 +74,30 @@ public:
 
     bool tryAdd(std::shared_ptr<const SolidItem> &soldier) override;
 
-    std::shared_ptr<Soldier> get(int y, int x) const override;
+    bool isFree(double y, double x) const override;
 
-    std::shared_ptr<Soldier> getSoldier(int y, int x) const override;
+    std::shared_ptr<Soldier> getSoldier(double y, double x) const override;
 
-    std::shared_ptr<Weapon> getWeapon(int y, int x) const override;
+    std::shared_ptr<Weapon> getWeapon(double y, double x) const override;
 
-    std::shared_ptr<Weapon> getArmor(int y, int x) const override;
+    std::shared_ptr<Armor> getArmor(double y, double x) const override;
 
-    std::shared_ptr<const SolidItem> getSolidItem(int y, int x) const override;
+    std::shared_ptr<const SolidItem> getSolidItem(double y, double x) const override;
 
-    const std::list<std::shared_ptr<Soldier>> getEnemiesAround(const Soldier &soldier, int distance) const override;
+    const std::list<std::shared_ptr<Soldier>>
+    getEnemiesAround(const Soldier &soldier, double distance) const override;
 
-    const std::list<std::shared_ptr<Soldier>> getAlliesAround(const Soldier &soldier, int distance) const override;
+    const std::list<std::shared_ptr<Soldier>>
+    getAlliesAround(const Soldier &soldier, double distance) const override;
 
     const std::list<std::shared_ptr<Weapon>>
-    getWeaponsAround(const Point2d &point2d, int distance) const override;
+    getWeaponsAround(const Point2d &point2d, double distance) const override;
 
     const std::list<std::shared_ptr<Armor>>
-    getArmorsAround(const Point2d &point2d, int distance) const override;
+    getArmorsAround(const Point2d &point2d, double distance) const override;
 
     const std::list<std::shared_ptr<const SolidItem>>
-    getSolidItemsAround(const Point2d &point2d, int distance) const override;
+    getSolidItemsAround(const Point2d &point2d, double distance) const override;
 };
 
 

@@ -1,5 +1,3 @@
 #include "MapReader.h"
 
-MapReader::~MapReader() {
-
-}
+MapReader::~MapReader() = default;

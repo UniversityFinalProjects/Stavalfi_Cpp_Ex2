@@ -1,16 +1,17 @@
 #include "Soldier.h"
+#include <cassert>
 
-Soldier::Soldier(const std::string &playerId,
+Soldier::Soldier(const std::string &soldierId,
+                 const std::string &playerId,
                  const Point2d &location,
                  short lifePoints,
                  short walkingSpeed,
                  const std::list<Point2d> &soldierDirections,
                  std::shared_ptr<Weapon> weapon)
-        : MapObject(playerId, location),
+        : MapObject(soldierId, location),
           playerId(playerId),
           lifePoints(lifePoints),
           walkingSpeed(walkingSpeed),
-          armors(2, nullptr),
           weapon(weapon),
           soldierDirections(soldierDirections) {
 
@@ -36,18 +37,28 @@ const short Soldier::getWalkingSpeed() const {
     return this->walkingSpeed;
 }
 
-Soldier::~Soldier() {
-}
+Soldier::~Soldier() = default;
 
-bool Soldier::changeArmor(std::shared_ptr<Armor> armor) {
-    return false;
+void Soldier::changeArmor(std::shared_ptr<Armor> armor) {
+    assert(armor != nullptr && this->armors.size() > 0);
+
+    for (auto armor_p:this->armors)
+        if (armor_p == nullptr) {
+            armor_p = armor;
+            return;
+        }
+    std::shared_ptr<Armor> *worst_armor = &this->armors[0];
+    for (int i = 0; i < this->armors.size(); i++)
+        if (this->armors[i]->getArmorStrength() < (*worst_armor)->getArmorStrength())
+            worst_armor = &this->armors[i];
+    *worst_armor = armor;
 }
 
 const std::shared_ptr<Weapon> &Soldier::getWeapon() const {
     return weapon;
 }
 
-const std::list<std::shared_ptr<Armor>> &Soldier::getArmors() const {
+const std::array<std::shared_ptr<Armor>, AMOUNT_OF_ALLOWED_ARMORS> &Soldier::getArmors() const {
     return armors;
 }
 

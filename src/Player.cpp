@@ -1,11 +1,15 @@
 #include "Player.h"
 
 void Player::addSoldier(std::shared_ptr<Soldier> &soldier) {
-
+    this->soldiers.push_back(soldier);
 }
 
 void Player::removeSoldier(const std::shared_ptr<Soldier> &soldier) {
-
+    for (auto soldier_p:this->soldiers)
+        if (soldier_p->getId() == soldier->getPlayerId()) {
+            this->soldiers.remove(soldier_p);
+            return;
+        }
 }
 
 
@@ -70,6 +74,4 @@ void Player::setMovingSoldierStrategy(const std::shared_ptr<MovingSoldierStrateg
     Player::movingSoldierStrategy = movingSoldierStrategy;
 }
 
-Player::~Player() {
-
-}
+Player::~Player() = default;

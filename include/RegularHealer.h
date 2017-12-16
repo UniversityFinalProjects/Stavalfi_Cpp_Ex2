@@ -5,7 +5,9 @@
 
 class RegularHealer : public Healer {
 public:
-    RegularHealer(const std::string &playerId, const Point2d &location,
+    RegularHealer(const std::string &soldierId,
+                  const std::string &playerId,
+                  const Point2d &location,
                   const std::list<Point2d> &soldierDirections,
                   std::shared_ptr<Weapon> weapon);
 

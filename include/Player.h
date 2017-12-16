@@ -63,8 +63,6 @@ public:
 
     void removeSoldier(const std::shared_ptr<Soldier> &soldier);
 
-
-
     virtual ~Player() = 0;
 };
 

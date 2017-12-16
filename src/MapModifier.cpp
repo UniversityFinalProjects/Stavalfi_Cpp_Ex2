@@ -1,5 +1,3 @@
 #include "MapModifier.h"
 
-MapModifier::~MapModifier() {
-
-}
+MapModifier::~MapModifier() = default;

@@ -14,9 +14,7 @@ void MapObject::setLocation(int y, int x) {
     this->location.setY(y);
 }
 
-MapObject::~MapObject() {
-}
-
+MapObject::~MapObject()  = default;
 const std::string &MapObject::getId() const {
     return id;
 }

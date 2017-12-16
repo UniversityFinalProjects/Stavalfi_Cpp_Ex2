@@ -6,7 +6,9 @@
 
 class RegularWarrior : public Warrior {
 public:
-    RegularWarrior(const std::string& playerId,const Point2d &location,
+    RegularWarrior(const std::string &soldierId,
+                   const std::string& playerId,
+                   const Point2d &location,
                    const std::list<Point2d> &soldierDirections);
 
     bool willAttackSucceed(int distance) override;

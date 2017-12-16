@@ -6,7 +6,9 @@
 
 class SniperWarrior: public Warrior {
 public:
-    SniperWarrior(const std::string& playerId,const Point2d &location,
+    SniperWarrior(const std::string &soldierId,
+                  const std::string& playerId,
+                  const Point2d &location,
                   const std::list<Point2d> &soldierDirections);
 
     bool willAttackSucceed(int distance) override;
