@@ -6,8 +6,11 @@ Warrior::Warrior(const std::string &soldierId,
                  const Point2d &location,
                  short lifePoints,
                  short walkingSpeed,
+                 short runningSpeed,
+                 short runningSpeedLifePointsCost,
                  const std::list<Point2d> &soldierDirections)
-        : Soldier(soldierId,playerId, location, lifePoints, walkingSpeed, soldierDirections) {}
+        : Soldier(soldierId, playerId, location, lifePoints, walkingSpeed, runningSpeed,
+                  runningSpeedLifePointsCost, soldierDirections) {}
 
 void Warrior::play(ApplySoldierStrategies &applySoldierStrategies) {
     applySoldierStrategies.playWithSoldier(*this);

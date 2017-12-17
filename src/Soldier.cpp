@@ -6,12 +6,16 @@ Soldier::Soldier(const std::string &soldierId,
                  const Point2d &location,
                  short lifePoints,
                  short walkingSpeed,
+                 short runningSpeed,
+                 short runningSpeedLifePointsCost,
                  const std::list<Point2d> &soldierDirections,
                  std::shared_ptr<Weapon> weapon)
         : MapObject(soldierId, location),
           playerId(playerId),
           lifePoints(lifePoints),
-          walkingSpeed(walkingSpeed),
+          walkingDistance(walkingSpeed),
+          runningDistance(runningSpeed),
+          runningDistanceLifePointsCost(runningSpeedLifePointsCost),
           weapon(weapon),
           soldierDirections(soldierDirections) {
 
@@ -33,8 +37,8 @@ void Soldier::setLifePoints(short lifePoints) {
     this->lifePoints = lifePoints;
 }
 
-const short Soldier::getWalkingSpeed() const {
-    return this->walkingSpeed;
+const short Soldier::getWalkingDistance() const {
+    return this->walkingDistance;
 }
 
 Soldier::~Soldier() = default;
@@ -62,18 +66,35 @@ const std::array<std::shared_ptr<Armor>, AMOUNT_OF_ALLOWED_ARMORS> &Soldier::get
     return armors;
 }
 
-Soldier::SoldierDirections::SoldierDirections(const std::list<Point2d> &directions)
-        : directions(directions), currentDirection(this->directions.cbegin()) {}
+std::unique_ptr<Point2d> Soldier::getNextDirection() const {
+    assert(this->soldierDirections.areDirectionsEnabled());
+    return this->soldierDirections.getNextDirection();
+}
 
-std::unique_ptr<Point2d> Soldier::SoldierDirections::getNextDirection() {
-    if (this->currentDirection != this->directions.cend()) {
-        const std::list<Point2d>::const_iterator currentDirection = this->currentDirection;
-        this->currentDirection++;
+bool Soldier::areDirectionsEnabled() const {
+    return this->soldierDirections.areDirectionsEnabled();
+}
+
+const short Soldier::getRunningDistance() const {
+    return runningDistance;
+}
+
+const short Soldier::getRunningDistanceLifePointsCost() const {
+    return runningDistanceLifePointsCost;
+}
+
+Soldier::SoldierDirections::SoldierDirections(const std::list<Point2d> &directions)
+        : directions(directions), currentDirection(new std::list<Point2d>::const_iterator(this->directions.cbegin())) {}
+
+std::unique_ptr<Point2d> Soldier::SoldierDirections::getNextDirection() const {
+    if (*this->currentDirection != this->directions.cend()) {
+        const std::list<Point2d>::const_iterator currentDirection = *this->currentDirection;
+        (*this->currentDirection)++;
         return std::unique_ptr<Point2d>(new Point2d(*currentDirection));
     }
     return std::unique_ptr<Point2d>(nullptr);
 }
 
-bool Soldier::SoldierDirections::areDirectionsEnabled() {
+bool Soldier::SoldierDirections::areDirectionsEnabled() const {
     return this->directions.size() == 0;
 }

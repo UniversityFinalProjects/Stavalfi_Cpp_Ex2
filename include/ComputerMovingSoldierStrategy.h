@@ -12,6 +12,11 @@ public:
     Point2d chooseNewLocation(const Warrior &warrior) const override;
 
     Point2d chooseNewLocation(const Healer &healer) const override;
+
+protected:
+    Point2d chooseNewLocationByDirection(const Warrior &warrior, const Point2d &direction) const override;
+
+    Point2d chooseNewLocationByDirection(const Healer &healer, const Point2d &direction) const override;
 };
 
 

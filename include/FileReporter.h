@@ -6,7 +6,11 @@
 #include "CurrentGameState.h"
 
 class FileReporter : public Reporter{
+    const std::string filePathToReportInto;
+
 public:
+    FileReporter(const std::string &filePathToReportInto);
+
     void report(const CurrentGameState &gameState) const override;
 };
 

@@ -5,10 +5,10 @@
 #include "Player.h"
 #include "Reportable.h"
 #include "MapReaderModifier.h"
-#include "CurrentGameState.h"
 #include "Reporter.h"
+#include "GameController.h"
 
-class Game : public CurrentGameState, public ApplySoldierStrategies {
+class Game : public GameController, public ApplySoldierStrategies {
     std::shared_ptr<MapReaderModifier> map;
     std::list<std::shared_ptr<Player>> players;
     std::list<std::shared_ptr<Player>>::iterator playerTurn;
@@ -21,7 +21,7 @@ class Game : public CurrentGameState, public ApplySoldierStrategies {
     // ----------------------------------------------------------------
     // Now we can skip some steps and call from this object to the
     // report method in report object.
-    std::shared_ptr<const Reporter> reporter;
+    const std::shared_ptr<const Reporter> reporter;
 
     void endGame();
 
@@ -34,17 +34,15 @@ class Game : public CurrentGameState, public ApplySoldierStrategies {
     void playCurrentWithPlayer();
 
 public:
-    Game(signed int mapWidth, signed int mapLength,
-         std::list<std::shared_ptr<Player>> &players,
-         std::list<std::shared_ptr<Armor>> &armorsInMap,
-         std::list<std::shared_ptr<Weapon>> &weaponsInMap,
-         std::list<std::shared_ptr<SolidItem>> &solidItemsInMap,
+    Game(signed int mapHigh, signed int mapWidth,
+         const std::list<std::shared_ptr<Player>> &players,
+         const std::list<std::shared_ptr<Armor>> &armorsInMap,
+         const std::list<std::shared_ptr<Weapon>> &weaponsInMap,
+         const std::list<std::shared_ptr<const SolidItem>> &solidItemsInMap,
          const std::shared_ptr<const Reporter> &reporter,
-         std::string &beginnerPlayerId);
+         const std::string &beginnerPlayerId);
 
-    const std::list<std::shared_ptr<Player>>::iterator &getPlayerTurn() const;
-
-    void setReporter(const std::shared_ptr<const Reporter> &reporter);
+    const std::list<std::shared_ptr<Player>>::iterator &getPlayerTurn() const override;
 
     Player &getPlayerBySoldier(const Soldier &soldier) const;
 
@@ -59,6 +57,8 @@ public:
     void playWithSoldier(Warrior &warrior) override;
 
     void playWithSoldier(Healer &healer) override;
+
+    void start() override;
 };
 
 

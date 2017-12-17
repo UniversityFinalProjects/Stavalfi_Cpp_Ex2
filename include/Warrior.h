@@ -13,6 +13,8 @@ public:
             const Point2d &location,
             short lifePoints,
             short walkingSpeed,
+            short runningSpeed,
+            short runningSpeedLifePointsCost,
             const std::list<Point2d> &soldierDirections);
 
     void setWeapon(const std::shared_ptr<Weapon> &weapon);

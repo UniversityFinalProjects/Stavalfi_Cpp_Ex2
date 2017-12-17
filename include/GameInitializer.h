@@ -2,17 +2,16 @@
 #define STAVALFI_CPP_EX2_GAME_INITIALIZER_H
 
 #include <memory>
-#include "Game.h"
+#include "GameController.h"
 #include "ConfigurationReader.h"
 
 class GameInitializer {
 public:
-    GameInitializer &getInstance() {
-        static GameInitializer gameInitializer;
-        return gameInitializer;
-    }
+    GameInitializer &getInstance();
 
-    std::shared_ptr<Game> initializeGame(const std::string fileConfigurationLocation);
+    std::shared_ptr<GameController>
+    initializeGame(const ConfigurationReader &configurationReader,
+                   const std::shared_ptr<const Reporter> &reporter);
 
 };
 

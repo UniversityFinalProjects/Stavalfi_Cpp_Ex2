@@ -1,6 +1,17 @@
 #include "Game.h"
 #include <Map.h>
 
+Game::Game(signed int mapHigh, signed int mapWidth,
+           const std::list<std::shared_ptr<Player>> &players,
+           const std::list<std::shared_ptr<Armor>> &armorsInMap,
+           const std::list<std::shared_ptr<Weapon>> &weaponsInMap,
+           const std::list<std::shared_ptr<const SolidItem>> &solidItemsInMap,
+           const std::shared_ptr<const Reporter> &reporter,
+           const std::string &beginnerPlayerId)
+        : map(new Map(mapHigh, mapWidth)), players(players), reporter(reporter) {
+}
+
+
 Player &Game::getPlayerBySoldier(const Soldier &soldier) const {
     return *this->players.front();
 }
@@ -11,20 +22,6 @@ const std::list<std::shared_ptr<Player>> &Game::getPlayers() const {
 
 const std::shared_ptr<const MapReader> Game::getMap() const {
     return this->map;
-}
-
-void Game::setReporter(const std::shared_ptr<const Reporter> &reporter) {
-    Game::reporter = reporter;
-}
-
-Game::Game(signed int mapWidth, signed int mapLength,
-           std::list<std::shared_ptr<Player>> &players,
-           std::list<std::shared_ptr<Armor>> &armorsInMap,
-           std::list<std::shared_ptr<Weapon>> &weaponsInMap,
-           std::list<std::shared_ptr<SolidItem>> &solidItemsInMap,
-           const std::shared_ptr<const Reporter> &reporter,
-           std::string &beginnerPlayerId)
-        : map(new Map(mapWidth, mapLength)), players(players), reporter(reporter) {
 }
 
 void Game::endIteration() {
@@ -64,5 +61,9 @@ void Game::startIteration() {
 }
 
 void Game::playCurrentWithPlayer() {
+
+}
+
+void Game::start() {
 
 }

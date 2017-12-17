@@ -12,15 +12,15 @@ public:
 
     FileConfigurationReader(const std::string &fileConfigurationLocation);
 
-    MapSize getMapSize() override;
+    MapSize getMapSize() const override;
 
-    std::list<std::shared_ptr<Player>> getPlayers() override;
+    std::list<std::shared_ptr<Player>> getPlayers() const override;
 
-    std::list<std::shared_ptr<Armor>> getArmorsInMap() override;
+    std::list<std::shared_ptr<Armor>> getArmorsInMap() const override;
 
-    std::list<std::shared_ptr<Weapon>> getWeaponsInMap() override;
+    std::list<std::shared_ptr<Weapon>> getWeaponsInMap() const override;
 
-    std::list<std::shared_ptr<const SolidItem>> getSolidItemsInMap() override;
+    std::list<std::shared_ptr<const SolidItem>> getSolidItemsInMap() const override;
 
     ~FileConfigurationReader() override = default;
 };

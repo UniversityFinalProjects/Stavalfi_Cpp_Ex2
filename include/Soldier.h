@@ -14,7 +14,9 @@ class ApplySoldierStrategies;
 class Soldier : public MapObject {
     const std::string &playerId;
     short lifePoints;
-    const short walkingSpeed;
+    const short walkingDistance;
+    const short runningDistance;
+    const short runningDistanceLifePointsCost;
 
     /**
      * Specify a pre-configured directions for this soldier.
@@ -22,13 +24,13 @@ class Soldier : public MapObject {
      */
     class SoldierDirections {
         const std::list<Point2d> directions;
-        std::list<Point2d>::const_iterator currentDirection;
+        std::shared_ptr<std::list<Point2d>::const_iterator> currentDirection;
     public:
         SoldierDirections(const std::list<Point2d> &directions);
 
-        std::unique_ptr<Point2d> getNextDirection();
+        std::unique_ptr<Point2d> getNextDirection() const;
 
-        bool areDirectionsEnabled();
+        bool areDirectionsEnabled() const;
     };
 
     SoldierDirections soldierDirections;
@@ -43,6 +45,10 @@ protected:
     std::shared_ptr<Weapon> weapon;
 
 public:
+
+    std::unique_ptr<Point2d> getNextDirection() const;
+
+    bool areDirectionsEnabled() const;
 
     /**
      * only the attack method will call this.
@@ -61,6 +67,8 @@ public:
             const Point2d &location,
             short lifePoints,
             short walkingSpeed,
+            short runningSpeed,
+            short runningSpeedLifePointsCost,
             const std::list<Point2d> &soldierDirections,
             std::shared_ptr<Weapon> weapon = nullptr);
 
@@ -74,7 +82,11 @@ public:
 
     short getLifePoints() const;
 
-    const short getWalkingSpeed() const;
+    const short getWalkingDistance() const;
+
+    const short getRunningDistance() const;
+
+    const short getRunningDistanceLifePointsCost() const;
 
     /**
      * throw away an old armor and get this one.

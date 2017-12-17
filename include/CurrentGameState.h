@@ -13,6 +13,8 @@ public:
 
     virtual const std::shared_ptr<const MapReader> getMap() const = 0;
 
+    virtual const std::list<std::shared_ptr<Player>>::iterator &getPlayerTurn() const = 0;
+
     virtual ~CurrentGameState() = 0;
 };
 

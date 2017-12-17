@@ -15,6 +15,11 @@ public:
     virtual Point2d chooseNewLocation(const Healer &healer) const = 0;
 
     virtual ~MovingSoldierStrategy() = 0;
+
+protected:
+    virtual Point2d chooseNewLocationByDirection(const Warrior &warrior, const Point2d &direction) const = 0;
+
+    virtual Point2d chooseNewLocationByDirection(const Healer &healer, const Point2d &direction) const = 0;
 };
 
 
