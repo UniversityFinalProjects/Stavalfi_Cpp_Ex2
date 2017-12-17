@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <Map.h>
+#include <cassert>
 
 Game::Game(signed int mapHigh, signed int mapWidth,
            const std::list<std::shared_ptr<Player>> &players,
@@ -24,20 +25,8 @@ const std::shared_ptr<const MapReader> Game::getMap() const {
     return this->map;
 }
 
-void Game::endIteration() {
-
-}
-
-void Game::changeTurnToNextPlayer() {
-
-}
-
 void Game::report(const Reporter &reporter) const {
     reporter.report(*this);
-}
-
-const std::list<std::shared_ptr<Player>>::iterator &Game::getPlayerTurn() const {
-    return playerTurn;
 }
 
 void Game::playWithSoldier(Soldier &soldier) {
@@ -52,18 +41,22 @@ void Game::playWithSoldier(Healer &healer) {
     // logic
 }
 
-void Game::endGame() {
+void Game::endGame() const {
 
 }
 
-void Game::startIteration() {
+void Game::startIteration() const {
+    assert(this->getPlayerTurn()->get() != nullptr);
 
+    Player &playerTurn = *this->getPlayerTurn()->get();
+    for (auto soldier:playerTurn.getSoldiers())
+        playWithSoldier((*soldier));
 }
 
-void Game::playCurrentWithPlayer() {
-
+void Game::endIteration() const {
+    report(*this->reporter);
 }
 
-void Game::start() {
-
+void Game::start() const {
+    this->startIteration();
 }

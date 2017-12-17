@@ -9,7 +9,7 @@ class GameInitializer {
 public:
     GameInitializer &getInstance();
 
-    std::shared_ptr<GameController>
+    std::shared_ptr<const GameController>
     initializeGame(const ConfigurationReader &configurationReader,
                    const std::shared_ptr<const Reporter> &reporter);
 

@@ -1,7 +1,7 @@
 #include "GameInitializer.h"
 #include <Game.h>
 
-std::shared_ptr<GameController>
+std::shared_ptr<const GameController>
 GameInitializer::initializeGame(const ConfigurationReader &configurationReader,
                                 const std::shared_ptr<const Reporter> &reporter) {
 
@@ -10,7 +10,7 @@ GameInitializer::initializeGame(const ConfigurationReader &configurationReader,
     std::list<std::shared_ptr<Player>> players = configurationReader.getPlayers();
     const std::string &beginnerPlayerId = (*players.begin())->getPlayerId();
 
-    return std::shared_ptr<GameController>(new Game(
+    return std::shared_ptr<const GameController>(new Game(
             mapSize.getMapHigh(),
             mapSize.getMapWidth(),
             players,

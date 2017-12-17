@@ -11,7 +11,6 @@
 class Game : public GameController, public ApplySoldierStrategies {
     std::shared_ptr<MapReaderModifier> map;
     std::list<std::shared_ptr<Player>> players;
-    std::list<std::shared_ptr<Player>>::iterator playerTurn;
 
     // usually a reporter object won't be inside a reportable class.
     // someone else should have a reporter object and call his method:
@@ -23,15 +22,13 @@ class Game : public GameController, public ApplySoldierStrategies {
     // report method in report object.
     const std::shared_ptr<const Reporter> reporter;
 
-    void endGame();
+    void endGame() const;
 
-    void endIteration();
+    void endIteration() const;
 
-    void startIteration();
+    void startIteration() const;
 
-    void changeTurnToNextPlayer();
-
-    void playCurrentWithPlayer();
+    void changeTurnToNextPlayer() const;
 
 public:
     Game(signed int mapHigh, signed int mapWidth,
@@ -58,7 +55,9 @@ public:
 
     void playWithSoldier(Healer &healer) override;
 
-    void start() override;
+    void start() const override;
+
+    ~Game() override = default;
 };
 
 
