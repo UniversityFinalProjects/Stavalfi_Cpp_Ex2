@@ -4,11 +4,10 @@
 #include "CollectableItem.h"
 #include "SolidItem.h"
 #include "Soldier.h"
-#include "MapModifier.h"
-#include "MapReader.h"
+#include "MapReaderModifier.h"
 #include <list>
 
-class MapCell : public MapModifier, public MapReader {
+class MapCell : public MapReaderModifier {
 
     const signed int y, x;
 
@@ -19,42 +18,6 @@ class MapCell : public MapModifier, public MapReader {
     std::list<std::shared_ptr<Armor>> armors;
 
     std::list<std::shared_ptr<const SolidItem>> solidItems;
-
-    /**
-     * @param y
-     * @param x
-     * @return the address of the
-     * std::shared_ptr<Soldier>
-     * which contain a soldier in (y,x)
-     */
-    std::shared_ptr<Soldier> *getSoldier_ptr(double y, double x) const;
-
-    /**
-     * @param y
-     * @param x
-     * @return the address of the
-     * std::shared_ptr<Soldier>
-     * which contain a soldier in (y,x)
-     */
-    std::shared_ptr<Weapon> *getWeapon_ptr(double y, double x) const;
-
-    /**
-     * @param y
-     * @param x
-     * @return the address of the
-     * std::shared_ptr<Armor>
-     * which contain a soldier in (y,x)
-     */
-    std::shared_ptr<Armor> *getArmor_ptr(double y, double x) const;
-
-    /**
-     * @param y
-     * @param x
-     * @return the address of the
-     * std::shared_ptr<const SolidItem>
-     * which contain a soldier in (y,x)
-     */
-    std::shared_ptr<const SolidItem> *getSolidItem_ptr(double y, double x) const;
 
 public:
 
@@ -98,6 +61,59 @@ public:
 
     const std::list<std::shared_ptr<const SolidItem>>
     getSolidItemsAround(const Point2d &point2d, double distance) const override;
+
+    bool isLocationInsideThisMap(double y, double x) const override;
+
+    bool isLocationInsideThisMap(const Point2d &location) const override;
+
+    int getMapHigh() override;
+
+    int getMapWidth() override;
+
+private:
+    /**
+ * @param y
+ * @param x
+ * @return the address of the
+ * std::shared_ptr<Soldier>
+ * which contain a soldier in (y,x)
+ */
+    std::shared_ptr<Soldier> *getSoldier_ptr(double y, double x);
+
+    /**
+     * @param y
+     * @param x
+     * @return the address of the
+     * std::shared_ptr<Soldier>
+     * which contain a soldier in (y,x)
+     */
+    std::shared_ptr<Weapon> *getWeapon_ptr(double y, double x);
+
+    /**
+     * @param y
+     * @param x
+     * @return the address of the
+     * std::shared_ptr<Armor>
+     * which contain a soldier in (y,x)
+     */
+    std::shared_ptr<Armor> *getArmor_ptr(double y, double x);
+
+    /**
+     * @param y
+     * @param x
+     * @return the address of the
+     * std::shared_ptr<const SolidItem>
+     * which contain a soldier in (y,x)
+     */
+    std::shared_ptr<const SolidItem> *getSolidItem_ptr(double y, double x);
+
+    const std::shared_ptr<Soldier> *getSoldier_ptr(double y, double x) const;
+
+    const std::shared_ptr<Weapon> *getWeapon_ptr(double y, double x) const;
+
+    const std::shared_ptr<Armor> *getArmor_ptr(double y, double x) const;
+
+    const std::shared_ptr<const SolidItem> *getSolidItem_ptr(double y, double x) const;
 };
 
 

@@ -17,7 +17,13 @@ public:
 
     void setY(double y);
 
+    double distance(double y, double x) const;
+
     double distance(const Point2d &location) const;
+
+    bool equeals(double y, double x) const;
+
+    bool operator==(const Point2d &location);
 };
 
 

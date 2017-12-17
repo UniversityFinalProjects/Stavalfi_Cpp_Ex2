@@ -9,6 +9,10 @@
 class MapReader {
 public:
 
+    virtual signed int getMapHigh() = 0;
+
+    virtual signed int getMapWidth() = 0;
+
     virtual bool isFree(double y, double x) const = 0;
 
     virtual std::shared_ptr<Soldier> getSoldier(double y, double x) const = 0;
@@ -62,6 +66,10 @@ public:
      */
     virtual const std::list<std::shared_ptr<const SolidItem>>
     getSolidItemsAround(const Point2d &point2d, double distance) const = 0;
+
+    virtual bool isLocationInsideThisMap(double y, double x) const = 0;
+
+    virtual bool isLocationInsideThisMap(const Point2d &location) const = 0;
 
     virtual ~MapReader() = 0;
 };

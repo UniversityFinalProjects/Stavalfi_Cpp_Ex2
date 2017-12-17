@@ -20,5 +20,17 @@ void Point2d::setY(double y) {
 }
 
 double Point2d::distance(const Point2d &location) const {
-    return sqrt(pow(this->getX() - location.getX(), 2) + pow(this->getY() - location.getY(), 2));
+    return distance(location.getY(), location.getX());
+}
+
+double Point2d::distance(double y, double x) const {
+    return sqrt(pow(this->getX() - x, 2) + pow(this->getY() - y, 2));
+}
+
+bool Point2d::operator==(const Point2d &location) {
+    return equeals(location.getY(), location.getX());
+}
+
+bool Point2d::equeals(double y, double x) const {
+    return this->y == y && this->x == x;
 }

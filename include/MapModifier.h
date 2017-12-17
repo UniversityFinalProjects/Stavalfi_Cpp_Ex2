@@ -19,7 +19,7 @@ public:
 
     virtual bool tryAdd(std::shared_ptr<Armor> &armor) = 0;
 
-    virtual bool tryAdd(std::shared_ptr<const SolidItem> &soldier) = 0;
+    virtual bool tryAdd(std::shared_ptr<const SolidItem> &solidItem) = 0;
 
     virtual ~MapModifier() = 0;
 };

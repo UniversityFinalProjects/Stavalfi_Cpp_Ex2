@@ -6,20 +6,17 @@ MapCell::MapCell(signed int y, signed int x) : x(x), y(y) {
 }
 
 void MapCell::remove(const Soldier &soldier) {
-    assert(this->y <= soldier.getLocation().getY() && soldier.getLocation().getY() <= this->y + 1 &&
-           this->x <= soldier.getLocation().getX() && soldier.getLocation().getX() <= this->x + 1);
+    assert(isLocationInsideThisMap(soldier.getLocation()));
 
     std::shared_ptr<Soldier> *soldier_p = getSoldier_ptr(soldier.getLocation().getY(),
                                                          soldier.getLocation().getX());
     assert(soldier_p != nullptr);
 
     this->soldiers.remove(*soldier_p);
-
 }
 
 void MapCell::remove(const Weapon &weapon) {
-    assert(this->y <= weapon.getLocation().getY() && weapon.getLocation().getY() <= this->y + 1 &&
-           this->x <= weapon.getLocation().getX() && weapon.getLocation().getX() <= this->x + 1);
+    assert(isLocationInsideThisMap(weapon.getLocation()));
 
     std::shared_ptr<Weapon> *weapon_p = getWeapon_ptr(weapon.getLocation().getY(),
                                                       weapon.getLocation().getX());
@@ -29,8 +26,7 @@ void MapCell::remove(const Weapon &weapon) {
 }
 
 void MapCell::remove(const Armor &armor) {
-    assert(this->y <= armor.getLocation().getY() && armor.getLocation().getY() <= this->y + 1 &&
-           this->x <= armor.getLocation().getX() && armor.getLocation().getX() <= this->x + 1);
+    assert(isLocationInsideThisMap(armor.getLocation()));
 
     std::shared_ptr<Armor> *armor_p = getArmor_ptr(armor.getLocation().getY(),
                                                    armor.getLocation().getX());
@@ -41,6 +37,7 @@ void MapCell::remove(const Armor &armor) {
 
 bool MapCell::tryAdd(std::shared_ptr<Soldier> soldier) {
     assert(soldier != nullptr);
+    assert(isLocationInsideThisMap(soldier->getLocation()));
 
     std::shared_ptr<Soldier> *soldier_p = getSoldier_ptr(soldier->getLocation().getY(),
                                                          soldier->getLocation().getX());
@@ -53,6 +50,7 @@ bool MapCell::tryAdd(std::shared_ptr<Soldier> soldier) {
 
 bool MapCell::tryAdd(std::shared_ptr<Weapon> &weapon) {
     assert(weapon != nullptr);
+    assert(isLocationInsideThisMap(weapon->getLocation()));
 
     std::shared_ptr<Weapon> *weapon_p = getWeapon_ptr(weapon->getLocation().getY(),
                                                       weapon->getLocation().getX());
@@ -65,6 +63,7 @@ bool MapCell::tryAdd(std::shared_ptr<Weapon> &weapon) {
 
 bool MapCell::tryAdd(std::shared_ptr<Armor> &armor) {
     assert(armor != nullptr);
+    assert(isLocationInsideThisMap(armor->getLocation()));
 
     std::shared_ptr<Armor> *armor_p = getArmor_ptr(armor->getLocation().getY(),
                                                    armor->getLocation().getX());
@@ -78,20 +77,18 @@ bool MapCell::tryAdd(std::shared_ptr<Armor> &armor) {
 bool MapCell::tryAdd(std::shared_ptr<const SolidItem> &solidItem) {
     assert(solidItem != nullptr);
 
-    std::shared_ptr<const SolidItem> *solidItem_p = getSolidItem_ptr(solidItem->getLocation().getY(),
-                                                                     solidItem->getLocation().getX());
-    if (solidItem_p != nullptr)
-        return false;
+    // TODO:
+    // asserting if 2 squares touch each other is not a part of this mission.
+    // for now I will leave it.
 
     this->solidItems.push_back(solidItem);
     return true;
 }
 
 std::shared_ptr<Soldier> MapCell::getSoldier(double y, double x) const {
-    assert(this->y <= y && y <= this->y + 1 &&
-           this->x <= x && x <= this->x + 1);
+    assert(isLocationInsideThisMap(y, x));
 
-    std::shared_ptr<Soldier> *solidItem_p = getSoldier_ptr(y, x);
+    const std::shared_ptr<Soldier> *solidItem_p = getSoldier_ptr(y, x);
     if (solidItem_p == nullptr)
         return nullptr;
 
@@ -99,10 +96,9 @@ std::shared_ptr<Soldier> MapCell::getSoldier(double y, double x) const {
 }
 
 std::shared_ptr<Weapon> MapCell::getWeapon(double y, double x) const {
-    assert(this->y <= y && y <= this->y + 1 &&
-           this->x <= x && x <= this->x + 1);
+    assert(isLocationInsideThisMap(y, x));
 
-    std::shared_ptr<Weapon> *weapon_p = getWeapon_ptr(y, x);
+    const std::shared_ptr<Weapon> *weapon_p = getWeapon_ptr(y, x);
     if (weapon_p == nullptr)
         return nullptr;
 
@@ -110,10 +106,9 @@ std::shared_ptr<Weapon> MapCell::getWeapon(double y, double x) const {
 }
 
 std::shared_ptr<Armor> MapCell::getArmor(double y, double x) const {
-    assert(this->y <= y && y <= this->y + 1 &&
-           this->x <= x && x <= this->x + 1);
+    assert(isLocationInsideThisMap(y, x));
 
-    std::shared_ptr<Armor> *armor_p = getArmor_ptr(y, x);
+    const std::shared_ptr<Armor> *armor_p = getArmor_ptr(y, x);
     if (armor_p == nullptr)
         return nullptr;
 
@@ -121,10 +116,9 @@ std::shared_ptr<Armor> MapCell::getArmor(double y, double x) const {
 }
 
 std::shared_ptr<const SolidItem> MapCell::getSolidItem(double y, double x) const {
-    assert(this->y <= y && y <= this->y + 1 &&
-           this->x <= x && x <= this->x + 1);
+    assert(isLocationInsideThisMap(y, x));
 
-    std::shared_ptr<const SolidItem> *solidItem_p = getSolidItem_ptr(y, x);
+    const std::shared_ptr<const SolidItem> *solidItem_p = getSolidItem_ptr(y, x);
     if (solidItem_p == nullptr)
         return nullptr;
 
@@ -188,52 +182,104 @@ MapCell::getSolidItemsAround(const Point2d &point2d, double distance) const {
 
     std::list<std::shared_ptr<const SolidItem>> solidItemsAround;
 
-    for (auto solidItem_p:this->solidItems)
-        if (point2d.distance(solidItem_p->getLocation()) <= distance)
-            solidItemsAround.push_back(solidItem_p);
+    // TODO:
+    // asserting if a square touch a circle in some way is not a part of this mission.
+    // for now I will leave this.
 
     return solidItemsAround;
 }
 
-std::shared_ptr<Soldier> *MapCell::getSoldier_ptr(double y, double x) const {
-    for (auto soldier_p:this->soldiers)
-        if (soldier_p->getLocation().getY() == y &&
-            soldier_p->getLocation().getX() == x) {
+std::shared_ptr<Soldier> *MapCell::getSoldier_ptr(double y, double x) {
+    assert(isLocationInsideThisMap(y, x));
+
+    for (std::shared_ptr<Soldier> &soldier_p:this->soldiers)
+        if (soldier_p->getLocation().equeals(y, x))
             return &soldier_p;
-        }
     return nullptr;
 }
 
-std::shared_ptr<Weapon> *MapCell::getWeapon_ptr(double y, double x) const {
-    for (auto weapon_p:this->weapons)
-        if (weapon_p->getLocation().getY() == y &&
-            weapon_p->getLocation().getX() == x) {
+std::shared_ptr<Weapon> *MapCell::getWeapon_ptr(double y, double x) {
+    assert(isLocationInsideThisMap(y, x));
+
+    for (std::shared_ptr<Weapon> &weapon_p:this->weapons)
+        if (weapon_p->getLocation().equeals(y, x))
             return &weapon_p;
-        }
     return nullptr;
 }
 
-std::shared_ptr<Armor> *MapCell::getArmor_ptr(double y, double x) const {
-    for (auto armor_p:this->armors)
-        if (armor_p->getLocation().getY() == y &&
-            armor_p->getLocation().getX() == x) {
+std::shared_ptr<Armor> *MapCell::getArmor_ptr(double y, double x) {
+    assert(isLocationInsideThisMap(y, x));
+
+    for (std::shared_ptr<Armor> &armor_p:this->armors)
+        if (armor_p->getLocation().equeals(y, x))
             return &armor_p;
-        }
     return nullptr;
 }
 
-std::shared_ptr<const SolidItem> *MapCell::getSolidItem_ptr(double y, double x) const {
-    for (auto solidItem_p:this->solidItems)
-        if (solidItem_p->getLocation().getY() == y &&
-            solidItem_p->getLocation().getX() == x) {
+std::shared_ptr<const SolidItem> *MapCell::getSolidItem_ptr(double y, double x) {
+    assert(isLocationInsideThisMap(y, x));
+
+    for (std::shared_ptr<const SolidItem> &solidItem_p:this->solidItems)
+        if (solidItem_p->isPointInside(y, x))
             return &solidItem_p;
-        }
+    return nullptr;
+}
+
+const std::shared_ptr<Soldier> *MapCell::getSoldier_ptr(double y, double x) const {
+    assert(isLocationInsideThisMap(y, x));
+
+    for (const std::shared_ptr<Soldier> &soldier_p:this->soldiers)
+        if (soldier_p->getLocation().equeals(y, x))
+            return &soldier_p;
+    return nullptr;
+}
+
+const std::shared_ptr<Weapon> *MapCell::getWeapon_ptr(double y, double x) const {
+    assert(isLocationInsideThisMap(y, x));
+
+    for (const std::shared_ptr<Weapon> &weapon_p:this->weapons)
+        if (weapon_p->getLocation().equeals(y, x))
+            return &weapon_p;
+    return nullptr;
+}
+
+const std::shared_ptr<Armor> *MapCell::getArmor_ptr(double y, double x) const {
+    assert(isLocationInsideThisMap(y, x));
+
+    for (const std::shared_ptr<Armor> &armor_p:this->armors)
+        if (armor_p->getLocation().equeals(y, x))
+            return &armor_p;
+    return nullptr;
+}
+
+const std::shared_ptr<const SolidItem> *MapCell::getSolidItem_ptr(double y, double x) const {
+    assert(isLocationInsideThisMap(y, x));
+
+    for (const std::shared_ptr<const SolidItem> &solidItem_p:this->solidItems)
+        if (solidItem_p->isPointInside(y, x))
+            return &solidItem_p;
     return nullptr;
 }
 
 bool MapCell::isFree(double y, double x) const {
-    assert(this->y <= y && y <= this->y + 1 &&
-           this->x <= x && x <= this->x + 1);
+    assert(isLocationInsideThisMap(y, x));
 
     return getSoldier(y, x) || getWeapon(y, x) || getArmor(y, x) || getSolidItem(y, x);
+}
+
+bool MapCell::isLocationInsideThisMap(double y, double x) const {
+    return this->y <= y && y < this->y + 1 &&
+           this->x <= x && x < this->x + 1;
+}
+
+bool MapCell::isLocationInsideThisMap(const Point2d &location) const {
+    return isLocationInsideThisMap(location.getX(), location.getY());
+}
+
+int MapCell::getMapHigh() {
+    return 1;
+}
+
+int MapCell::getMapWidth() {
+    return 1;
 }

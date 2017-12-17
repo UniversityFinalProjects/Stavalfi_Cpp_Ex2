@@ -4,11 +4,19 @@
 #include "Item.h"
 
 class SolidItem : public Item {
-    const short length;
+    const short high;
     const short width;
 public:
     SolidItem(const std::string &id, const Point2d &location,
-              short length, short width);
+              short high, short width);
+
+    bool isPointInside(double y, double x) const;
+
+    bool isPointInside(const Point2d &location) const;
+
+    const short getHigh() const;
+
+    const short getWidth() const;
 };
 
 

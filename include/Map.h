@@ -6,13 +6,18 @@
 #include <vector>
 
 class Map : public MapReaderModifier {
-    // why not <MapCell& or * or smart_ptr> - because
-    // vector return MapCell& anyway.
-    // Also each MapCell object is located in the heap also.
-    std::vector<MapCell> map;
-    const signed int w, h;
+    // An abstract representation of 2d matrix.
+    // Each cell in the matrix is representing
+    // a small map from [x,y] to (x+1,y+1).
+    std::vector<std::shared_ptr<MapReaderModifier>> map;
+    const signed int width, high;
+
+    const std::shared_ptr<MapReaderModifier> &getCellByLocation(double y, double x) const;
+
+    const std::shared_ptr<MapReaderModifier> &getCellByLocation(const Point2d &location) const;
+
 public:
-    Map(int w, int h);
+    Map(signed int high, signed int width);
 
     ~Map() override = default;
 
@@ -28,7 +33,7 @@ public:
 
     bool tryAdd(std::shared_ptr<Armor> &armor) override;
 
-    bool tryAdd(std::shared_ptr<const SolidItem> &soldier) override;
+    bool tryAdd(std::shared_ptr<const SolidItem> &solidItem) override;
 
     bool isFree(double y, double x) const override;
 
@@ -52,6 +57,14 @@ public:
 
     const std::list<std::shared_ptr<const SolidItem>>
     getSolidItemsAround(const Point2d &point2d, double distance) const override;
+
+    bool isLocationInsideThisMap(double y, double x) const override;
+
+    bool isLocationInsideThisMap(const Point2d &location) const override;
+
+    int getMapHigh() override;
+
+    int getMapWidth() override;
 };
 
 
