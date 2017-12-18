@@ -1,18 +1,25 @@
 #ifndef STAVALFI_CPP_EX2_SOLDIER_ACTIONS_H
 #define STAVALFI_CPP_EX2_SOLDIER_ACTIONS_H
 
-#include "Warrior.h"
-#include "Healer.h"
+#include "MapModifier.h"
+
+class Player;
+
+class Warrior;
+
+class Healer;
 
 class ApplySoldierStrategies {
+    const std::shared_ptr<MapModifier> map;
+    const std::shared_ptr<Player> player;
 public:
-    virtual void playWithSoldier(Soldier &soldier) = 0;
+    ApplySoldierStrategies(const std::shared_ptr<MapModifier> &map, const std::shared_ptr<Player> &player);
 
-    virtual void playWithSoldier(Warrior &warrior) = 0;
+    void applySoldierStrategies(Warrior &warrior) const;
 
-    virtual void playWithSoldier(Healer &healer) = 0;
+    void applySoldierStrategies(Healer &healer) const;
 
-    virtual ~ApplySoldierStrategies() = 0;
+    ~ApplySoldierStrategies() = default;
 };
 
 

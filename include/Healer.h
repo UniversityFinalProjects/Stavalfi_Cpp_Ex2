@@ -16,7 +16,7 @@ public:
            const std::list<Point2d> &soldierDirections,
            const std::shared_ptr<Weapon> &weapon);
 
-    void play(ApplySoldierStrategies &applySoldierStrategies) override;
+    void play(const ApplySoldierStrategies &applySoldierStrategies) override;
 
     virtual ~Healer() = 0;
 };

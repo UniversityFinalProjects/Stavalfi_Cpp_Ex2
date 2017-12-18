@@ -4,8 +4,8 @@
 
 #define RUNNING_SPEED_LIFE_POINTS_COST 0
 
-void Healer::play(ApplySoldierStrategies &applySoldierStrategies) {
-    applySoldierStrategies.playWithSoldier(*this);
+void Healer::play(const ApplySoldierStrategies &applySoldierStrategies) {
+    applySoldierStrategies.applySoldierStrategies(*this);
 }
 
 Healer::~Healer() {

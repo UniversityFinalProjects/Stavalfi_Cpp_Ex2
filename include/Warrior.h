@@ -19,7 +19,7 @@ public:
 
     void setWeapon(const std::shared_ptr<Weapon> &weapon);
 
-    void play(ApplySoldierStrategies &applySoldierStrategies) override;
+    void play(const ApplySoldierStrategies &applySoldierStrategies) override;
 
     virtual ~Warrior() = 0;
 };

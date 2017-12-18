@@ -12,8 +12,8 @@ Warrior::Warrior(const std::string &soldierId,
         : Soldier(soldierId, playerId, location, lifePoints, walkingSpeed, runningSpeed,
                   runningSpeedLifePointsCost, soldierDirections) {}
 
-void Warrior::play(ApplySoldierStrategies &applySoldierStrategies) {
-    applySoldierStrategies.playWithSoldier(*this);
+void Warrior::play(const ApplySoldierStrategies &applySoldierStrategies) {
+    applySoldierStrategies.applySoldierStrategies(*this);
 }
 
 void Warrior::setWeapon(const std::shared_ptr<Weapon> &weapon) {

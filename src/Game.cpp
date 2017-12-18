@@ -7,18 +7,14 @@ Game::Game(signed int mapHigh, signed int mapWidth,
            const std::list<std::shared_ptr<Armor>> &armorsInMap,
            const std::list<std::shared_ptr<Weapon>> &weaponsInMap,
            const std::list<std::shared_ptr<const SolidItem>> &solidItemsInMap,
-           const std::shared_ptr<const Reporter> &reporter,
-           const std::string &beginnerPlayerId)
-        : map(new Map(mapHigh, mapWidth)), players(players), reporter(reporter) {
-}
-
-
-Player &Game::getPlayerBySoldier(const Soldier &soldier) const {
-    return *this->players.front();
+           const std::shared_ptr<const Reporter> &reporter)
+        : map(new Map(mapHigh, mapWidth)),
+          players(players),
+          reporter(reporter) {
 }
 
 const std::list<std::shared_ptr<Player>> &Game::getPlayers() const {
-    return this->players;
+    return players;
 }
 
 const std::shared_ptr<const MapReader> Game::getMap() const {
@@ -29,28 +25,12 @@ void Game::report(const Reporter &reporter) const {
     reporter.report(*this);
 }
 
-void Game::playWithSoldier(Soldier &soldier) {
-    soldier.play(*this);
-}
-
-void Game::playWithSoldier(Warrior &warrior) {
-    // logic
-}
-
-void Game::playWithSoldier(Healer &healer) {
-    // logic
-}
-
 void Game::endGame() const {
-
 }
 
 void Game::startIteration() const {
-    assert(this->getPlayerTurn()->get() != nullptr);
-
-    Player &playerTurn = *this->getPlayerTurn()->get();
-    for (auto soldier:playerTurn.getSoldiers())
-        playWithSoldier((*soldier));
+    for (auto &player:this->players)
+        player->play(ApplySoldierStrategies(this->map, player));
 }
 
 void Game::endIteration() const {
@@ -58,5 +38,6 @@ void Game::endIteration() const {
 }
 
 void Game::start() const {
-    this->startIteration();
+    startIteration();
+    endIteration();
 }

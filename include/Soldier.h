@@ -72,7 +72,7 @@ public:
             const std::list<Point2d> &soldierDirections,
             std::shared_ptr<Weapon> weapon = nullptr);
 
-    virtual void play(ApplySoldierStrategies &applySoldierStrategies) = 0;
+    virtual void play(const ApplySoldierStrategies &applySoldierStrategies) = 0;
 
     bool isEnemy(const Soldier &soldier) const;
 

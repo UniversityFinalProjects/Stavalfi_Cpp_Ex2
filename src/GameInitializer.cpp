@@ -17,8 +17,7 @@ GameInitializer::initializeGame(const ConfigurationReader &configurationReader,
             configurationReader.getArmorsInMap(),
             configurationReader.getWeaponsInMap(),
             configurationReader.getSolidItemsInMap(),
-            reporter,
-            beginnerPlayerId));
+            reporter));
 }
 
 GameInitializer &GameInitializer::getInstance() {

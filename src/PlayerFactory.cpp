@@ -6,7 +6,9 @@
 #include "ComputerPlayer.h"
 
 std::shared_ptr<Player>
-PlayerFactory::create(PlayerType playerType, const std::shared_ptr<AttackingStrategy> &attackingStrategy,
+PlayerFactory::create(PlayerType playerType,
+                      const std::list<std::shared_ptr<Soldier>> &soldiers,
+                      const std::shared_ptr<AttackingStrategy> &attackingStrategy,
                       const std::shared_ptr<ChoosingWeaponStrategy> &choosingWeaponStrategy,
                       const std::shared_ptr<ChoosingArmorStrategy> &choosingArmorStrategy,
                       const std::shared_ptr<HealingStrategy> &healingStrategy,
@@ -15,6 +17,7 @@ PlayerFactory::create(PlayerType playerType, const std::shared_ptr<AttackingStra
     switch (playerType) {
         case PlayerType::HUMAN:
             return std::shared_ptr<Player>(new HumanPlayer(std::to_string(id++),
+                                                           soldiers,
                                                            attackingStrategy,
                                                            choosingWeaponStrategy,
                                                            choosingArmorStrategy,
@@ -22,6 +25,7 @@ PlayerFactory::create(PlayerType playerType, const std::shared_ptr<AttackingStra
                                                            movingSoldierStrategy));
         case PlayerType::COMPUTER:
             return std::shared_ptr<Player>(new ComputerPlayer(std::to_string(id++),
+                                                              soldiers,
                                                               attackingStrategy,
                                                               choosingWeaponStrategy,
                                                               choosingArmorStrategy,

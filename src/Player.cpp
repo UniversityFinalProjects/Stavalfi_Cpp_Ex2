@@ -1,9 +1,5 @@
 #include "Player.h"
 
-void Player::addSoldier(std::shared_ptr<Soldier> &soldier) {
-    this->soldiers.push_back(soldier);
-}
-
 void Player::removeSoldier(const std::shared_ptr<Soldier> &soldier) {
     for (auto soldier_p:this->soldiers)
         if (soldier_p->getId() == soldier->getPlayerId()) {
@@ -14,12 +10,14 @@ void Player::removeSoldier(const std::shared_ptr<Soldier> &soldier) {
 
 
 Player::Player(const std::string &playerId,
+               const std::list<std::shared_ptr<Soldier>> &soldiers,
                const std::shared_ptr<AttackingStrategy> &attackingStrategy,
                const std::shared_ptr<ChoosingWeaponStrategy> &choosingWeaponStrategy,
                const std::shared_ptr<ChoosingArmorStrategy> &choosingArmorStrategy,
                const std::shared_ptr<HealingStrategy> &healingStrategy,
                const std::shared_ptr<MovingSoldierStrategy> &movingSoldierStrategy)
         : playerId(playerId),
+          soldiers(soldiers),
           attackingStrategy(attackingStrategy),
           choosingWeaponStrategy(choosingWeaponStrategy),
           choosingArmorStrategy(choosingArmorStrategy),
@@ -72,6 +70,11 @@ const std::shared_ptr<MovingSoldierStrategy> &Player::getMovingSoldierStrategy()
 
 void Player::setMovingSoldierStrategy(const std::shared_ptr<MovingSoldierStrategy> &movingSoldierStrategy) {
     Player::movingSoldierStrategy = movingSoldierStrategy;
+}
+
+void Player::play(const ApplySoldierStrategies &applySoldierStrategies) {
+    for (auto &soldier:this->soldiers)
+        soldier->play(applySoldierStrategies);
 }
 
 Player::~Player() = default;

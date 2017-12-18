@@ -8,8 +8,8 @@
 #include "Reporter.h"
 #include "GameController.h"
 
-class Game : public GameController, public ApplySoldierStrategies {
-    std::shared_ptr<MapReaderModifier> map;
+class Game : public GameController {
+    const std::shared_ptr<MapReaderModifier> map;
     std::list<std::shared_ptr<Player>> players;
 
     // usually a reporter object won't be inside a reportable class.
@@ -28,32 +28,19 @@ class Game : public GameController, public ApplySoldierStrategies {
 
     void startIteration() const;
 
-    void changeTurnToNextPlayer() const;
-
 public:
     Game(signed int mapHigh, signed int mapWidth,
          const std::list<std::shared_ptr<Player>> &players,
          const std::list<std::shared_ptr<Armor>> &armorsInMap,
          const std::list<std::shared_ptr<Weapon>> &weaponsInMap,
          const std::list<std::shared_ptr<const SolidItem>> &solidItemsInMap,
-         const std::shared_ptr<const Reporter> &reporter,
-         const std::string &beginnerPlayerId);
-
-    const std::list<std::shared_ptr<Player>>::iterator &getPlayerTurn() const override;
-
-    Player &getPlayerBySoldier(const Soldier &soldier) const;
+         const std::shared_ptr<const Reporter> &reporter);
 
     const std::list<std::shared_ptr<Player>> &getPlayers() const override;
 
     const std::shared_ptr<const MapReader> getMap() const override;
 
     void report(const Reporter &reporter) const override;
-
-    void playWithSoldier(Soldier &soldier) override;
-
-    void playWithSoldier(Warrior &warrior) override;
-
-    void playWithSoldier(Healer &healer) override;
 
     void start() const override;
 

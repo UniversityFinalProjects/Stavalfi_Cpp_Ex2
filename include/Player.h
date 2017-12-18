@@ -26,9 +26,12 @@ class Player {
     std::shared_ptr<HealingStrategy> healingStrategy;
     std::shared_ptr<MovingSoldierStrategy> movingSoldierStrategy;
 
+    void removeSoldier(const std::shared_ptr<Soldier> &soldier);
+
 public:
 
     Player(const std::string &playerId,
+           const std::list<std::shared_ptr<Soldier>> &soldiers,
            const std::shared_ptr<AttackingStrategy> &attackingStrategy,
            const std::shared_ptr<ChoosingWeaponStrategy> &choosingWeaponStrategy,
            const std::shared_ptr<ChoosingArmorStrategy> &choosingArmorStrategy,
@@ -59,9 +62,7 @@ public:
 
     const std::string &getPlayerId() const;
 
-    void addSoldier(std::shared_ptr<Soldier> &soldier);
-
-    void removeSoldier(const std::shared_ptr<Soldier> &soldier);
+    void play(const ApplySoldierStrategies &applySoldierStrategies);
 
     virtual ~Player() = 0;
 };
