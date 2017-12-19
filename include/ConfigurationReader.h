@@ -21,9 +21,11 @@ public:
 
     ConfigurationReader(const std::string &fileConfigurationLocation);
 
+    const std::string &getFileConfigurationLocation() const;
+
     virtual MapSize getMapSize() const = 0;
 
-    virtual std::list<std::shared_ptr<Player>> getPlayers() const = 0;
+    virtual std::list<std::shared_ptr<Player>> getPlayers(const std::shared_ptr<MapReader> &map) const = 0;
 
     virtual std::list<std::shared_ptr<Armor>> getArmorsInMap() const = 0;
 

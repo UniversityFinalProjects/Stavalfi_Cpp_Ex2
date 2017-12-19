@@ -1,14 +1,14 @@
 #include "Game.h"
-#include <Map.h>
+#include "Map.h"
 #include <cassert>
 
-Game::Game(signed int mapHigh, signed int mapWidth,
+Game::Game(const std::shared_ptr<MapReaderModifier> &map,
            const std::list<std::shared_ptr<Player>> &players,
            const std::list<std::shared_ptr<Armor>> &armorsInMap,
            const std::list<std::shared_ptr<Weapon>> &weaponsInMap,
            const std::list<std::shared_ptr<const SolidItem>> &solidItemsInMap,
            const std::shared_ptr<const Reporter> &reporter)
-        : map(new Map(mapHigh, mapWidth)),
+        : map(map),
           players(players),
           reporter(reporter) {
 }
@@ -25,7 +25,12 @@ void Game::report(const Reporter &reporter) const {
     reporter.report(*this);
 }
 
-void Game::endGame() const {
+void Game::start() const {
+    while (!isGameFinished()) {
+        startIteration();
+        endIteration();
+    }
+    endGame();
 }
 
 void Game::startIteration() const {
@@ -37,7 +42,13 @@ void Game::endIteration() const {
     report(*this->reporter);
 }
 
-void Game::start() const {
-    startIteration();
-    endIteration();
+void Game::endGame() const {
+}
+
+bool Game::isGameFinished() const {
+    for (auto &player:this->players)
+        for (auto &soldier: player->getSoldiers())
+            if (soldier->areDirectionsEnabled() && soldier->getNextDirection() == nullptr)
+                return false;
+    return true;
 }

@@ -28,8 +28,10 @@ class Game : public GameController {
 
     void startIteration() const;
 
+    bool isGameFinished() const;
+
 public:
-    Game(signed int mapHigh, signed int mapWidth,
+    Game(const std::shared_ptr<MapReaderModifier> &map,
          const std::list<std::shared_ptr<Player>> &players,
          const std::list<std::shared_ptr<Armor>> &armorsInMap,
          const std::list<std::shared_ptr<Weapon>> &weaponsInMap,

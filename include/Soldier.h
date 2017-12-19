@@ -30,6 +30,8 @@ class Soldier : public MapObject {
 
         std::unique_ptr<Point2d> getNextDirection() const;
 
+        std::unique_ptr<Point2d> getCurrentDirection() const;
+
         bool areDirectionsEnabled() const;
     };
 
@@ -47,6 +49,8 @@ protected:
 public:
 
     std::unique_ptr<Point2d> getNextDirection() const;
+
+    std::unique_ptr<Point2d> getCurrentDirection() const;
 
     bool areDirectionsEnabled() const;
 

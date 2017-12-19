@@ -5,12 +5,11 @@
 #include "GameController.h"
 #include "ConfigurationReader.h"
 
-class GameInitializer {
+class SpecificGameInitializer {
 public:
-    GameInitializer &getInstance();
+    SpecificGameInitializer &getInstance();
 
-    std::shared_ptr<const GameController>
-    initializeGame(const ConfigurationReader &configurationReader,
+    std::shared_ptr<const GameController> initializeGame(const ConfigurationReader &configurationReader,
                    const std::shared_ptr<const Reporter> &reporter);
 
 };

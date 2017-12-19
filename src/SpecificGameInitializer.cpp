@@ -1,8 +1,8 @@
-#include "GameInitializer.h"
+#include "SpecificGameInitializer.h"
 #include <Game.h>
 
 std::shared_ptr<const GameController>
-GameInitializer::initializeGame(const ConfigurationReader &configurationReader,
+SpecificGameInitializer::initializeGame(const ConfigurationReader &configurationReader,
                                 const std::shared_ptr<const Reporter> &reporter) {
 
     ConfigurationReader::MapSize mapSize = configurationReader.getMapSize();
@@ -20,7 +20,7 @@ GameInitializer::initializeGame(const ConfigurationReader &configurationReader,
             reporter));
 }
 
-GameInitializer &GameInitializer::getInstance() {
-    static GameInitializer gameInitializer;
+SpecificGameInitializer &SpecificGameInitializer::getInstance() {
+    static SpecificGameInitializer gameInitializer;
     return gameInitializer;
 }

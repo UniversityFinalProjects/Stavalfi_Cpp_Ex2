@@ -7,6 +7,10 @@ ConfigurationReader::~ConfigurationReader() {
 ConfigurationReader::ConfigurationReader(const std::string &fileConfigurationLocation)
         : fileConfigurationLocation(fileConfigurationLocation) {}
 
+const std::string &ConfigurationReader::getFileConfigurationLocation() const {
+    return fileConfigurationLocation;
+}
+
 ConfigurationReader::MapSize::MapSize(int mapWidth, int mapLength)
         : mapWidth(mapWidth), mapHigh(mapLength) {}
 
