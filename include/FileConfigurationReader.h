@@ -8,6 +8,7 @@
 #include <fstream>
 #include <map>
 #include <vector>
+#include <sstream>
 
 class FileConfigurationReader : public ConfigurationReader {
 public:
@@ -27,7 +28,7 @@ public:
 
     ~FileConfigurationReader() override = default;
 
-
+private:
     // represent all the possible player types and their
     // corresponding enum.
     std::map<const std::string, PlayerType> playerTypes;
@@ -70,6 +71,12 @@ public:
                                         bool soldierDirectionsExist) const;
 
     std::list<Point2d> getSoldiersDirections(size_t soldierIndex) const;
+
+    std::shared_ptr<Armor> getArmorInMap(std::stringstream armorLine) const;
+
+    std::shared_ptr<Weapon> getWeaponInMap(std::stringstream weaponLine) const;
+
+    std::shared_ptr<const SolidItem> getSolidItemInMap(std::stringstream solidItemLine) const;
 };
 
 

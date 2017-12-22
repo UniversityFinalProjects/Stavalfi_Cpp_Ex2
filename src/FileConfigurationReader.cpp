@@ -26,7 +26,7 @@ FileConfigurationReader::FileConfigurationReader(const std::string &fileGameConf
 
 ConfigurationReader::MapSize FileConfigurationReader::getMapSize() const {
     std::ifstream reader;
-    reader.open("../" + this->getFileGameConfigurationLocation(), std::ios::in);
+    reader.open(this->getFileGameConfigurationLocation(), std::ios::in);
     std::string s1 = "";
     while (s1 != "battlefieldSize") {
         assert(reader.good());
@@ -44,7 +44,7 @@ ConfigurationReader::MapSize FileConfigurationReader::getMapSize() const {
 std::list<std::shared_ptr<Player>>
 FileConfigurationReader::getPlayers(const std::shared_ptr<const MapReader> &map) const {
     std::ifstream reader;
-    reader.open("../init.txt", std::ios::in);
+    reader.open(this->getFileGameConfigurationLocation(), std::ios::in);
     std::list<std::shared_ptr<Player>> players;
 
     std::string s1 = "";
@@ -196,7 +196,7 @@ std::list<Point2d> FileConfigurationReader::getSoldiersDirections(size_t soldier
     std::list<Point2d> directions;
 
     std::ifstream reader;
-    reader.open("../" + getFileSoldierDirectionsLocation(), std::ios::in);
+    reader.open(getFileSoldierDirectionsLocation(), std::ios::in);
     std::string line;
     for (int i = 0; i <= soldierIndex + 1; i++)
         std::getline(reader, line);
@@ -218,15 +218,77 @@ std::list<Point2d> FileConfigurationReader::getSoldiersDirections(size_t soldier
 }
 
 std::list<std::shared_ptr<Armor>> FileConfigurationReader::getArmorsInMap() const {
-    return std::list<std::shared_ptr<Armor>>();
+    std::list<std::shared_ptr<Armor>> armors;
+
+    std::ifstream reader;
+    reader.open(this->getFileGameConfigurationLocation(), std::ios::in);
+    std::string line;
+    std::getline(reader, line);
+    while (!reader.eof()) {
+        if (line.find("Armor"))
+            armors.push_back(getArmorInMap(std::stringstream(line)));
+        std::getline(reader, line);
+        assert(reader.good());
+    }
+
+    return armors;
 }
 
 std::list<std::shared_ptr<Weapon>> FileConfigurationReader::getWeaponsInMap() const {
-    return std::list<std::shared_ptr<Weapon>>();
+    std::list<std::shared_ptr<Weapon>> weapons;
+
+    std::ifstream reader;
+    reader.open(this->getFileGameConfigurationLocation(), std::ios::in);
+    std::string line;
+    std::getline(reader, line);
+    while (!reader.eof()) {
+        if (line.find("weapon"))
+            weapons.push_back(getWeaponInMap(std::stringstream(line)));
+        std::getline(reader, line);
+        assert(reader.good());
+    }
+
+    return weapons;
 }
 
 std::list<std::shared_ptr<const SolidItem>> FileConfigurationReader::getSolidItemsInMap() const {
-    return std::list<std::shared_ptr<const SolidItem>>();
+    std::list<std::shared_ptr<const SolidItem>> solidItems;
+
+    std::ifstream reader;
+    reader.open(this->getFileGameConfigurationLocation(), std::ios::in);
+    std::string line;
+    std::getline(reader, line);
+    while (!reader.eof()) {
+        if (line.find("solid"))
+            solidItems.push_back(getSolidItemInMap(std::stringstream(line)));
+        std::getline(reader, line);
+        assert(reader.good());
+    }
+
+    return solidItems;
 }
 
+std::shared_ptr<const SolidItem> FileConfigurationReader::getSolidItemInMap(std::stringstream solidItemLine) const {
+    std::string solidItemType;
+    char temp;
+    double x, y;
+    solidItemLine >> solidItemType >> temp >> x >> y >> temp;
+    return ItemFactory::create(this->solidItemTypes.at(solidItemType), Point2d(y, x));
+}
+
+std::shared_ptr<Weapon> FileConfigurationReader::getWeaponInMap(std::stringstream weaponLine) const {
+    std::string weaponType;
+    char temp;
+    double x, y;
+    weaponLine >> weaponType >> temp >> x >> y >> temp;
+    return ItemFactory::create(this->weaponTypes.at(weaponType), Point2d(y, x), false);
+}
+
+std::shared_ptr<Armor> FileConfigurationReader::getArmorInMap(std::stringstream armorLine) const {
+    std::string armorType;
+    char temp;
+    double armorStrength, x, y;
+    armorLine >> armorType >> armorStrength >> temp >> x >> y >> temp;
+    return ItemFactory::create(this->armorTypes.at(armorType), Point2d(y, x), false);
+}
 

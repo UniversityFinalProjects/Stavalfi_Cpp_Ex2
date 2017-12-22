@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[]) {
     ConsoleReporter consoleReporter;
-    FileConfigurationReader f("init.txt", "player.txt");
+    FileConfigurationReader f("../init.txt", "../player.txt");
     FileConfigurationReader::MapSize mapSize = f.getMapSize();
     std::shared_ptr<Map> map(new Map(mapSize.getMapHigh(), mapSize.getMapWidth()));
     std::list<std::shared_ptr<Player>> players = f.getPlayers(map);
