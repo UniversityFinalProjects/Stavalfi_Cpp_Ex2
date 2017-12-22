@@ -18,6 +18,7 @@ void ApplySoldierStrategies::applySoldierStrategies(Warrior &warrior) const {
     // call and apply attack strategy
     if (warrior.getWeapon() != nullptr) {
         std::shared_ptr<Soldier> enemy = this->player->getAttackingStrategy()->chooseEnemyToAttack(warrior);
+        assert(enemy != nullptr);// if its nullptr then we shouldn't continue the game because this->player won.
         enemy->setLifePoints(warrior.getWeapon()->getWeaponStrength());
         if (enemy->getLifePoints() <= 0) {
             // remove enemy from map and his player's soldier list
@@ -70,5 +71,5 @@ void ApplySoldierStrategies::applySoldierStrategies(Healer &healer) const {
     // call and apply heal strategy
     std::shared_ptr<Soldier> allie = this->player->getHealingStrategy()->chooseAllieToHeal(healer);
     if (allie != nullptr)
-        allie->setLifePoints(180);
+        allie->setLifePoints(100);
 }

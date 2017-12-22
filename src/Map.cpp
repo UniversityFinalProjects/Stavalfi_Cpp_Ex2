@@ -94,8 +94,8 @@ std::shared_ptr<const SolidItem> Map::getSolidItem(double y, double x) const {
 const std::list<std::shared_ptr<Soldier>> Map::getEnemiesAround(const Soldier &soldier, double distance) const {
     Point2d start(std::max(0, (signed int) (soldier.getLocation().getY() - distance - 1)),
                   std::max(0, (signed int) (soldier.getLocation().getX() - distance - 1)));
-    Point2d end(std::min(this->high - 1, (signed int) (soldier.getLocation().getY() - distance - 1)),
-                std::min(this->width - 1, (signed int) (soldier.getLocation().getX() - distance - 1)));
+    Point2d end(std::min(this->high - 1, (signed int) (soldier.getLocation().getY() + distance - 1)),
+                std::min(this->width - 1, (signed int) (soldier.getLocation().getX() + distance - 1)));
 
     std::list<std::shared_ptr<Soldier>> result;
 
@@ -103,17 +103,25 @@ const std::list<std::shared_ptr<Soldier>> Map::getEnemiesAround(const Soldier &s
     for (int y = start.getY(); y <= end.getY(); y++)
         for (int x = start.getX(); x <= end.getX(); x++) {
             std::list<std::shared_ptr<Soldier>> temp = getCellByLocation(y, x)->getEnemiesAround(soldier, distance);
+            int q = temp.size();
+            int o = 0;
+            if (q > 0) {
+                o++;
+            }
             result.insert(result.end(), temp.begin(), temp.end());
+            q = result.size();
+            o++;
         }
 
+    int p = result.size();
     return result;
 }
 
 const std::list<std::shared_ptr<Soldier>> Map::getAlliesAround(const Soldier &soldier, double distance) const {
     Point2d start(std::max(0, (signed int) (soldier.getLocation().getY() - distance - 1)),
                   std::max(0, (signed int) (soldier.getLocation().getX() - distance - 1)));
-    Point2d end(std::min(this->high - 1, (signed int) (soldier.getLocation().getY() - distance - 1)),
-                std::min(this->width - 1, (signed int) (soldier.getLocation().getX() - distance - 1)));
+    Point2d end(std::min(this->high - 1, (signed int) (soldier.getLocation().getY() + distance - 1)),
+                std::min(this->width - 1, (signed int) (soldier.getLocation().getX() + distance - 1)));
 
     std::list<std::shared_ptr<Soldier>> result;
 
@@ -130,8 +138,8 @@ const std::list<std::shared_ptr<Soldier>> Map::getAlliesAround(const Soldier &so
 const std::list<std::shared_ptr<Weapon>> Map::getWeaponsAround(const Point2d &point2d, double distance) const {
     Point2d start(std::max(0, (signed int) (point2d.getY() - distance - 1)),
                   std::max(0, (signed int) (point2d.getX() - distance - 1)));
-    Point2d end(std::min(this->high - 1, (signed int) (point2d.getY() - distance - 1)),
-                std::min(this->width - 1, (signed int) (point2d.getX() - distance - 1)));
+    Point2d end(std::min(this->high - 1, (signed int) (point2d.getY() + distance - 1)),
+                std::min(this->width - 1, (signed int) (point2d.getX() + distance - 1)));
 
     std::list<std::shared_ptr<Weapon>> result;
 
@@ -148,8 +156,8 @@ const std::list<std::shared_ptr<Weapon>> Map::getWeaponsAround(const Point2d &po
 const std::list<std::shared_ptr<Armor>> Map::getArmorsAround(const Point2d &point2d, double distance) const {
     Point2d start(std::max(0, (signed int) (point2d.getY() - distance - 1)),
                   std::max(0, (signed int) (point2d.getX() - distance - 1)));
-    Point2d end(std::min(this->high - 1, (signed int) (point2d.getY() - distance - 1)),
-                std::min(this->width - 1, (signed int) (point2d.getX() - distance - 1)));
+    Point2d end(std::min(this->high - 1, (signed int) (point2d.getY() + distance - 1)),
+                std::min(this->width - 1, (signed int) (point2d.getX() + distance - 1)));
 
     std::list<std::shared_ptr<Armor>> result;
 
@@ -167,8 +175,8 @@ const std::list<std::shared_ptr<const SolidItem>>
 Map::getSolidItemsAround(const Point2d &point2d, double distance) const {
     Point2d start(std::max(0, (signed int) (point2d.getY() - distance - 1)),
                   std::max(0, (signed int) (point2d.getX() - distance - 1)));
-    Point2d end(std::min(this->high - 1, (signed int) (point2d.getY() - distance - 1)),
-                std::min(this->width - 1, (signed int) (point2d.getX() - distance - 1)));
+    Point2d end(std::min(this->high - 1, (signed int) (point2d.getY() + distance - 1)),
+                std::min(this->width - 1, (signed int) (point2d.getX() + distance - 1)));
 
     std::list<std::shared_ptr<const SolidItem>> result;
 

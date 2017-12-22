@@ -132,9 +132,14 @@ MapCell::getEnemiesAround(const Soldier &soldier, double distance) const {
 
     std::list<std::shared_ptr<Soldier>> enemiesAround;
 
-    for (auto soldier_p:this->soldiers)
+    for (auto soldier_p:this->soldiers) {
+        Point2d l1 = soldier.getLocation();
+        Point2d l2 = soldier_p->getLocation();
+        std::string p1 = soldier_p->getPlayerId(), p2 = soldier.getPlayerId();
+        double distance123 = soldier.getLocation().distance(soldier_p->getLocation());
         if (soldier.getLocation().distance(soldier_p->getLocation()) <= distance && soldier.isEnemy(*soldier_p))
             enemiesAround.push_back(soldier_p);
+    }
 
     return enemiesAround;
 }
@@ -146,7 +151,9 @@ MapCell::getAlliesAround(const Soldier &soldier, double distance) const {
     std::list<std::shared_ptr<Soldier>> alliesAround;
 
     for (auto soldier_p:this->soldiers)
-        if (soldier.getLocation().distance(soldier_p->getLocation()) <= distance && !soldier.isEnemy(*soldier_p))
+        if (soldier_p->getId() != soldier.getId() &&
+            soldier.getLocation().distance(soldier_p->getLocation()) <= distance &&
+            !soldier.isEnemy(*soldier_p))
             alliesAround.push_back(soldier_p);
 
     return alliesAround;

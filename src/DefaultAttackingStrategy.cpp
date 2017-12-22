@@ -4,9 +4,9 @@ DefaultAttackingStrategy::DefaultAttackingStrategy(const std::shared_ptr<const M
         : AttackingStrategy(mapReader) {}
 
 std::shared_ptr<Soldier> DefaultAttackingStrategy::chooseEnemyToAttack(const Warrior &warrior) {
-    return this->getMapReader()->getSoldier(0, 1);
+    return this->getMapReader()->getEnemiesAround(warrior, 200).front();
 }
 
 std::shared_ptr<Soldier> DefaultAttackingStrategy::chooseEnemyToAttack(const Healer &healer) {
-    return this->getMapReader()->getSoldier(0, 1);
+    return this->getMapReader()->getEnemiesAround(healer, 200).front();
 }
