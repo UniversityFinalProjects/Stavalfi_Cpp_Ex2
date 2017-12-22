@@ -8,9 +8,9 @@ DefaultChoosingArmorStrategy::~DefaultChoosingArmorStrategy() {
 }
 
 std::shared_ptr<Armor> DefaultChoosingArmorStrategy::chooseArmor(const Warrior &warrior) const {
-    return std::shared_ptr<Armor>();
+    return this->getMapReader()->getArmor(0, 1);
 }
 
 std::shared_ptr<Armor> DefaultChoosingArmorStrategy::chooseArmor(const Healer &healer) const {
-    return std::shared_ptr<Armor>();
+    return this->getMapReader()->getArmor(0, 1);
 }

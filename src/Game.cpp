@@ -35,7 +35,7 @@ void Game::start() const {
 
 void Game::startIteration() const {
     for (auto &player:this->players)
-        player->play(ApplySoldierStrategies(this->map, player));
+        player->play(ApplySoldierStrategies(this->map, player, *this));
 }
 
 void Game::endIteration() const {
@@ -51,4 +51,11 @@ bool Game::isGameFinished() const {
             if (soldier->arePreDefinedDirectionsEnabled() && soldier->getNextPreDefinedDirection() == nullptr)
                 return false;
     return true;
+}
+
+const std::shared_ptr<Player> Game::getPlayerById(const std::string &playerId) const {
+    for (auto &player:this->players)
+        if (player->getPlayerId() == playerId)
+            return player;
+    return std::shared_ptr<Player>(nullptr);
 }

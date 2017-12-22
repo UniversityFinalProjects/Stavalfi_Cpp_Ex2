@@ -7,8 +7,9 @@
 #include "MapReaderModifier.h"
 #include "Reporter.h"
 #include "GameController.h"
+#include "FindPlayer.h"
 
-class Game : public GameController {
+class Game : public GameController, public FindPlayer {
     const std::shared_ptr<MapReaderModifier> map;
     std::list<std::shared_ptr<Player>> players;
 
@@ -37,6 +38,8 @@ public:
          const std::list<std::shared_ptr<Weapon>> &weaponsInMap,
          const std::list<std::shared_ptr<const SolidItem>> &solidItemsInMap,
          const std::shared_ptr<const Reporter> &reporter);
+
+    const std::shared_ptr<Player> getPlayerById(const std::string &playerId) const override;
 
     const std::list<std::shared_ptr<Player>> &getPlayers() const override;
 

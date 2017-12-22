@@ -9,5 +9,5 @@ DefaultChoosingWeaponStrategy::~DefaultChoosingWeaponStrategy() {
 }
 
 std::shared_ptr<Weapon> DefaultChoosingWeaponStrategy::chooseWeapon(const Warrior &warrior) const {
-    return std::shared_ptr<Weapon>();
+    return this->getMapReader()->getWeapon(0, 1);
 }

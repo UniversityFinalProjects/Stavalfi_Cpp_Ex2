@@ -27,8 +27,6 @@ class Player : public Reportable {
     std::shared_ptr<HealingStrategy> healingStrategy;
     std::shared_ptr<MovingSoldierStrategy> movingSoldierStrategy;
 
-    void removeSoldier(const std::shared_ptr<Soldier> &soldier);
-
 public:
 
     Player(const std::string &playerId,
@@ -37,6 +35,8 @@ public:
            const std::shared_ptr<ChoosingArmorStrategy> &choosingArmorStrategy,
            const std::shared_ptr<HealingStrategy> &healingStrategy,
            const std::shared_ptr<MovingSoldierStrategy> &movingSoldierStrategy);
+
+    void removeSoldier(const std::shared_ptr<Soldier> &soldier);
 
     void addSoldier(std::shared_ptr<Soldier> &soldier);
 
