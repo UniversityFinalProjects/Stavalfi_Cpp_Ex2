@@ -13,11 +13,12 @@ void MapObject::setLocation(double y, double x) {
     this->location.setY(y);
 }
 
-MapObject::~MapObject()  = default;
+MapObject::~MapObject() = default;
+
 const std::string &MapObject::getId() const {
     return id;
 }
 
 void MapObject::setLocation(const Point2d &location) {
-    MapObject::location = location;
+    this->setLocation(location.getY(), location.getX());
 }

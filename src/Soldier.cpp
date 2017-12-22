@@ -57,6 +57,7 @@ void Soldier::changeArmor(std::shared_ptr<Armor> armor) {
         if (this->armors[i]->getArmorStrength() < (*worst_armor)->getArmorStrength())
             worst_armor = &this->armors[i];
     *worst_armor = armor;
+    armor->setLocation(this->getLocation());
 }
 
 const std::shared_ptr<Weapon> &Soldier::getWeapon() const {

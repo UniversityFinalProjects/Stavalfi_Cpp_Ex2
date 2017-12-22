@@ -40,6 +40,8 @@ public:
 
     void addSoldier(std::shared_ptr<Soldier> &soldier);
 
+    std::shared_ptr<Soldier> getSoldierById(const std::string &soldierId) const;
+
     const std::list<std::shared_ptr<Soldier>> &getSoldiers() const;
 
     const std::shared_ptr<AttackingStrategy> &getAttackingStrategy() const;

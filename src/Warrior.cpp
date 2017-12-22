@@ -18,6 +18,7 @@ void Warrior::play(const ApplySoldierStrategies &applySoldierStrategies) {
 
 void Warrior::setWeapon(const std::shared_ptr<Weapon> &weapon) {
     this->Soldier::weapon = weapon;
+    this->getWeapon()->setLocation(this->getLocation());
 }
 
 Warrior::~Warrior() {

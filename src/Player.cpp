@@ -79,4 +79,11 @@ void Player::addSoldier(std::shared_ptr<Soldier> &soldier) {
     this->soldiers.push_back(soldier);
 }
 
+std::shared_ptr<Soldier> Player::getSoldierById(const std::string &soldierId) const {
+    for (auto &soldier:this->soldiers)
+        if(soldier->getId()==soldierId)
+            return soldier;
+    return std::shared_ptr<Soldier>(nullptr);
+}
+
 Player::~Player() = default;
