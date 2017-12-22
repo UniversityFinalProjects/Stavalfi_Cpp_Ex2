@@ -13,7 +13,7 @@ public:
            const Point2d &location,
            short lifePoints,
            short walkingSpeed,
-           const std::list<Point2d> &soldierDirections,
+           std::vector<Point2d> &soldierDirections,
            const std::shared_ptr<Weapon> &weapon);
 
     void play(const ApplySoldierStrategies &applySoldierStrategies) override;

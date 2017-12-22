@@ -162,7 +162,7 @@ FileConfigurationReader::getSoldier(std::ifstream &reader,
     double y, x;
     stringstream >> soldierType >> temp >> x >> y >> temp;
 
-    std::list<Point2d> soldierDirections;
+    std::vector<Point2d> soldierDirections;
 
     if (soldierDirectionsExist)
         soldierDirections = getSoldiersDirections(soldierIndex);
@@ -192,8 +192,8 @@ FileConfigurationReader::getSoldier(std::ifstream &reader,
     return soldier;
 }
 
-std::list<Point2d> FileConfigurationReader::getSoldiersDirections(size_t soldierIndex) const {
-    std::list<Point2d> directions;
+std::vector<Point2d> FileConfigurationReader::getSoldiersDirections(size_t soldierIndex) const {
+    std::vector<Point2d> directions;
 
     std::ifstream reader;
     reader.open(getFileSoldierDirectionsLocation(), std::ios::in);

@@ -10,7 +10,7 @@
 RegularWarrior::RegularWarrior(const std::string &soldierId,
                                const std::string &playerId,
                                const Point2d &location,
-                               const std::list<Point2d> &soldierDirections)
+                               std::vector<Point2d> &soldierDirections)
         : Warrior(soldierId,
                   playerId,
                   location,

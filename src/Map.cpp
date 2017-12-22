@@ -27,6 +27,11 @@ void Map::remove(const Armor &armor) {
 }
 
 bool Map::tryAdd(std::shared_ptr<Soldier> soldier) {
+    Soldier &soldier1 = *soldier;
+    if (soldier1.getLocation().getX() == 90 && soldier1.getLocation().getY() == 112) {
+        int x = 1;
+        x++;
+    }
     assert(isLocationInsideThisMap(soldier->getLocation()));
 
     return getCellByLocation(soldier->getLocation())->tryAdd(soldier);
@@ -190,7 +195,7 @@ bool Map::isLocationInsideThisMap(double y, double x) const {
 }
 
 bool Map::isLocationInsideThisMap(const Point2d &location) const {
-    return isLocationInsideThisMap(location.getY(), location.getY());
+    return isLocationInsideThisMap(location.getY(), location.getX());
 }
 
 const std::shared_ptr<MapReaderModifier> &Map::getCellByLocation(double y, double x) const {

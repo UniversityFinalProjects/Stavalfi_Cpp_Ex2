@@ -1,7 +1,4 @@
 #include "PlayerFactory.h"
-
-#define ENUM_TO_STR(ENUM) std::string(#ENUM)
-
 #include "HumanPlayer.h"
 #include "ComputerPlayer.h"
 
@@ -15,20 +12,18 @@ PlayerFactory::create(PlayerType playerType,
     static signed int id = 0;
     switch (playerType) {
         case PlayerType::HUMAN:
-            return std::shared_ptr<Player>(new HumanPlayer(std::to_string(id++),
-                                                           attackingStrategy,
-                                                           choosingWeaponStrategy,
-                                                           choosingArmorStrategy,
-                                                           healingStrategy,
-                                                           movingSoldierStrategy));
+            return std::make_shared<HumanPlayer>(std::to_string(id++),
+                                                 attackingStrategy,
+                                                 choosingWeaponStrategy,
+                                                 choosingArmorStrategy,
+                                                 healingStrategy,
+                                                 movingSoldierStrategy);
         case PlayerType::COMPUTER:
-            return std::shared_ptr<Player>(new ComputerPlayer(std::to_string(id++),
-                                                              attackingStrategy,
-                                                              choosingWeaponStrategy,
-                                                              choosingArmorStrategy,
-                                                              healingStrategy,
-                                                              movingSoldierStrategy));
-        default:
-            throw std::invalid_argument(ENUM_TO_STR(armorTypes));
+            return std::make_shared<ComputerPlayer>(std::to_string(id++),
+                                                    attackingStrategy,
+                                                    choosingWeaponStrategy,
+                                                    choosingArmorStrategy,
+                                                    healingStrategy,
+                                                    movingSoldierStrategy);
     }
 }

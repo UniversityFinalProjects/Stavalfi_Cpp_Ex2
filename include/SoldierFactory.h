@@ -15,7 +15,7 @@ public:
     static std::shared_ptr<Soldier> create(SoldierType soldierType,
                                            const Point2d &location,
                                            const std::string &playerId,
-                                           const std::list<Point2d> &soldierDirections);
+                                           std::vector<Point2d> &soldierDirections);
 };
 
 #endif //STAVALFI_CPP_EX2_SOLDIER_FACTORY_H

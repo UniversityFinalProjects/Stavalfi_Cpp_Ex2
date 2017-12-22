@@ -4,32 +4,20 @@ HumanMovingSoldierStrategy::HumanMovingSoldierStrategy(const std::shared_ptr<con
         : MovingSoldierStrategy(mapReader) {}
 
 Point2d HumanMovingSoldierStrategy::chooseNewLocation(const Warrior &warrior) const {
-    if (warrior.arePreDefinedDirectionsEnabled()) {
-        const std::shared_ptr<Point2d> direction = warrior.getNextPreDefinedDirection();
-        if (direction != nullptr)
-            chooseNewLocationByDirection(warrior, *direction);
-        else
-            // by the rules of this game,
-            // if there are no more directions,
-            // a soldier shouldn't move.
-            return warrior.getLocation();
+    if (warrior.getSoldierDirections().isEnabled() &&
+            warrior.getSoldierDirections().anyLeft()) {
+        Point2d direction = warrior.getSoldierDirections().getNextDirection();
+        chooseNewLocationByDirection(warrior, direction);
     }
-    // directions are disabled:
     return warrior.getLocation();
 }
 
 Point2d HumanMovingSoldierStrategy::chooseNewLocation(const Healer &healer) const {
-    if (healer.arePreDefinedDirectionsEnabled()) {
-        const std::shared_ptr<Point2d> direction = healer.getNextPreDefinedDirection();
-        if (direction != nullptr)
-            chooseNewLocationByDirection(healer, *direction);
-        else
-            // by the rules of this game,
-            // if there are no more directions,
-            // a soldier shouldn't move.
-            return healer.getLocation();
+    if (healer.getSoldierDirections().isEnabled() &&
+            healer.getSoldierDirections().anyLeft()) {
+        Point2d direction = healer.getSoldierDirections().getNextDirection();
+        chooseNewLocationByDirection(healer, direction);
     }
-    // directions are disabled:
     return healer.getLocation();
 }
 

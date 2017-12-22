@@ -9,7 +9,7 @@ Soldier::Soldier(const std::string &soldierId,
                  short walkingSpeed,
                  short runningSpeed,
                  short runningSpeedLifePointsCost,
-                 const std::list<Point2d> &soldierDirections,
+                 std::vector<Point2d> &soldierDirections,
                  std::shared_ptr<Weapon> weapon)
         : MapObject(soldierId, location),
           playerId(playerId),
@@ -71,15 +71,6 @@ const std::list<std::shared_ptr<Armor>> Soldier::getArmors() const {
     return armors;
 }
 
-std::unique_ptr<Point2d> Soldier::getNextPreDefinedDirection() const {
-    assert(this->soldierDirections.arePreDefinedDirectionsEnabled());
-    return this->soldierDirections.getNextPreDefinedDirection();
-}
-
-bool Soldier::arePreDefinedDirectionsEnabled() const {
-    return this->soldierDirections.arePreDefinedDirectionsEnabled();
-}
-
 const short Soldier::getRunningDistance() const {
     return runningDistance;
 }
@@ -88,46 +79,18 @@ const short Soldier::getRunningDistanceLifePointsCost() const {
     return runningDistanceLifePointsCost;
 }
 
-std::unique_ptr<Point2d> Soldier::getPreDefinedCurrentDirection() const {
-    return this->soldierDirections.getCurrentPreDefinedDirection();
-}
-
-const std::list<Point2d> Soldier::getPreDefinedDirections() const {
-    return this->soldierDirections.getPreDefinedDirections();
-}
-
 void Soldier::report(const Reporter &reporter) const {
     reporter.report(*this);
 }
 
-Soldier::SoldierPreDefinedDirections::SoldierPreDefinedDirections(const std::list<Point2d> &directions)
-        : directions(directions), currentDirection(new std::list<Point2d>::const_iterator(this->directions.cbegin())) {}
-
-std::unique_ptr<Point2d> Soldier::SoldierPreDefinedDirections::getNextPreDefinedDirection() const {
-    assert(arePreDefinedDirectionsEnabled());
-    if (*this->currentDirection != this->directions.cend()) {
-        const std::list<Point2d>::const_iterator currentDirection = *this->currentDirection;
-        (*this->currentDirection)++;
-        return std::unique_ptr<Point2d>(new Point2d(*currentDirection));
-    }
-    return std::unique_ptr<Point2d>(nullptr);
+void Soldier::setLocation(double y, double x) {
+    MapObject::setLocation(y, x);
+    if (this->weapon != nullptr)
+        this->weapon->setLocation(y, x);
+    for (auto &armor:this->getArmors())
+        armor->setLocation(y, x);
 }
 
-bool Soldier::SoldierPreDefinedDirections::arePreDefinedDirectionsEnabled() const {
-    return this->directions.size() != 0;
-}
-
-std::unique_ptr<Point2d> Soldier::SoldierPreDefinedDirections::getCurrentPreDefinedDirection() const {
-    if (*this->currentDirection != this->directions.cend()) {
-        const Point2d &currentDirection = *(*this->currentDirection);
-        return std::unique_ptr<Point2d>(new Point2d(currentDirection));
-    }
-    return std::unique_ptr<Point2d>(nullptr);
-}
-
-const std::list<Point2d> Soldier::SoldierPreDefinedDirections::getPreDefinedDirections() const {
-    std::list<Point2d> copy;
-    for (auto &direction:this->directions)
-        copy.push_back(direction);
-    return copy;
+const SoldierDirections &Soldier::getSoldierDirections() const {
+    return soldierDirections;
 }

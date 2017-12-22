@@ -15,10 +15,11 @@ class MapObject : public Reportable {
     // that we will talk about it's location also.
     Point2d location;
 
-protected:
-    void setLocation(int y, int x);
-
 public:
+    virtual void setLocation(double y, double x);
+
+    void setLocation(const Point2d &location);
+
     const std::string &getId() const;
 
     explicit MapObject(const std::string &id, const Point2d &location);

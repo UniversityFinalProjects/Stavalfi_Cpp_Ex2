@@ -24,8 +24,6 @@ void ConsoleReporter::report(const Soldier &soldier) const {
     std::cout << "  location (x y): " << soldier.getLocation().getX() << " " << soldier.getLocation().getY()
               << std::endl;
     std::cout << "  runningDistance: " << soldier.getRunningDistance() << std::endl;
-    std::cout << "  currentDirection (x y): " << soldier.getPreDefinedCurrentDirection()->getX() << " "
-              << soldier.getPreDefinedCurrentDirection()->getY() << std::endl;
     std::cout << "  lifePoints: " << soldier.getLifePoints() << std::endl;
     std::cout << "  runningDistanceLifePointsCost: " << soldier.getRunningDistanceLifePointsCost() << std::endl;
     std::cout << "  walkingDistance: " << soldier.getWalkingDistance() << std::endl;
@@ -33,8 +31,15 @@ void ConsoleReporter::report(const Soldier &soldier) const {
     std::cout << "  armors:" << soldier.getArmors().size() << std::endl;
     for (auto &armor:soldier.getArmors())
         report(*armor);
-    std::cout << "  pre-defined directions:" << soldier.getPreDefinedDirections().size() << std::endl;
-    for (auto &direction:soldier.getPreDefinedDirections()) {
+    if (soldier.getSoldierDirections().isEnabled())
+        if (soldier.getSoldierDirections().anyLeft())
+            std::cout << "          next pre-defined direction (x y): "
+                      << soldier.getSoldierDirections().getCurrent().getX()
+                      << " "
+                      << soldier.getSoldierDirections().getCurrent().getY() << std::endl;
+        else
+            std::cout << "          next pre-defined direction (x y): no more" << std::endl;
+    for (auto &direction:soldier.getSoldierDirections().getDirections()) {
         std::cout << "      pre-defined direction (x y): " << direction.getX() << " " << direction.getY()
                   << std::endl;
     }

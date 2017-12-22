@@ -70,7 +70,7 @@ private:
     std::shared_ptr<Soldier> getSoldier(std::ifstream &reader, const std::string &playerId, size_t soldierIndex,
                                         bool soldierDirectionsExist) const;
 
-    std::list<Point2d> getSoldiersDirections(size_t soldierIndex) const;
+    std::vector<Point2d> getSoldiersDirections(size_t soldierIndex) const;
 
     std::shared_ptr<Armor> getArmorInMap(std::stringstream armorLine) const;
 

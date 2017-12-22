@@ -45,6 +45,7 @@ bool MapCell::tryAdd(std::shared_ptr<Soldier> soldier) {
         return false;
 
     this->soldiers.push_back(soldier);
+
     return true;
 }
 
@@ -273,7 +274,7 @@ bool MapCell::isLocationInsideThisMap(double y, double x) const {
 }
 
 bool MapCell::isLocationInsideThisMap(const Point2d &location) const {
-    return isLocationInsideThisMap(location.getX(), location.getY());
+    return isLocationInsideThisMap(location.getY(), location.getX());
 }
 
 int MapCell::getMapHigh() {

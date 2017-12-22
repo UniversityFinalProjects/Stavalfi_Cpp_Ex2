@@ -8,7 +8,7 @@ Warrior::Warrior(const std::string &soldierId,
                  short walkingSpeed,
                  short runningSpeed,
                  short runningSpeedLifePointsCost,
-                 const std::list<Point2d> &soldierDirections)
+                 std::vector<Point2d> &soldierDirections)
         : Soldier(soldierId, playerId, location, lifePoints, walkingSpeed, runningSpeed,
                   runningSpeedLifePointsCost, soldierDirections) {}
 

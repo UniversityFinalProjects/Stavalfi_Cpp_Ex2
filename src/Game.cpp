@@ -4,9 +4,6 @@
 
 Game::Game(const std::shared_ptr<MapReaderModifier> &map,
            const std::list<std::shared_ptr<Player>> &players,
-           const std::list<std::shared_ptr<Armor>> &armorsInMap,
-           const std::list<std::shared_ptr<Weapon>> &weaponsInMap,
-           const std::list<std::shared_ptr<const SolidItem>> &solidItemsInMap,
            const std::shared_ptr<const Reporter> &reporter)
         : map(map),
           players(players),
@@ -26,9 +23,14 @@ void Game::report(const Reporter &reporter) const {
 }
 
 void Game::start() const {
+    static size_t i = 0;
     while (!isGameFinished()) {
+        if (i == 4) {
+            i = 4;
+        }
         startIteration();
         endIteration();
+        i++;
     }
     endGame();
 }
@@ -43,12 +45,26 @@ void Game::endIteration() const {
 }
 
 void Game::endGame() const {
+
 }
 
 bool Game::isGameFinished() const {
+    // if there is only one player
+    // with at list one soldier
+    size_t playersWithSoldiers = 0;
+    for (auto &player:this->players)
+        if (player->getSoldiers().size() > 0)
+            playersWithSoldiers++;
+
+    if (playersWithSoldiers == 1)
+        return true;
+
+    // all the soldiers of all players
+    // moved by all their pre-defined directions.
     for (auto &player:this->players)
         for (auto &soldier: player->getSoldiers())
-            if (soldier->arePreDefinedDirectionsEnabled() && soldier->getNextPreDefinedDirection() == nullptr)
+            if (soldier->getSoldierDirections().isEnabled() &&
+                soldier->getSoldierDirections().anyLeft())
                 return false;
     return true;
 }

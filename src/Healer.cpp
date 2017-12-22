@@ -17,7 +17,7 @@ Healer::Healer(const std::string &soldierId,
                const Point2d &location,
                short lifePoints,
                short walkingSpeed,
-               const std::list<Point2d> &soldierDirections,
+               std::vector<Point2d> &soldierDirections,
                const std::shared_ptr<Weapon> &weapon)
         : Soldier(soldierId, playerId, location, lifePoints, walkingSpeed, walkingSpeed, RUNNING_SPEED_LIFE_POINTS_COST,
                   soldierDirections, weapon) {

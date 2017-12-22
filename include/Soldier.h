@@ -6,6 +6,7 @@
 #include <memory>
 #include "Weapon.h"
 #include "Armor.h"
+#include "SoldierDirections.h"
 
 class Reporter;
 
@@ -22,31 +23,10 @@ public:
             short walkingSpeed,
             short runningSpeed,
             short runningSpeedLifePointsCost,
-            const std::list<Point2d> &soldierDirections,
+            std::vector<Point2d> &soldierDirections,
             std::shared_ptr<Weapon> weapon = nullptr);
 
     void report(const Reporter &reporter) const override;
-
-    std::unique_ptr<Point2d> getNextPreDefinedDirection() const;
-
-    /**
-     * get the current pre-defined direction
-     * @return the pre-defined direction or
-     * nullptr if no more pre-defined directions
-     * or this player doesn't have pre-defined directions.
-     */
-    std::unique_ptr<Point2d> getPreDefinedCurrentDirection() const;
-
-    /**
-     * @return copy of all pre-defined directions
-     */
-    const std::list<Point2d> getPreDefinedDirections() const;
-
-    /**
-     * check if this player have pre-defined directions
-     * @return true if he has. else return false.
-     */
-    bool arePreDefinedDirectionsEnabled() const;
 
     /**
      * only the attack method will call this.
@@ -85,6 +65,11 @@ public:
 
     const std::list<std::shared_ptr<Armor>> getArmors() const;
 
+
+    void setLocation(double y, double x) override;
+
+    const SoldierDirections &getSoldierDirections() const;
+
     virtual ~Soldier();
 
 private:
@@ -94,39 +79,7 @@ private:
     const short runningDistance;
     const short runningDistanceLifePointsCost;
 
-    /**
-     * Specify a pre-configured directions for this soldier.
-     * It will be used only in the MoveStrategy's drived classes.
-     */
-    class SoldierPreDefinedDirections {
-        const std::list<Point2d> directions;
-        std::shared_ptr<std::list<Point2d>::const_iterator> currentDirection;
-    public:
-        SoldierPreDefinedDirections(const std::list<Point2d> &directions);
-
-        std::unique_ptr<Point2d> getNextPreDefinedDirection() const;
-
-        /**
-         * get the current pre-defined direction
-         * @return the pre-defined direction or
-         * nullptr if no more pre-defined directions
-         * or this player doesn't have pre-defined directions.
-         */
-        std::unique_ptr<Point2d> getCurrentPreDefinedDirection() const;
-
-        /**
-         * check if this player have pre-defined directions
-         * @return true if he has. else return false.
-         */
-        bool arePreDefinedDirectionsEnabled() const;
-
-        /**
-         * @return copy of all pre-defined directions
-         */
-        const std::list<Point2d> getPreDefinedDirections() const;
-    };
-
-    SoldierPreDefinedDirections soldierDirections;
+    SoldierDirections soldierDirections;
 
     std::array<std::shared_ptr<Armor>, AMOUNT_OF_ALLOWED_ARMORS> armors;
 protected:
