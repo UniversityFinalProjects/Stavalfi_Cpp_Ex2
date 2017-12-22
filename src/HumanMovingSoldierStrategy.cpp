@@ -4,8 +4,8 @@ HumanMovingSoldierStrategy::HumanMovingSoldierStrategy(const std::shared_ptr<con
         : MovingSoldierStrategy(mapReader) {}
 
 Point2d HumanMovingSoldierStrategy::chooseNewLocation(const Warrior &warrior) const {
-    if (warrior.areDirectionsEnabled()) {
-        const std::shared_ptr<Point2d> direction = warrior.getNextDirection();
+    if (warrior.arePreDefinedDirectionsEnabled()) {
+        const std::shared_ptr<Point2d> direction = warrior.getNextPreDefinedDirection();
         if (direction != nullptr)
             chooseNewLocationByDirection(warrior, *direction);
         else
@@ -19,8 +19,8 @@ Point2d HumanMovingSoldierStrategy::chooseNewLocation(const Warrior &warrior) co
 }
 
 Point2d HumanMovingSoldierStrategy::chooseNewLocation(const Healer &healer) const {
-    if (healer.areDirectionsEnabled()) {
-        const std::shared_ptr<Point2d> direction = healer.getNextDirection();
+    if (healer.arePreDefinedDirectionsEnabled()) {
+        const std::shared_ptr<Point2d> direction = healer.getNextPreDefinedDirection();
         if (direction != nullptr)
             chooseNewLocationByDirection(healer, *direction);
         else

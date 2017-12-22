@@ -1,4 +1,5 @@
 #include "HumanPlayer.h"
+#include "Reporter.h"
 
 HumanPlayer::HumanPlayer(const std::string &playerId,
                          const std::shared_ptr<AttackingStrategy> &attackingStrategy,
@@ -11,3 +12,7 @@ HumanPlayer::HumanPlayer(const std::string &playerId,
                                                                                                        choosingArmorStrategy,
                                                                                                        healingStrategy,
                                                                                                        movingSoldierStrategy) {}
+
+void HumanPlayer::report(const Reporter &reporter) const {
+    reporter.report(*this);
+}

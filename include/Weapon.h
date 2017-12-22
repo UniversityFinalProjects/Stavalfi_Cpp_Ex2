@@ -10,7 +10,9 @@ class Weapon : public CollectableItem {
     const short bulletAmountAtOnce;
 
 public:
-    Weapon(const std::string& id,const Point2d &location,bool inUse, short weaponStrength, short bulletAmountAtOnce);
+    Weapon(const std::string &id, const Point2d &location, bool inUse, short weaponStrength, short bulletAmountAtOnce);
+
+    void report(const Reporter &reporter) const override;
 
     short getWeaponStrength() const;
 

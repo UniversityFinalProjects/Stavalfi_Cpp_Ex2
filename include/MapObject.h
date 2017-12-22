@@ -3,10 +3,11 @@
 
 
 #include "Point2d.h"
+#include "Reportable.h"
 #include <string>
 
-class MapObject {
-    const std::string &id;
+class MapObject : public Reportable {
+    const std::string id;
     // MapObject object will be located in the heap
     // anyway so there is no need to locate him in
     // different page in the heap because every time we will

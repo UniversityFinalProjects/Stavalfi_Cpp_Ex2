@@ -11,8 +11,9 @@
 #include "ApplySoldierStrategies.h"
 #include "ChoosingArmorStrategy.h"
 #include "MapModifier.h"
+#include "Reportable.h"
 
-class Player {
+class Player : public Reportable {
     const std::string playerId;
     std::list<std::shared_ptr<Soldier>> soldiers;
 

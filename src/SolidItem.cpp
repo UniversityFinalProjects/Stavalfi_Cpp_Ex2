@@ -1,4 +1,5 @@
 #include "SolidItem.h"
+#include "Reporter.h"
 
 SolidItem::SolidItem(const std::string &id, const Point2d &location, const short high, const short width)
         : Item(id, location), high(high), width(width) {}
@@ -18,4 +19,8 @@ const short SolidItem::getHigh() const {
 
 const short SolidItem::getWidth() const {
     return width;
+}
+
+void SolidItem::report(const Reporter &reporter) const {
+    reporter.report(*this);
 }

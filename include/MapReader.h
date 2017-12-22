@@ -1,10 +1,10 @@
 #ifndef STAVALFI_CPP_EX2_MAP_READER_H
 #define STAVALFI_CPP_EX2_MAP_READER_H
 
-
-#include "Soldier.h"
 #include "SolidItem.h"
+#include "Soldier.h"
 #include <memory>
+#include <list>
 
 class MapReader {
 public:

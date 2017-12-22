@@ -5,8 +5,8 @@ ComputerMovingSoldierStrategy::ComputerMovingSoldierStrategy(const std::shared_p
         mapReader) {}
 
 Point2d ComputerMovingSoldierStrategy::chooseNewLocation(const Warrior &warrior) const {
-    if (warrior.areDirectionsEnabled()) {
-        const std::shared_ptr<Point2d> direction = warrior.getNextDirection();
+    if (warrior.arePreDefinedDirectionsEnabled()) {
+        const std::shared_ptr<Point2d> direction = warrior.getNextPreDefinedDirection();
         if (direction != nullptr)
             chooseNewLocationByDirection(warrior, *direction);
         else
@@ -20,8 +20,8 @@ Point2d ComputerMovingSoldierStrategy::chooseNewLocation(const Warrior &warrior)
 }
 
 Point2d ComputerMovingSoldierStrategy::chooseNewLocation(const Healer &healer) const {
-    if (healer.areDirectionsEnabled()) {
-        const std::shared_ptr<Point2d> direction = healer.getNextDirection();
+    if (healer.arePreDefinedDirectionsEnabled()) {
+        const std::shared_ptr<Point2d> direction = healer.getNextPreDefinedDirection();
         if (direction != nullptr)
             chooseNewLocationByDirection(healer, *direction);
         else

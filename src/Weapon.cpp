@@ -1,5 +1,6 @@
 #include "Weapon.h"
 #include "ApplySoldierStrategies.h"
+#include "Reporter.h"
 
 Weapon::Weapon(const std::string &id, const Point2d &location, bool inUse, short weaponStrength,
                short bulletAmountAtOnce)
@@ -12,6 +13,10 @@ short Weapon::getWeaponStrength() const {
 
 short Weapon::getBulletAmountAtOnce() const {
     return bulletAmountAtOnce;
+}
+
+void Weapon::report(const Reporter &reporter) const {
+    reporter.report(*this);
 }
 
 Weapon::~Weapon() = default;

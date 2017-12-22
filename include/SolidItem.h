@@ -10,6 +10,8 @@ public:
     SolidItem(const std::string &id, const Point2d &location,
               short high, short width);
 
+    void report(const Reporter &reporter) const override;
+
     bool isPointInside(double y, double x) const;
 
     bool isPointInside(const Point2d &location) const;

@@ -1,4 +1,5 @@
 #include "ComputerPlayer.h"
+#include "Reporter.h"
 
 ComputerPlayer::ComputerPlayer(const std::string &playerId,
                                const std::shared_ptr<AttackingStrategy> &attackingStrategy,
@@ -11,3 +12,7 @@ ComputerPlayer::ComputerPlayer(const std::string &playerId,
                                                                                                              choosingArmorStrategy,
                                                                                                              healingStrategy,
                                                                                                              movingSoldierStrategy) {}
+
+void ComputerPlayer::report(const Reporter &reporter) const {
+    reporter.report(*this);
+}

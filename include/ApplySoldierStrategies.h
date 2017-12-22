@@ -10,7 +10,12 @@ class Warrior;
 class Healer;
 
 class ApplySoldierStrategies {
+    // this class have read map permission only.
     const std::shared_ptr<MapModifier> map;
+    // from the following pointer I get all
+    // the strategies objects so I can activate
+    // them on each soldier I get in the method:
+    // applySoldierStrategies.
     const std::shared_ptr<Player> player;
 public:
     ApplySoldierStrategies(const std::shared_ptr<MapModifier> &map, const std::shared_ptr<Player> &player);

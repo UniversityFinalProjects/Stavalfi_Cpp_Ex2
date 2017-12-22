@@ -7,7 +7,9 @@
 class Armor : public CollectableItem {
     const double ArmorStrength;
 public:
-    Armor(const std::string& id, const Point2d &location,bool inUse, double ArmorStrength);
+    Armor(const std::string &id, const Point2d &location, bool inUse, double ArmorStrength);
+
+    void report(const Reporter &reporter) const override;
 
     double getArmorStrength() const;
 

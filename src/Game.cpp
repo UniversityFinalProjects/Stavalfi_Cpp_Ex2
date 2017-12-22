@@ -48,7 +48,7 @@ void Game::endGame() const {
 bool Game::isGameFinished() const {
     for (auto &player:this->players)
         for (auto &soldier: player->getSoldiers())
-            if (soldier->areDirectionsEnabled() && soldier->getNextDirection() == nullptr)
+            if (soldier->arePreDefinedDirectionsEnabled() && soldier->getNextPreDefinedDirection() == nullptr)
                 return false;
     return true;
 }

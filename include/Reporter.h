@@ -4,12 +4,24 @@
 
 #include "Reportable.h"
 #include "CurrentGameState.h"
+#include "HumanPlayer.h"
+#include "ComputerPlayer.h"
 
 class Reporter {
 public:
-    void report(const Reportable &reportable) const;
-
     virtual void report(const CurrentGameState &gameState) const = 0;
+
+    virtual void report(const HumanPlayer &player) const = 0;
+
+    virtual void report(const ComputerPlayer &player) const = 0;
+
+    virtual void report(const Soldier &soldier) const = 0;
+
+    virtual void report(const Armor &armor) const = 0;
+
+    virtual void report(const Weapon &weapon) const = 0;
+
+    virtual void report(const SolidItem &solidItem) const = 0;
 
     virtual ~Reporter() = 0;
 };

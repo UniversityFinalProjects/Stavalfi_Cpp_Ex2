@@ -13,6 +13,8 @@ public:
                 const std::shared_ptr<HealingStrategy> &healingStrategy,
                 const std::shared_ptr<MovingSoldierStrategy> &movingSoldierStrategy);
 
+    void report(const Reporter &reporter) const override;
+
     ~HumanPlayer() override = default;
 };
 
