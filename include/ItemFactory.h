@@ -7,28 +7,28 @@
 #include "SolidItem.h"
 #include <memory>
 
-enum ArmorTypes {
+enum ArmorType {
     SHIELD_ARMOR,
     BODY_ARMOR
 };
 
-enum WeaponTypes {
+enum WeaponType {
     M16_RIFLE,
     UZI_RIFLE,
     MISSILE,
     HEALER_WEAPON
 };
-enum SolidItemTypes {
+enum SolidItemType {
     REGULAR_SOLID_ITEM
 };
 
 class ItemFactory {
 public:
-    static std::shared_ptr<Armor> create(enum ArmorTypes armorTypes, const Point2d &location, bool inUsed);
+    static std::shared_ptr<Armor> create(enum ArmorType armorTypes, const Point2d &location, bool inUsed);
 
-    static std::shared_ptr<Weapon> create(enum WeaponTypes weaponTypes, const Point2d &location, bool inUsed);
+    static std::shared_ptr<Weapon> create(enum WeaponType weaponTypes, const Point2d &location, bool inUsed);
 
-    static std::shared_ptr<const SolidItem> create(enum SolidItemTypes solidItemTypes, const Point2d &location);
+    static std::shared_ptr<const SolidItem> create(enum SolidItemType solidItemTypes, const Point2d &location);
 };
 
 

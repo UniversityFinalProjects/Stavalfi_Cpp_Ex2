@@ -7,7 +7,7 @@
 
 class ComputerPlayer : public Player {
 public:
-    ComputerPlayer(const std::string &playerId, const std::list<std::shared_ptr<Soldier>> &soldiers,
+    ComputerPlayer(const std::string &playerId,
                    const std::shared_ptr<AttackingStrategy> &attackingStrategy,
                    const std::shared_ptr<ChoosingWeaponStrategy> &choosingWeaponStrategy,
                    const std::shared_ptr<ChoosingArmorStrategy> &choosingArmorStrategy,

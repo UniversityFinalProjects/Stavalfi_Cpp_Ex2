@@ -12,7 +12,7 @@ std::shared_ptr<Soldier> SoldierFactory::create(SoldierType soldierType,
 
     switch (soldierType) {
         case SoldierType::REGULAR_HEALER: {
-            std::shared_ptr<Weapon> weapon(ItemFactory::create(WeaponTypes::HEALER_WEAPON, location, true));
+            std::shared_ptr<Weapon> weapon(ItemFactory::create(WeaponType::HEALER_WEAPON, location, true));
             return std::shared_ptr<Soldier>(
                     new RegularHealer(std::to_string(++id), playerId, location, soldierDirections, weapon));
         }

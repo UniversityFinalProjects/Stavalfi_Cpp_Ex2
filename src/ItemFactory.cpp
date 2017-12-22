@@ -10,41 +10,43 @@
 
 #define ENUM_TO_STR(ENUM) std::string(#ENUM)
 
-std::shared_ptr<Armor> ItemFactory::create(enum ArmorTypes armorTypes, const Point2d &location, bool inUsed) {
+std::shared_ptr<Armor> ItemFactory::create(enum ArmorType armorTypes, const Point2d &location, bool inUsed) {
     static signed int id = 0;
 
     switch (armorTypes) {
-        case ArmorTypes::BODY_ARMOR:
+        case ArmorType::BODY_ARMOR:
             return std::shared_ptr<Armor>(new BodyArmor(std::to_string(id), location, inUsed));
-        case ArmorTypes::SHIELD_ARMOR:
+        case ArmorType::SHIELD_ARMOR:
             return std::shared_ptr<Armor>(new ShieldArmor(std::to_string(id), location, inUsed));
         default:
             throw std::invalid_argument(ENUM_TO_STR(armorTypes));
     }
 }
 
-std::shared_ptr<Weapon> ItemFactory::create(enum WeaponTypes weaponTypes, const Point2d &location, bool inUsed) {
+std::shared_ptr<Weapon> ItemFactory::create(enum WeaponType weaponTypes,
+                                            const Point2d &location,
+                                            bool inUsed) {
     static signed int id = 0;
 
     switch (weaponTypes) {
-        case WeaponTypes::M16_RIFLE:
+        case WeaponType::M16_RIFLE:
             return std::shared_ptr<Weapon>(new M16Rifle(std::to_string(id), location, inUsed));
-        case WeaponTypes::UZI_RIFLE:
+        case WeaponType::UZI_RIFLE:
             return std::shared_ptr<Weapon>(new UziRifle(std::to_string(id), location, inUsed));
-        case WeaponTypes::MISSILE:
+        case WeaponType::MISSILE:
             return std::shared_ptr<Weapon>(new Missile(std::to_string(id), location, inUsed));
-        case WeaponTypes::HEALER_WEAPON:
+        case WeaponType::HEALER_WEAPON:
             return std::shared_ptr<Weapon>(new HealerWeapon(std::to_string(id), location, inUsed));
         default:
             throw std::invalid_argument(ENUM_TO_STR(armorTypes));
     }
 }
 
-std::shared_ptr<const SolidItem> ItemFactory::create(enum SolidItemTypes solidItemTypes, const Point2d &location) {
+std::shared_ptr<const SolidItem> ItemFactory::create(enum SolidItemType solidItemTypes, const Point2d &location) {
     static signed int id = 0;
 
     switch (solidItemTypes) {
-        case SolidItemTypes::REGULAR_SOLID_ITEM:
+        case SolidItemType::REGULAR_SOLID_ITEM:
             return std::shared_ptr<const SolidItem>(new RegularSolidItem(std::to_string(id), location));
         default:
             throw std::invalid_argument(ENUM_TO_STR(armorTypes));

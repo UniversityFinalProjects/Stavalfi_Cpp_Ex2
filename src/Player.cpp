@@ -10,14 +10,12 @@ void Player::removeSoldier(const std::shared_ptr<Soldier> &soldier) {
 
 
 Player::Player(const std::string &playerId,
-               const std::list<std::shared_ptr<Soldier>> &soldiers,
                const std::shared_ptr<AttackingStrategy> &attackingStrategy,
                const std::shared_ptr<ChoosingWeaponStrategy> &choosingWeaponStrategy,
                const std::shared_ptr<ChoosingArmorStrategy> &choosingArmorStrategy,
                const std::shared_ptr<HealingStrategy> &healingStrategy,
                const std::shared_ptr<MovingSoldierStrategy> &movingSoldierStrategy)
         : playerId(playerId),
-          soldiers(soldiers),
           attackingStrategy(attackingStrategy),
           choosingWeaponStrategy(choosingWeaponStrategy),
           choosingArmorStrategy(choosingArmorStrategy),
@@ -75,6 +73,10 @@ void Player::setMovingSoldierStrategy(const std::shared_ptr<MovingSoldierStrateg
 void Player::play(const ApplySoldierStrategies &applySoldierStrategies) {
     for (auto &soldier:this->soldiers)
         soldier->play(applySoldierStrategies);
+}
+
+void Player::addSoldier(std::shared_ptr<Soldier> &soldier) {
+    this->soldiers.push_back(soldier);
 }
 
 Player::~Player() = default;

@@ -12,7 +12,6 @@ enum PlayerType {
 class PlayerFactory {
 public:
     static std::shared_ptr<Player> create(PlayerType playerType,
-                                          const std::list<std::shared_ptr<Soldier>> &soldiers,
                                           const std::shared_ptr<AttackingStrategy> &attackingStrategy,
                                           const std::shared_ptr<ChoosingWeaponStrategy> &choosingWeaponStrategy,
                                           const std::shared_ptr<ChoosingArmorStrategy> &choosingArmorStrategy,

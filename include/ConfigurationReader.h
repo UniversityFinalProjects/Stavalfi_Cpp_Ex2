@@ -7,7 +7,14 @@
 
 class ConfigurationReader {
 
-    const std::string fileConfigurationLocation;
+    const std::string fileGameConfigurationLocation;
+    const std::string fileSoldierDirectionsLocation;
+
+protected:
+    const std::string &getFileGameConfigurationLocation() const;
+
+    const std::string &getFileSoldierDirectionsLocation() const;
+
 public:
     struct MapSize {
         const signed int mapWidth, mapHigh;
@@ -19,13 +26,12 @@ public:
         const int getMapHigh() const;
     };
 
-    ConfigurationReader(const std::string &fileConfigurationLocation);
-
-    const std::string &getFileConfigurationLocation() const;
+    ConfigurationReader(const std::string &fileGameConfigurationLocation,
+                        const std::string &fileSoldierDirectionsLocation);
 
     virtual MapSize getMapSize() const = 0;
 
-    virtual std::list<std::shared_ptr<Player>> getPlayers(const std::shared_ptr<MapReader> &map) const = 0;
+    virtual std::list<std::shared_ptr<Player>> getPlayers(const std::shared_ptr<const MapReader> &map) const = 0;
 
     virtual std::list<std::shared_ptr<Armor>> getArmorsInMap() const = 0;
 
