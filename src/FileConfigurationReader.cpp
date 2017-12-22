@@ -213,7 +213,7 @@ std::list<Point2d> FileConfigurationReader::getSoldiersDirections(size_t soldier
         assert(stringstream.good());
         directions.emplace_back(y, x);
     }
-
+    reader.close();
     return directions;
 }
 
@@ -225,12 +225,12 @@ std::list<std::shared_ptr<Armor>> FileConfigurationReader::getArmorsInMap() cons
     std::string line;
     std::getline(reader, line);
     while (!reader.eof()) {
-        if (line.find("Armor"))
+        assert(reader.good());
+        if (line.find("Armor") != std::string::npos)
             armors.push_back(getArmorInMap(std::stringstream(line)));
         std::getline(reader, line);
-        assert(reader.good());
     }
-
+    reader.close();
     return armors;
 }
 
@@ -242,12 +242,12 @@ std::list<std::shared_ptr<Weapon>> FileConfigurationReader::getWeaponsInMap() co
     std::string line;
     std::getline(reader, line);
     while (!reader.eof()) {
-        if (line.find("weapon"))
+        assert(reader.good());
+        if (line.find("weapon") != std::string::npos)
             weapons.push_back(getWeaponInMap(std::stringstream(line)));
         std::getline(reader, line);
-        assert(reader.good());
     }
-
+    reader.close();
     return weapons;
 }
 
@@ -259,36 +259,36 @@ std::list<std::shared_ptr<const SolidItem>> FileConfigurationReader::getSolidIte
     std::string line;
     std::getline(reader, line);
     while (!reader.eof()) {
-        if (line.find("solid"))
+        assert(reader.good());
+        if (line.find("solid") != std::string::npos)
             solidItems.push_back(getSolidItemInMap(std::stringstream(line)));
         std::getline(reader, line);
-        assert(reader.good());
     }
-
+    reader.close();
     return solidItems;
 }
 
 std::shared_ptr<const SolidItem> FileConfigurationReader::getSolidItemInMap(std::stringstream solidItemLine) const {
-    std::string solidItemType;
+    std::string solidItem, solidItemType;
     char temp;
     double x, y;
-    solidItemLine >> solidItemType >> temp >> x >> y >> temp;
+    solidItemLine >> solidItem >> solidItemType >> temp >> x >> y >> temp;
     return ItemFactory::create(this->solidItemTypes.at(solidItemType), Point2d(y, x));
 }
 
 std::shared_ptr<Weapon> FileConfigurationReader::getWeaponInMap(std::stringstream weaponLine) const {
-    std::string weaponType;
+    std::string weapon, weaponType;
     char temp;
     double x, y;
-    weaponLine >> weaponType >> temp >> x >> y >> temp;
+    weaponLine >> weapon >> weaponType >> temp >> x >> y >> temp;
     return ItemFactory::create(this->weaponTypes.at(weaponType), Point2d(y, x), false);
 }
 
 std::shared_ptr<Armor> FileConfigurationReader::getArmorInMap(std::stringstream armorLine) const {
-    std::string armorType;
+    std::string armor, armorType;
     char temp;
     double armorStrength, x, y;
-    armorLine >> armorType >> armorStrength >> temp >> x >> y >> temp;
+    armorLine >> armor >> armorType >> armorStrength >> temp >> x >> y >> temp;
     return ItemFactory::create(this->armorTypes.at(armorType), Point2d(y, x), false);
 }
 

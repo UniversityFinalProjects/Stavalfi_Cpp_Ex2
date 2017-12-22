@@ -28,6 +28,8 @@ public:
     void report(const SolidItem &solidItem) const override;
 
     ~FileReporter() override = default;
+
+    const std::string &getFilePathToReportInto() const;
 };
 
 

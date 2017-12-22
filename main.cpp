@@ -6,16 +6,17 @@
 #include <FileConfigurationReader.h>
 #include "Map.h"
 #include <ConsoleReporter.h>
+#include <FileReporter.h>
 
 
 int main(int argc, char *argv[]) {
-    ConsoleReporter consoleReporter;
+    FileReporter fileReporter("../report.txt");
     FileConfigurationReader f("../init.txt", "../player.txt");
     FileConfigurationReader::MapSize mapSize = f.getMapSize();
     std::shared_ptr<Map> map(new Map(mapSize.getMapHigh(), mapSize.getMapWidth()));
-    std::list<std::shared_ptr<Player>> players = f.getPlayers(map);
-    for (auto &player:players)
-        player->report(consoleReporter);
+    auto weapons = f.getWeaponsInMap();
+    for (auto weapon:weapons)
+        weapon->report(fileReporter);
 
     return 0;
 //    srand(time(NULL));
