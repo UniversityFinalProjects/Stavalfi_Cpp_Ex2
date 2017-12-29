@@ -14,6 +14,10 @@ public:
 
     explicit AttackingStrategy(const std::shared_ptr<const MapReader> &mapReader);
 
+    // this methods may save an internal state
+    // between calls so I can't use const on method.
+
+
     virtual std::shared_ptr<Soldier> chooseEnemyToAttack(const Warrior &warrior) = 0;
 
     virtual std::shared_ptr<Soldier> chooseEnemyToAttack(const Healer &healer) = 0;
